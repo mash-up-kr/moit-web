@@ -21,7 +21,7 @@ module.exports = {
     'import/parsers': { '@typescript-eslint/parser': ['.ts', '.tsx'] },
   },
   parser: '@typescript-eslint/parser',
-  ignorePatterns: ['.eslintrc.cjs'],
+  ignorePatterns: ['.eslintrc.cjs', 'vite.config.ts'],
   parserOptions: {
     ecmaFeatures: {
       "jsx": true
