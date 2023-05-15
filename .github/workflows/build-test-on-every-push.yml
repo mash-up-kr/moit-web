@@ -26,5 +26,5 @@ jobs:
         run: yarn
 
       - name: Build Test
-        run: npm run build
+        run: yarn build
         if: ${{ always() }}
