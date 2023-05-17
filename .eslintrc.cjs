@@ -19,6 +19,7 @@ module.exports = {
       },
     },
     'import/parsers': { '@typescript-eslint/parser': ['.ts', '.tsx'] },
+    'import/external-module-folders': ['.yarn']
   },
   parser: '@typescript-eslint/parser',
   ignorePatterns: ['.eslintrc.cjs', 'vite.config.ts'],
