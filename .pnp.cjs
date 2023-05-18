@@ -43,6 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:7.32.2"],\
             ["eslint-plugin-react-hooks", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:4.6.0"],\
             ["eslint-plugin-react-refresh", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:0.3.5"],\
+            ["husky", "npm:8.0.3"],\
             ["prettier", "npm:2.8.8"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:18.2.0"],\
@@ -3417,6 +3418,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["husky", [\
+        ["npm:8.0.3", {\
+          "packageLocation": "./.yarn/cache/husky-npm-8.0.3-b0b59c5127-837bc7e441.zip/node_modules/husky/",\
+          "packageDependencies": [\
+            ["husky", "npm:8.0.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["iconv-lite", [\
         ["npm:0.6.3", {\
           "packageLocation": "./.yarn/cache/iconv-lite-npm-0.6.3-24b8aae27e-3f60d47a5c.zip/node_modules/iconv-lite/",\
@@ -4194,6 +4204,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:7.32.2"],\
             ["eslint-plugin-react-hooks", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:4.6.0"],\
             ["eslint-plugin-react-refresh", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:0.3.5"],\
+            ["husky", "npm:8.0.3"],\
             ["prettier", "npm:2.8.8"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:18.2.0"],\
