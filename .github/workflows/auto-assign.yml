@@ -1,0 +1,29 @@
+name: 👤 Auto Author Assign PR
+on:
+  pull_request:
+    types: [opened, reopened]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ secrets.NODE_VERSION }}
+      - name: Install Lib
+        run: |
+          npm init --y
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "@wonjin-dev:registry=https://npm.pkg.github.com" >> ~/.npmrc
+          npm install wonjin-actions
+
+      - name: Auto Assign
+        uses: actions/github-script@v6
+
+        with:
+          script: |
+            const { autoAssign } = require('wonjin-actions')
+            await autoAssign({ context, github })
