@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "format": "prettier -w ./src/**/*.tsx --loglevel=warn",
     "lint": "eslint --ext .ts,.tsx src",
     "lint-fix": "eslint --fix --ext .ts,.tsx src",
     "preview": "vite preview",
@@ -14,6 +15,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
+      "yarn foramt",
       "yarn lint"
     ]
   },
