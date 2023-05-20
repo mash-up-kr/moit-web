@@ -11,13 +11,19 @@
     "lint-fix": "eslint --fix --ext .ts,.tsx src",
     "preview": "vite preview",
     "prepare": "husky install",
-    "pre-commit": "lint-staged --no-stash"
+    "pre-commit": "lint-staged --no-stash",
+    "commit": "./.yarn/unplugged/cz-customizable-npm-7.0.0-1704ad9243/node_modules/cz-customizable/standalone.js"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "yarn format",
       "yarn lint"
     ]
+  },
+  "config": {
+    "cz-customizable": {
+      "config": ".cz-config.cjs"
+    }
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -30,6 +36,7 @@
     "@typescript-eslint/parser": "^5.57.1",
     "@vitejs/plugin-react": "^4.0.0",
     "@yarnpkg/sdks": "^3.0.0-rc.43",
+    "cz-customizable": "^7.0.0",
     "eslint": "^8.40.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.8.0",
@@ -46,5 +53,10 @@
     "vite": "^4.3.2",
     "vite-tsconfig-paths": "^4.2.0"
   },
-  "packageManager": "yarn@3.5.1"
+  "packageManager": "yarn@3.5.1",
+  "dependenciesMeta": {
+    "cz-customizable@7.0.0": {
+      "unplugged": true
+    }
+  }
 }
