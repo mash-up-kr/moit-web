@@ -36,6 +36,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:5.59.5"],\
             ["@vitejs/plugin-react", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:4.0.0"],\
             ["@yarnpkg/sdks", "npm:3.0.0-rc.43"],\
+            ["commitlint-config-gitmoji", "npm:2.3.1"],\
             ["cz-customizable", "npm:7.0.0"],\
             ["eslint", "npm:8.40.0"],\
             ["eslint-config-airbnb-typescript", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:17.0.0"],\
@@ -602,6 +603,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chalk", "npm:4.1.2"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:17.4.4", {\
+          "packageLocation": "./.yarn/cache/@commitlint-types-npm-17.4.4-378d320505-03c5242905.zip/node_modules/@commitlint/types/",\
+          "packageDependencies": [\
+            ["@commitlint/types", "npm:17.4.4"],\
+            ["chalk", "npm:4.1.2"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@cspotcode/source-map-support", [\
@@ -876,6 +885,36 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@gar-promisify-npm-1.1.3-ac1a325862-4059f790e2.zip/node_modules/@gar/promisify/",\
           "packageDependencies": [\
             ["@gar/promisify", "npm:1.1.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@gitmoji/commit-types", [\
+        ["npm:1.1.5", {\
+          "packageLocation": "./.yarn/cache/@gitmoji-commit-types-npm-1.1.5-6c6ffceb8c-132aa891af.zip/node_modules/@gitmoji/commit-types/",\
+          "packageDependencies": [\
+            ["@gitmoji/commit-types", "npm:1.1.5"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@gitmoji/gitmoji-regex", [\
+        ["npm:1.0.0", {\
+          "packageLocation": "./.yarn/cache/@gitmoji-gitmoji-regex-npm-1.0.0-9edee99160-92cb460250.zip/node_modules/@gitmoji/gitmoji-regex/",\
+          "packageDependencies": [\
+            ["@gitmoji/gitmoji-regex", "npm:1.0.0"],\
+            ["emoji-regex", "npm:10.2.1"],\
+            ["gitmojis", "npm:3.13.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@gitmoji/parser-opts", [\
+        ["npm:1.4.0", {\
+          "packageLocation": "./.yarn/cache/@gitmoji-parser-opts-npm-1.4.0-1b1d2ef2d5-4e39d58285.zip/node_modules/@gitmoji/parser-opts/",\
+          "packageDependencies": [\
+            ["@gitmoji/parser-opts", "npm:1.4.0"],\
+            ["@gitmoji/gitmoji-regex", "npm:1.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2387,6 +2426,31 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["commitlint-config-gitmoji", [\
+        ["npm:2.3.1", {\
+          "packageLocation": "./.yarn/cache/commitlint-config-gitmoji-npm-2.3.1-6860cfebfa-c11a4ecd0e.zip/node_modules/commitlint-config-gitmoji/",\
+          "packageDependencies": [\
+            ["commitlint-config-gitmoji", "npm:2.3.1"],\
+            ["@commitlint/types", "npm:17.4.4"],\
+            ["@gitmoji/commit-types", "npm:1.1.5"],\
+            ["@gitmoji/parser-opts", "npm:1.4.0"],\
+            ["commitlint-plugin-gitmoji", "npm:2.2.6"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["commitlint-plugin-gitmoji", [\
+        ["npm:2.2.6", {\
+          "packageLocation": "./.yarn/cache/commitlint-plugin-gitmoji-npm-2.2.6-f9804720b0-cc025c63ab.zip/node_modules/commitlint-plugin-gitmoji/",\
+          "packageDependencies": [\
+            ["commitlint-plugin-gitmoji", "npm:2.2.6"],\
+            ["@commitlint/types", "npm:17.4.4"],\
+            ["@gitmoji/gitmoji-regex", "npm:1.0.0"],\
+            ["gitmojis", "npm:3.13.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["compare-func", [\
         ["npm:2.0.0", {\
           "packageLocation": "./.yarn/cache/compare-func-npm-2.0.0-9cd7852f23-fb71d70632.zip/node_modules/compare-func/",\
@@ -2814,6 +2878,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["emoji-regex", [\
+        ["npm:10.2.1", {\
+          "packageLocation": "./.yarn/cache/emoji-regex-npm-10.2.1-463e5e2567-1aa2d16881.zip/node_modules/emoji-regex/",\
+          "packageDependencies": [\
+            ["emoji-regex", "npm:10.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:8.0.0", {\
           "packageLocation": "./.yarn/cache/emoji-regex-npm-8.0.0-213764015c-d4c5c39d5a.zip/node_modules/emoji-regex/",\
           "packageDependencies": [\
@@ -3883,6 +3954,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["meow", "npm:8.1.2"],\
             ["split2", "npm:3.2.2"],\
             ["through2", "npm:4.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["gitmojis", [\
+        ["npm:3.13.4", {\
+          "packageLocation": "./.yarn/cache/gitmojis-npm-3.13.4-f6bdd7955a-f9d8ec955e.zip/node_modules/gitmojis/",\
+          "packageDependencies": [\
+            ["gitmojis", "npm:3.13.4"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5326,6 +5406,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:5.59.5"],\
             ["@vitejs/plugin-react", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:4.0.0"],\
             ["@yarnpkg/sdks", "npm:3.0.0-rc.43"],\
+            ["commitlint-config-gitmoji", "npm:2.3.1"],\
             ["cz-customizable", "npm:7.0.0"],\
             ["eslint", "npm:8.40.0"],\
             ["eslint-config-airbnb-typescript", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:17.0.0"],\
