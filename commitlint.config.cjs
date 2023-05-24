@@ -1,5 +1,3 @@
-const commitizenConfig = require('./.cz-config.cjs');
-
 const Configuration = {
   extends: ['gitmoji'],
   rules: {
