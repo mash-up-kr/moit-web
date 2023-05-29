@@ -13,7 +13,7 @@
     "prepare": "husky install",
     "pre-commit": "lint-staged --no-stash",
     "commit": "./.yarn/unplugged/cz-customizable-npm-7.0.0-1704ad9243/node_modules/cz-customizable/standalone.js",
-    "postinstall": "husky install"
+    "postinstall": "husky install && yarn dlx @yarnpkg/sdks vscode"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
@@ -27,6 +27,11 @@
     }
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.6.1",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "emotion-normalize": "^11.0.1",
+    "framer-motion": "^10.12.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
