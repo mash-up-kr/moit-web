@@ -33,7 +33,8 @@
     "emotion-normalize": "^11.0.1",
     "framer-motion": "^10.12.16",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
