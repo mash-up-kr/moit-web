@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 const Greeting = styled.div`
@@ -9,7 +10,7 @@ const Greeting = styled.div`
 const App = () => {
   return (
     <Greeting>
-      <>Hello, MO IT</>
+      <Box bg={'white'}>Hello, MO IT</Box>
     </Greeting>
   );
 };

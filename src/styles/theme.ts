@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+// import { css } from '@emotion/react';
 
 export const colors = {
   black: '#000',
@@ -31,50 +31,50 @@ export const colors = {
   white_01: 'rgba(255, 255, 255, 0.1)',
 } as const;
 
-export const fonts = {
-  h1: css`
-    font-size: 36px;
-    line-height: 50px;
-  `,
-  h2: css`
-    font-size: 32px;
-    line-height: 32px;
-  `,
-  h3: css`
-    font-size: 24px;
-    line-height: 36px;
-  `,
-  h4: css`
-    font-size: 20px;
-    line-height: 32px;
-  `,
-  h5: css`
-    font-size: 18px;
-    line-height: 27px;
-  `,
-  h6: css`
-    font-size: 16px;
-    line-height: 23px;
-  `,
-  body1: css`
-    font-size: 16px;
-    line-height: 23px;
-  `,
-  body2: css`
-    font-size: 14px;
-    line-height: 22px;
-  `,
-  body3: css`
-    font-size: 14px;
-    line-height: 22px;
-  `,
-  caption: css`
-    font-size: 12px;
-    line-height: 18px;
-  `,
-} as const;
+// export const fonts = {
+//   h1: css`
+//     font-size: 36px;
+//     line-height: 50px;
+//   `,
+//   h2: css`
+//     font-size: 32px;
+//     line-height: 32px;
+//   `,
+//   h3: css`
+//     font-size: 24px;
+//     line-height: 36px;
+//   `,
+//   h4: css`
+//     font-size: 20px;
+//     line-height: 32px;
+//   `,
+//   h5: css`
+//     font-size: 18px;
+//     line-height: 27px;
+//   `,
+//   h6: css`
+//     font-size: 16px;
+//     line-height: 23px;
+//   `,
+//   body1: css`
+//     font-size: 16px;
+//     line-height: 23px;
+//   `,
+//   body2: css`
+//     font-size: 14px;
+//     line-height: 22px;
+//   `,
+//   body3: css`
+//     font-size: 14px;
+//     line-height: 22px;
+//   `,
+//   caption: css`
+//     font-size: 12px;
+//     line-height: 18px;
+//   `,
+// } as const;
 
 export const theme = {
   colors,
-  fonts,
+  // fonts,
 } as const;
