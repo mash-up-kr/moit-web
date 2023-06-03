@@ -20,7 +20,10 @@
     "allowSyntheticDefaultImports": true,
 
     "baseUrl": "./src",
+    "paths": {
+      "@styles/*": ["styles/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "types"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

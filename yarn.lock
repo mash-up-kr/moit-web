@@ -3773,6 +3773,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"emotion-normalize@npm:^11.0.1":
+  version: 11.0.1
+  resolution: "emotion-normalize@npm:11.0.1"
+  peerDependencies:
+    "@emotion/react": ^11.0.0
+    react: ">=16.3.0"
+  checksum: f33c6ac75eca2d52d84cad99e359c0e73f78f814377121743c6002edb903864d8ad0adaf2a760dfac5a9c18dc5591ef01a7985f5c223973b10e7d20fa706f226
+  languageName: node
+  linkType: hard
+
 "encoding@npm:^0.1.13":
   version: 0.1.13
   resolution: "encoding@npm:0.1.13"
@@ -6024,6 +6034,7 @@ __metadata:
     "@yarnpkg/sdks": ^3.0.0-rc.43
     commitlint-config-gitmoji: ^2.3.1
     cz-customizable: ^7.0.0
+    emotion-normalize: ^11.0.1
     eslint: ^8.40.0
     eslint-config-airbnb-typescript: ^17.0.0
     eslint-config-prettier: ^8.8.0

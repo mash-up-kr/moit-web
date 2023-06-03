@@ -40,6 +40,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@yarnpkg/sdks", "npm:3.0.0-rc.43"],\
             ["commitlint-config-gitmoji", "npm:2.3.1"],\
             ["cz-customizable", "npm:7.0.0"],\
+            ["emotion-normalize", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:11.0.1"],\
             ["eslint", "npm:8.40.0"],\
             ["eslint-config-airbnb-typescript", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:17.0.0"],\
             ["eslint-config-prettier", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:8.8.0"],\
@@ -5506,6 +5507,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["emotion-normalize", [\
+        ["npm:11.0.1", {\
+          "packageLocation": "./.yarn/cache/emotion-normalize-npm-11.0.1-b4905b7500-f33c6ac75e.zip/node_modules/emotion-normalize/",\
+          "packageDependencies": [\
+            ["emotion-normalize", "npm:11.0.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:11.0.1", {\
+          "packageLocation": "./.yarn/__virtual__/emotion-normalize-virtual-d9ee4ebabb/0/cache/emotion-normalize-npm-11.0.1-b4905b7500-f33c6ac75e.zip/node_modules/emotion-normalize/",\
+          "packageDependencies": [\
+            ["emotion-normalize", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:11.0.1"],\
+            ["@emotion/react", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:11.11.0"],\
+            ["@types/emotion__react", null],\
+            ["@types/react", "npm:18.2.6"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@emotion/react",\
+            "@types/emotion__react",\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["encoding", [\
         ["npm:0.1.13", {\
           "packageLocation": "./.yarn/cache/encoding-npm-0.1.13-82a1837d30-bb98632f8f.zip/node_modules/encoding/",\
@@ -8111,6 +8138,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@yarnpkg/sdks", "npm:3.0.0-rc.43"],\
             ["commitlint-config-gitmoji", "npm:2.3.1"],\
             ["cz-customizable", "npm:7.0.0"],\
+            ["emotion-normalize", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:11.0.1"],\
             ["eslint", "npm:8.40.0"],\
             ["eslint-config-airbnb-typescript", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:17.0.0"],\
             ["eslint-config-prettier", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:8.8.0"],\
