@@ -1,17 +1,26 @@
-import { Box } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { FC, useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { RecoilRoot } from 'recoil';
+import Router from 'Router';
 
-const Greeting = styled.div`
-  background-color: ${({ theme }) => theme.colors.blue400};
-  width: 100vw;
-  height: 100vh;
-`;
+const App: FC = () => {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      }),
+  );
 
-const App = () => {
   return (
-    <Greeting>
-      <Box bg={'white'}>Hello, MO IT</Box>
-    </Greeting>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <Router />
+      </QueryClientProvider>
+    </RecoilRoot>
   );
 };
 

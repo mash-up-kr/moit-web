@@ -1,4 +1,4 @@
-name: 👤 Auto Author Assign PR
+name: Auto Author Assign PR
 on:
   pull_request:
     types: [opened, reopened]
