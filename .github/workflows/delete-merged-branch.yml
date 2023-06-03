@@ -1,0 +1,29 @@
+name: Delete Merged Branch Except Develop
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  if_merged:
+    permissions: write-all
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install NPM
+        run: |
+          npm init --y
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "@wonjin-dev:registry=https://npm.pkg.github.com" >> ~/.npmrc
+          npm install wonjin-actions
+
+      - name: delete branch
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { deleteBranch } = require('wonjin-actions')
+            deleteBranch({ context, github })
