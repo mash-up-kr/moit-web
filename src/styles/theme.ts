@@ -21,7 +21,6 @@ export const colors = {
   gray100: '#F2F4F6',
   gray50: '#F9FAFB',
   white: '#FFF',
-  white_08: 'rgba(255, 255, 255, 0.8)',
   white_07: 'rgba(255, 255, 255, 0.7)',
   white_06: 'rgba(255, 255, 255, 0.6)',
   white_05: 'rgba(255, 255, 255, 0.5)',
