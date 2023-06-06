@@ -8,6 +8,7 @@ import {
 import ReactDOM from 'react-dom';
 import styled from '@emotion/styled';
 import { colors } from '@styles/theme';
+import { zIndex } from '@styles/z-index';
 import { ModalProps } from 'hooks/useModal';
 import useScrollLock from 'hooks/useScrollLock';
 
@@ -20,7 +21,7 @@ const Container = styled.div<{ dimColor?: string }>`
   width: 100vw;
   height: 100vh;
   background-color: ${({ dimColor }) => dimColor};
-  z-index: 998;
+  z-index: ${zIndex.MODAL_BACKGROUND};
 `;
 
 export interface BaseModalProps {
