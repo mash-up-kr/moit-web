@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import BottomSheet from 'components/BottomSheet';
+import { useModal } from 'hooks/useModal';
 
 const Greeting = styled.div`
   background-color: ${({ theme }) => theme.colors.blue400};
@@ -9,9 +11,15 @@ const Greeting = styled.div`
 `;
 
 const Example: FC = () => {
+  const testBottomSheetProps = useModal();
+
   return (
     <Greeting>
       <Box bg={'white'}>Hello, MO IT</Box>
+      <Button onClick={() => testBottomSheetProps.showModal()}>
+        modal test
+      </Button>
+      <BottomSheet modalProps={testBottomSheetProps} content={<h3>test</h3>} />
     </Greeting>
   );
 };
