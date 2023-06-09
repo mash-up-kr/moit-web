@@ -35,3 +35,9 @@ dist-ssr
 
 # Vite Cache
 .vite
+
+# Storybook Build
+storybook-static/
+
+#env
+.env

@@ -15,7 +15,8 @@
     "commit": "./.yarn/unplugged/cz-customizable-npm-7.0.0-1704ad9243/node_modules/cz-customizable/standalone.js",
     "postinstall": "husky install",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "dotenv -- cross-var chromatic --project-token=%CHROMATIC_PROJECT_TOKEN%"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
@@ -58,7 +59,9 @@
     "@yarnpkg/sdks": "^3.0.0-rc.43",
     "chromatic": "^6.18.2",
     "commitlint-config-gitmoji": "^2.3.1",
+    "cross-var": "^1.1.0",
     "cz-customizable": "^7.0.0",
+    "dotenv-cli": "^7.2.1",
     "eslint": "^8.40.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.8.0",
