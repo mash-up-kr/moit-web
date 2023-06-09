@@ -7,7 +7,10 @@ module.exports = {
   settings: {
     'import/resolver': {
       typescript: {
-        directory: './src'
+        directory: './src',
+        alias: {
+          '@components': './src/components'
+        }
       }
     },
     'import/parsers': {
