@@ -19,7 +19,11 @@ const Example: FC = () => {
       <Button onClick={() => testBottomSheetProps.showModal()}>
         modal test
       </Button>
-      <BottomSheet modalProps={testBottomSheetProps} content={<h3>test</h3>} />
+      <BottomSheet
+        modalProps={testBottomSheetProps}
+        headerTitle="title test"
+        content={<h3>content test</h3>}
+      />
     </Greeting>
   );
 };
