@@ -106,5 +106,6 @@ module.exports = {
         optionalDependencies: false,
       },
     ],
+    '@typescript-eslint/no-use-before-define': 'off',
   },
 };
