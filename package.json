@@ -16,7 +16,8 @@
     "postinstall": "husky install",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "dotenv -- cross-var chromatic --project-token=%CHROMATIC_PROJECT_TOKEN%"
+    "chromatic": "dotenv -- cross-var chromatic --project-token=%CHROMATIC_PROJECT_TOKEN%",
+    "sb": "yarn dlx chromatic"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
@@ -57,7 +58,6 @@
     "@typescript-eslint/parser": "^5.57.1",
     "@vitejs/plugin-react": "^4.0.0",
     "@yarnpkg/sdks": "^3.0.0-rc.43",
-    "chromatic": "^6.18.2",
     "commitlint-config-gitmoji": "^2.3.1",
     "cross-var": "^1.1.0",
     "cz-customizable": "^7.0.0",
