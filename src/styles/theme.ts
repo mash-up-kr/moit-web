@@ -37,16 +37,20 @@ export const palette = {
 export const colors = {
   primary: {
     default: palette.blue800,
-    input: palette.gray50,
     disabled: palette.gray200,
-    pressed: palette.blue100,
+    selected: palette.blue100,
   },
   background: {
+    input: palette.gray50,
     white: palette.white,
-    black: palette.black,
+    black: palette.gray900,
   },
-  text: {},
-  ui: {},
+  text: {
+    general: palette.gray900,
+    inputLabel: palette.gray700,
+    placeholer: palette.gray500,
+    white: palette.white,
+  },
 };
 
 export const fonts = {
@@ -92,10 +96,6 @@ export const fonts = {
   `,
 } as const;
 
-const size = {
-  mobile: 768,
-};
-
 const spacing = {
   xl: 60,
   lg: 30,
@@ -106,14 +106,12 @@ const spacing = {
 
 const zIndex = {
   header: 999,
-  nav: 888,
   bottomSheet: 777,
 };
 
 const theme = {
   spacing,
   palette,
-  size,
   colors,
   fonts,
   zIndex,
