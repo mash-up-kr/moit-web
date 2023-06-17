@@ -13,7 +13,11 @@
     "prepare": "husky install",
     "pre-commit": "lint-staged --no-stash",
     "commit": "./.yarn/unplugged/cz-customizable-npm-7.0.0-1704ad9243/node_modules/cz-customizable/standalone.js",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "chromatic": "dotenv -- cross-var chromatic --project-token=%CHROMATIC_PROJECT_TOKEN%",
+    "sb": "yarn dlx chromatic"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
@@ -40,6 +44,14 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
+    "@storybook/addon-essentials": "^7.0.20",
+    "@storybook/addon-interactions": "^7.0.20",
+    "@storybook/addon-links": "^7.0.20",
+    "@storybook/blocks": "^7.0.20",
+    "@storybook/react": "^7.0.20",
+    "@storybook/react-vite": "^7.0.20",
+    "@storybook/testing-library": "^0.0.14-next.2",
+    "@types/prop-types": "^15",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.5",
@@ -47,7 +59,9 @@
     "@vitejs/plugin-react": "^4.0.0",
     "@yarnpkg/sdks": "^3.0.0-rc.43",
     "commitlint-config-gitmoji": "^2.3.1",
+    "cross-var": "^1.1.0",
     "cz-customizable": "^7.0.0",
+    "dotenv-cli": "^7.2.1",
     "eslint": "^8.40.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.8.0",
@@ -57,9 +71,12 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "eslint-plugin-storybook": "^0.6.12",
     "husky": "^8.0.3",
     "lint-staged": "^13.0.3",
     "prettier": "^2.8.8",
+    "prop-types": "^15.8.1",
+    "storybook": "^7.0.20",
     "typescript": "^5.0.2",
     "vite": "^4.3.2",
     "vite-tsconfig-paths": "^4.2.0"

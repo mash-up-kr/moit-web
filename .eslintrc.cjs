@@ -11,14 +11,20 @@ module.exports = {
     'plugin:react/recommended',
     'prettier',
     'plugin:import/typescript',
+    'plugin:storybook/recommended',
   ],
   settings: {
     'import/resolver': {
       typescript: {
         directory: './src',
+        alias: {
+          '@components': './src/components',
+        },
       },
     },
-    'import/parsers': { '@typescript-eslint/parser': ['.ts', '.tsx'] },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
     'import/external-module-folders': ['.yarn'],
     react: {
       version: 'detect',
@@ -93,5 +99,13 @@ module.exports = {
         },
       },
     ],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['**/stories/**'],
+        optionalDependencies: false,
+      },
+    ],
+    '@typescript-eslint/no-use-before-define': 'off',
   },
 };
