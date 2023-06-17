@@ -7,7 +7,7 @@ import {
 } from 'react';
 import ReactDOM from 'react-dom';
 import styled from '@emotion/styled';
-import { colors } from '@styles/theme';
+import { palette } from '@styles/theme';
 import { zIndex } from '@styles/z-index';
 import { ModalProps } from 'hooks/useModal';
 import useScrollLock from 'hooks/useScrollLock';
@@ -34,12 +34,12 @@ export interface BaseModalProps {
 const BaseModal = ({
   children,
   modalProps,
-  dimColor = colors.white_02,
+  dimColor = palette.white_02,
 }: BaseModalProps) => {
   const [portal, setPortal] = useState<HTMLElement | null>(null);
   const contentRef = useRef(null);
 
-  useScrollLock(true);
+  useScrollLock(modalProps.modalShowing);
 
   useEffect(() => {
     setPortal(document.getElementById('modal-root'));
