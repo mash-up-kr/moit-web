@@ -3,7 +3,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { Global, ThemeProvider, css } from '@emotion/react';
 import normalize from 'emotion-normalize';
 import ReactDOM from 'react-dom/client';
-import { theme } from '@styles/theme';
+import theme from '@styles/theme';
 import App from 'App';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
