@@ -1,10 +1,17 @@
 import { FC } from 'react';
+import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import TimeSelectBottomSheet from 'domain/moit/TimeSelectBottomSheet';
+import { useModal } from 'hooks/useModal';
 
 const Example: FC = () => {
+  const selectDateBottonSheet = useModal();
+
   return (
     <Greeting>
       <Title>Hello, MOIT</Title>
+      <Button onClick={() => selectDateBottonSheet.showModal()}>TEST</Button>
+      <TimeSelectBottomSheet modalProps={selectDateBottonSheet} />
     </Greeting>
   );
 };

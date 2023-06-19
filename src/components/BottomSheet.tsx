@@ -37,16 +37,7 @@ const BottomSheet: FC<BottomSheetProps> = ({
         ) : (
           <DefaultBottomCTA>
             {/* TODO: 우리 버튼 컴포넌트로 바꾸기 */}
-            <button
-              style={{
-                width: '100%',
-                height: '56px',
-                backgroundColor: 'green',
-                borderRadius: '20px',
-              }}
-            >
-              임시 버튼
-            </button>
+            <button>임시 버튼</button>
           </DefaultBottomCTA>
         )}
       </Container>
@@ -81,9 +72,6 @@ const DefaultHeader = styled.header`
   align-items: center;
   margin-bottom: 20px;
 
-  /* TODO: Delete under line  */
-  background-color: red;
-
   h1 {
     color: ${({ theme }) => theme.palette.gray900};
     font-size: 18px;
@@ -94,17 +82,12 @@ const DefaultHeader = styled.header`
 
 const ContentWrapper = styled.section<{ height?: number }>`
   height: ${({ height }) =>
-    `calc(${height}px - 216px)`}; // - (header height + footer height)
-
-  /* TODO: Delete under line  */
-  background-color: yellow;
+    // 216 = (header height + footer height)
+    `calc(${height}px - 216px)`};
 `;
 
 const DefaultBottomCTA = styled.footer`
   height: 100px;
   padding: 8px 0 36px 0;
   margin-top: 20px;
-
-  /* TODO: Delete under line  */
-  background-color: blue;
 `;
