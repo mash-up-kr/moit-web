@@ -4502,6 +4502,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/addon-viewport@npm:^7.0.22":
+  version: 7.0.22
+  resolution: "@storybook/addon-viewport@npm:7.0.22"
+  dependencies:
+    "@storybook/client-logger": 7.0.22
+    "@storybook/components": 7.0.22
+    "@storybook/core-events": 7.0.22
+    "@storybook/global": ^5.0.0
+    "@storybook/manager-api": 7.0.22
+    "@storybook/preview-api": 7.0.22
+    "@storybook/theming": 7.0.22
+    memoizerific: ^1.11.3
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: b73cbf6eb53a1b6d1de8e375e4e1d7928d8cc362a113bf2398ff7b86cec3500076d70d9242d15773998b7cdcd29373e0e836b0d28ab38486d194849072c5c469
+  languageName: node
+  linkType: hard
+
 "@storybook/blocks@npm:7.0.20, @storybook/blocks@npm:^7.0.20":
   version: 7.0.20
   resolution: "@storybook/blocks@npm:7.0.20"
@@ -12459,6 +12484,7 @@ __metadata:
     "@storybook/addon-essentials": ^7.0.20
     "@storybook/addon-interactions": ^7.0.20
     "@storybook/addon-links": ^7.0.20
+    "@storybook/addon-viewport": ^7.0.22
     "@storybook/blocks": ^7.0.20
     "@storybook/react": ^7.0.20
     "@storybook/react-vite": ^7.0.20
