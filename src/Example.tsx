@@ -11,7 +11,18 @@ const Example: FC = () => {
     <Greeting>
       <Title>Hello, MOIT</Title>
       <Button onClick={() => selectDateBottonSheet.showModal()}>TEST</Button>
-      <TimeSelectBottomSheet modalProps={selectDateBottonSheet} />
+      <TimeSelectBottomSheet
+        modalProps={selectDateBottonSheet}
+        currentTarget={'start'}
+        startTime={{
+          hour: 15,
+          minuete: 30,
+        }}
+        endTime={{
+          hour: 16,
+          minuete: 30,
+        }}
+      />
     </Greeting>
   );
 };

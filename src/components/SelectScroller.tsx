@@ -3,23 +3,26 @@ import styled from '@emotion/styled';
 
 interface Props {
   elements: number[];
+  selectedElements: number;
   onScroll: () => void;
 }
 
 const SelectScroller = forwardRef<HTMLUListElement, Props>((props, ref) => {
-  const { elements, onScroll } = props;
+  const { elements, selectedElements, onScroll } = props;
 
   return (
     <Container ref={ref} onScroll={onScroll}>
       {elements.map((el, i) => (
-        <li key={i}>{String(el)}</li>
+        <li key={i}>
+          <Option isActive={el === selectedElements}>{String(el)}</Option>
+        </li>
       ))}
       <Cursor />
     </Container>
   );
 });
 
-SelectScroller.displayName = 'SelectScroller'; // ??
+SelectScroller.displayName = 'SelectScroller'; // ?? 이게 몰까염
 
 export default SelectScroller;
 
@@ -33,11 +36,17 @@ const Container = styled.ul`
   color: ${({ theme }) => theme.palette.gray900};
   display: flex;
   flex-direction: column;
+  padding: 52px 0;
   gap: 20px;
 
   ::-webkit-scrollbar {
     display: none;
   }
+`;
+
+const Option = styled.span<{ isActive: boolean }>`
+  color: ${({ theme, isActive }) =>
+    isActive ? theme.palette.gray900 : theme.palette.gray600};
 `;
 
 const Cursor = styled.div`

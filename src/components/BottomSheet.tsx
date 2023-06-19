@@ -55,8 +55,8 @@ const Container = styled.div<{ isShow: boolean; height?: number }>`
   overflow: scroll;
   background-color: ${({ theme }) => theme.palette.white};
   padding: 20px 20px 0 20px;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   transform: translateY(100%);
   transition: 0.24s ease-out;
   ${({ isShow }) =>

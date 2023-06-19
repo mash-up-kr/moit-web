@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 
-type TimeZoneCursor = 'start' | 'end';
-type TimeParams = {
+export type TimeZoneCursor = 'start' | 'end';
+export type TimeParams = {
   hour: number;
   minuete: number;
 };
