@@ -16,7 +16,7 @@ const ScreenHeader: FC<ScreenHeaderProps> = ({
 }) => {
   return (
     <Flex>
-      {leftIcon || <SvgIcon name="arrow-left" size={16} />}
+      {leftIcon || <SvgIcon name="ArrowLeft" size={16} />}
       <Text color="gray900">{title}</Text>
       {rightIcon}
     </Flex>
