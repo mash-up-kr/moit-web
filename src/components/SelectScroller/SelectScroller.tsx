@@ -22,17 +22,16 @@ export const SelectScroller = forwardRef<
 SelectScroller.displayName = 'SelectScroller'; // ?? 이게 몰까염
 
 const Container = styled.ul`
-  height: 136px;
-  overflow: scroll;
-  text-align: center;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 32px;
-  color: ${({ theme }) => theme.palette.gray900};
   display: flex;
   flex-direction: column;
-  padding: 52px 0;
   gap: 20px;
+
+  height: 136px;
+  padding: 52px 0;
+
+  overflow: scroll;
+
+  color: ${({ theme }) => theme.palette.gray900};
 
   ::-webkit-scrollbar {
     display: none;
@@ -43,9 +42,11 @@ const Cursor = styled.div`
   position: absolute;
   top: 50%;
   z-index: ${({ theme }) => theme.zIndex.hide};
-  background-color: ${({ theme }) => theme.palette.blue100};
-  border-radius: 20px;
+
   width: 100%;
   height: 52px;
   transform: translateY(-24px);
+
+  background-color: ${({ theme }) => theme.palette.blue100};
+  border-radius: 20px;
 `;

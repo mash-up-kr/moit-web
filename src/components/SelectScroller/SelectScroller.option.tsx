@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
+import { fonts } from '@styles/theme';
 
 interface Props {
   isActive: boolean;
@@ -13,6 +14,8 @@ export const SelectScrollerOption = ({
 };
 
 const Option = styled.span<Props>`
+  ${fonts.h4}
+  text-align: center;
   color: ${({ theme, isActive }) =>
-    isActive ? theme.palette.gray900 : theme.palette.gray600};
+    theme.palette[isActive ? 'gray900' : 'gray600']};
 `;
