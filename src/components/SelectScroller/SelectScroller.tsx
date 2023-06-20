@@ -1,30 +1,25 @@
-import { forwardRef } from 'react';
+import { PropsWithChildren, forwardRef } from 'react';
 import styled from '@emotion/styled';
 
 interface Props {
-  elements: number[];
-  selectedElements: number;
-  onScroll: () => void;
+  onScroll: VoidFunction;
 }
 
-const SelectScroller = forwardRef<HTMLUListElement, Props>((props, ref) => {
-  const { elements, selectedElements, onScroll } = props;
+export const SelectScroller = forwardRef<
+  HTMLUListElement,
+  PropsWithChildren<Props>
+>((props, ref) => {
+  const { children, onScroll } = props;
 
   return (
     <Container ref={ref} onScroll={onScroll}>
-      {elements.map((el, i) => (
-        <li key={i}>
-          <Option isActive={el === selectedElements}>{String(el)}</Option>
-        </li>
-      ))}
+      {children}
       <Cursor />
     </Container>
   );
 });
 
 SelectScroller.displayName = 'SelectScroller'; // ?? 이게 몰까염
-
-export default SelectScroller;
 
 const Container = styled.ul`
   height: 136px;
@@ -44,15 +39,10 @@ const Container = styled.ul`
   }
 `;
 
-const Option = styled.span<{ isActive: boolean }>`
-  color: ${({ theme, isActive }) =>
-    isActive ? theme.palette.gray900 : theme.palette.gray600};
-`;
-
 const Cursor = styled.div`
   position: absolute;
   top: 50%;
-  z-index: -1;
+  z-index: ${({ theme }) => theme.zIndex.hide};
   background-color: ${({ theme }) => theme.palette.blue100};
   border-radius: 20px;
   width: 100%;
