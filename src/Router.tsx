@@ -1,14 +1,16 @@
 import { FC } from 'react';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Example from 'Example';
+import StudyRegisterScreen from 'screens/StudyRegisterScreen';
 
 const Router: FC = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Example />} />
+        <Route path="/register" element={<StudyRegisterScreen />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
