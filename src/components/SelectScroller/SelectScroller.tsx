@@ -31,8 +31,6 @@ const Container = styled.ul`
 
   overflow: scroll;
 
-  color: ${({ theme }) => theme.palette.gray900};
-
   ::-webkit-scrollbar {
     display: none;
   }
