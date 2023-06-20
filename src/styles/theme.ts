@@ -57,42 +57,52 @@ export const fonts = {
   h1: css`
     font-size: 36px;
     line-height: 50px;
+    font-weight: 700;
   `,
   h2: css`
     font-size: 32px;
     line-height: 32px;
+    font-weight: 700;
   `,
   h3: css`
     font-size: 24px;
     line-height: 36px;
+    font-weight: 600;
   `,
   h4: css`
     font-size: 20px;
     line-height: 32px;
+    font-weight: 600;
   `,
   h5: css`
     font-size: 18px;
     line-height: 27px;
+    font-weight: 600;
   `,
   h6: css`
     font-size: 16px;
     line-height: 23px;
+    font-weight: 600;
   `,
-  body1: css`
+  p1: css`
     font-size: 16px;
     line-height: 23px;
+    font-weight: 500;
   `,
-  body2: css`
+  p2: css`
     font-size: 14px;
     line-height: 22px;
+    font-weight: 500;
   `,
-  body3: css`
+  p3: css`
     font-size: 14px;
     line-height: 22px;
+    font-weight: 400;
   `,
   caption: css`
     font-size: 12px;
     line-height: 18px;
+    font-weight: 500;
   `,
 } as const;
 
