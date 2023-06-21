@@ -1,24 +1,34 @@
 import { FC, ReactNode } from 'react';
-import { Flex, Text } from '@chakra-ui/react';
-import SvgIcon from './SvgIcon';
+import { Center, Flex, Text, AbsoluteCenter } from '@chakra-ui/react';
+import theme, { PalleteValueType } from '@styles/theme';
 
 interface ScreenHeaderProps {
-  title: string;
+  title?: string;
+  titleColor?: PalleteValueType;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
 }
 
-//** TODO(@Young-mason): Emotion Theme 관련 정리된 이후 스타일링 작업 예정*/
 const ScreenHeader: FC<ScreenHeaderProps> = ({
-  title,
+  title = '',
+  titleColor = theme.palette.gray900,
   leftIcon,
   rightIcon,
 }) => {
   return (
-    <Flex>
-      {leftIcon || <SvgIcon name="ArrowLeft" size={24} />}
-      <Text color="gray900">{title}</Text>
-      {rightIcon}
+    <Flex
+      align="center"
+      justify="space-between"
+      position="relative"
+      height={56}
+    >
+      <Center>{leftIcon}</Center>
+      <AbsoluteCenter>
+        <Text color={titleColor} css={theme.fonts.h6}>
+          {title}
+        </Text>
+      </AbsoluteCenter>
+      <Center>{rightIcon}</Center>
     </Flex>
   );
 };
