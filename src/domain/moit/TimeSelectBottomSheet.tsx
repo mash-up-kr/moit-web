@@ -1,9 +1,10 @@
-import { FC, useRef, useState } from 'react';
+import { FC } from 'react';
 import styled from '@emotion/styled';
+import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
 import { ModalProps } from 'hooks/useModal';
 import { generateArray } from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
-import SelectScroller from '@components/SelectScroller';
+import { SelectScroller, useSelectScroller } from '@components/SelectScroller';
 import TimeZone, { TimeParams, TimeZoneCursor } from './components/TimeZone';
 
 interface Props {
@@ -20,30 +21,15 @@ const TimeSelectBottomSheet: FC<Props> = ({
   endTime,
 }) => {
   const ITEM_HEIGHT = 52;
-  const hourRef = useRef<HTMLUListElement>(null);
-  const minRef = useRef<HTMLUListElement>(null);
-  // TODO: 임시 상태
-  const [tempHour, setTempHour] = useState(0);
-  const [tempMin, setTempMin] = useState(0);
+
+  const {
+    onScroll,
+    ref: hourRef,
+    selectedIndex: selectedHour,
+  } = useSelectScroller({ itemHeight: ITEM_HEIGHT });
 
   // const hour = currentTarget === 'start' ? startTime.hour : endTime.hour;
   // const min = currentTarget === 'start' ? startTime.minuete : endTime.minuete;
-
-  const handleHourScroll = () => {
-    const top = hourRef.current && hourRef.current.scrollTop;
-    const currentSelectedHour = top ? Math.round(top / ITEM_HEIGHT) : 0;
-
-    // TODO
-    setTempHour(currentSelectedHour);
-  };
-
-  const handleMinScroll = () => {
-    const top = minRef.current && minRef.current.scrollTop;
-    const currentSelectedMin = top ? Math.round(top / ITEM_HEIGHT) : 0;
-
-    // TODO
-    setTempMin(currentSelectedMin);
-  };
 
   return (
     <BottomSheet
@@ -58,22 +44,16 @@ const TimeSelectBottomSheet: FC<Props> = ({
           />
           <ContentWrapper>
             <Content>
-              <SelectScroller
-                ref={hourRef}
-                // selectedElements={hour}
-                selectedElements={tempHour}
-                elements={generateArray(24)}
-                onScroll={handleHourScroll}
-              />
-            </Content>
-            <Content>
-              <SelectScroller
-                ref={minRef}
-                // selectedElements={min}
-                selectedElements={tempMin}
-                elements={generateArray(59)}
-                onScroll={handleMinScroll}
-              />
+              <SelectScroller ref={hourRef} onScroll={onScroll}>
+                {generateArray(24).map((hour) => (
+                  <SelectScrollerOption
+                    isActive={selectedHour === hour}
+                    key={hour}
+                  >
+                    {hour}
+                  </SelectScrollerOption>
+                ))}
+              </SelectScroller>
             </Content>
           </ContentWrapper>
         </main>
