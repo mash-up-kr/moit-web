@@ -1,4 +1,10 @@
-import { useRef, useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
+
+export interface UseSelectScroller {
+  selectedIndex: number;
+  ref: RefObject<HTMLUListElement>;
+  onScroll: () => void;
+}
 
 export const useSelectScroller = ({
   itemHeight = 52,
@@ -6,7 +12,7 @@ export const useSelectScroller = ({
 }: {
   itemHeight: number;
   initialSelectedIndex?: number;
-}) => {
+}): UseSelectScroller => {
   const ref = useRef<HTMLUListElement>(null);
   const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
 

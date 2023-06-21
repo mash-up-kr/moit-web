@@ -1,27 +1,33 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 
-export type TimeZoneCursor = 'start' | 'end';
-export type TimeParams = {
-  hour: number;
-  minute: number;
-};
-
 interface Props {
   currentCursor: TimeZoneCursor;
   startTime: TimeParams;
   endTime: TimeParams;
+  onTimeZoneClick: (type: TimeZoneCursor) => void;
 }
 
-const TimeZone: FC<Props> = ({ currentCursor, startTime, endTime }) => {
+const TimeZone: FC<Props> = ({
+  currentCursor,
+  startTime,
+  endTime,
+  onTimeZoneClick,
+}) => {
   return (
     <Container>
-      <Content isCurrentCursor={currentCursor === 'start'}>
+      <Content
+        isCurrentCursor={currentCursor === 'start'}
+        onClick={() => onTimeZoneClick('start')}
+      >
         <p>시작</p>
         <span>{`${startTime.hour}시 `}</span>
         <span>{`${startTime.minute}분 `}</span>
       </Content>
-      <Content isCurrentCursor={currentCursor === 'end'}>
+      <Content
+        isCurrentCursor={currentCursor === 'end'}
+        onClick={() => onTimeZoneClick('end')}
+      >
         <p>종료</p>
         <span>{`${endTime.hour}시 `}</span>
         <span>{`${endTime.minute}분 `}</span>

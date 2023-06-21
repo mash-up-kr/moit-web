@@ -1,37 +1,24 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styled from '@emotion/styled';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
 import { palette } from '@styles/theme';
 import { ModalProps } from 'hooks/useModal';
 import { generateArray } from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
-import { SelectScroller, useSelectScroller } from '@components/SelectScroller';
-import TimeZone, { TimeParams, TimeZoneCursor } from './components/TimeZone';
+import { SelectScroller } from '@components/SelectScroller';
+import TimeZone from './components/TimeZone';
+import { useSelectTime } from './hooks/useSelectTime';
 
 interface Props {
   modalProps: ModalProps;
-  currentTarget: TimeZoneCursor;
-  startTime: TimeParams;
-  endTime: TimeParams;
 }
 
-const TimeSelectBottomSheet: FC<Props> = ({
-  modalProps,
-  startTime,
-  endTime,
-}) => {
-  const ITEM_HEIGHT = 52;
+// TODO: 타입 변환시 해당 인덱스로 스크롤 로직 추가
+// TODO: 인풋 로직 개발되면 저장버튼에 싱크 로직 추가
 
-  const {
-    onScroll: hourScroll,
-    ref: hourRef,
-    selectedIndex: selectedHour,
-  } = useSelectScroller({ itemHeight: ITEM_HEIGHT });
-  const {
-    onScroll: minScroll,
-    ref: minRef,
-    selectedIndex: selectedMin,
-  } = useSelectScroller({ itemHeight: ITEM_HEIGHT });
+const TimeSelectBottomSheet: FC<Props> = ({ modalProps }) => {
+  const [currentCursor, setCurrentCursor] = useState<TimeZoneCursor>('start');
+  const { hour, min, startTime, endTime } = useSelectTime(currentCursor);
 
   return (
     <BottomSheet
@@ -41,25 +28,29 @@ const TimeSelectBottomSheet: FC<Props> = ({
       content={
         <main>
           <TimeZone
-            currentCursor={'start'}
+            currentCursor={currentCursor}
             startTime={startTime}
             endTime={endTime}
+            onTimeZoneClick={(type: TimeZoneCursor) => setCurrentCursor(type)}
           />
           <ContentWrapper>
-            <SelectScroller ref={hourRef} onScroll={hourScroll}>
-              {generateArray(23).map((hour) => (
+            <SelectScroller ref={hour.ref} onScroll={hour.onScroll}>
+              {generateArray(23).map((h) => (
                 <SelectScrollerOption
-                  isActive={selectedHour === hour}
-                  key={hour}
+                  isActive={hour.selectedIndex === h}
+                  key={h}
                 >
-                  {hour}
+                  {h}
                 </SelectScrollerOption>
               ))}
             </SelectScroller>
-            <SelectScroller ref={minRef} onScroll={minScroll}>
-              {generateArray(59).map((min) => (
-                <SelectScrollerOption isActive={selectedMin === min} key={min}>
-                  {min}
+            <SelectScroller ref={min.ref} onScroll={min.onScroll}>
+              {generateArray(59).map((m) => (
+                <SelectScrollerOption
+                  isActive={min.selectedIndex === m}
+                  key={m}
+                >
+                  {m}
                 </SelectScrollerOption>
               ))}
             </SelectScroller>
