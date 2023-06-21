@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 export type TimeZoneCursor = 'start' | 'end';
 export type TimeParams = {
   hour: number;
-  minuete: number;
+  minute: number;
 };
 
 interface Props {
@@ -19,12 +19,12 @@ const TimeZone: FC<Props> = ({ currentCursor, startTime, endTime }) => {
       <Content isCurrentCursor={currentCursor === 'start'}>
         <p>시작</p>
         <span>{`${startTime.hour}시 `}</span>
-        <span>{`${startTime.minuete}분 `}</span>
+        <span>{`${startTime.minute}분 `}</span>
       </Content>
       <Content isCurrentCursor={currentCursor === 'end'}>
         <p>종료</p>
         <span>{`${endTime.hour}시 `}</span>
-        <span>{`${endTime.minuete}분 `}</span>
+        <span>{`${endTime.minute}분 `}</span>
       </Content>
     </Container>
   );

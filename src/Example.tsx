@@ -16,11 +16,11 @@ const Example: FC = () => {
         currentTarget={'start'}
         startTime={{
           hour: 15,
-          minuete: 30,
+          minute: 30,
         }}
         endTime={{
           hour: 16,
-          minuete: 30,
+          minute: 30,
         }}
       />
     </Greeting>
