@@ -16,20 +16,21 @@ interface Props {
 
 const TimeSelectBottomSheet: FC<Props> = ({
   modalProps,
-  // currentTarget,
   startTime,
   endTime,
 }) => {
   const ITEM_HEIGHT = 52;
 
   const {
-    onScroll,
+    onScroll: hourScroll,
     ref: hourRef,
     selectedIndex: selectedHour,
   } = useSelectScroller({ itemHeight: ITEM_HEIGHT });
-
-  // const hour = currentTarget === 'start' ? startTime.hour : endTime.hour;
-  // const min = currentTarget === 'start' ? startTime.minuete : endTime.minuete;
+  const {
+    onScroll: minScroll,
+    ref: minRef,
+    selectedIndex: selectedMin,
+  } = useSelectScroller({ itemHeight: ITEM_HEIGHT });
 
   return (
     <BottomSheet
@@ -43,18 +44,24 @@ const TimeSelectBottomSheet: FC<Props> = ({
             endTime={endTime}
           />
           <ContentWrapper>
-            <Content>
-              <SelectScroller ref={hourRef} onScroll={onScroll}>
-                {generateArray(24).map((hour) => (
-                  <SelectScrollerOption
-                    isActive={selectedHour === hour}
-                    key={hour}
-                  >
-                    {hour}
-                  </SelectScrollerOption>
-                ))}
-              </SelectScroller>
-            </Content>
+            <SelectScroller ref={hourRef} onScroll={hourScroll}>
+              {generateArray(23).map((hour) => (
+                <SelectScrollerOption
+                  isActive={selectedHour === hour}
+                  key={hour}
+                >
+                  {hour}
+                </SelectScrollerOption>
+              ))}
+            </SelectScroller>
+            <SelectScroller ref={minRef} onScroll={minScroll}>
+              {generateArray(59).map((min) => (
+                <SelectScrollerOption isActive={selectedMin === min} key={min}>
+                  {min}
+                </SelectScrollerOption>
+              ))}
+            </SelectScroller>
+            <Cursor />
           </ContentWrapper>
         </main>
       }
@@ -69,9 +76,18 @@ const ContentWrapper = styled.section`
   gap: 20px;
   margin-top: 20px;
   padding-bottom: 100px;
+  position: relative;
 `;
 
-const Content = styled.div`
-  position: relative;
-  width: 50%;
+const Cursor = styled.div`
+  position: absolute;
+  z-index: ${({ theme }) => theme.zIndex.hide};
+
+  width: 100%;
+  height: 52px;
+
+  transform: translateY(42px);
+
+  background-color: ${({ theme }) => theme.palette.blue100};
+  border-radius: 20px;
 `;
