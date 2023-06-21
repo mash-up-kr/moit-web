@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
+import { palette } from '@styles/theme';
 import { ModalProps } from 'hooks/useModal';
 import { generateArray } from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
@@ -35,6 +36,7 @@ const TimeSelectBottomSheet: FC<Props> = ({
   return (
     <BottomSheet
       modalProps={modalProps}
+      dimColor={palette.modal_dim}
       headerTitle="시간선택"
       content={
         <main>
