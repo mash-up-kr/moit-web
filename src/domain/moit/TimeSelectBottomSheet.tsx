@@ -79,6 +79,13 @@ const ContentWrapper = styled.section`
   margin-top: 20px;
   padding-bottom: 100px;
   position: relative;
+
+  /* 드래그 방지 */
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const Cursor = styled.div`
