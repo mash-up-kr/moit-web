@@ -107,6 +107,7 @@ const spacing = {
 const zIndex = {
   header: 999,
   bottomSheet: 777,
+  hide: -1,
 };
 
 const theme = {
