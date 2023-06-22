@@ -6,7 +6,7 @@ const Example: FC = () => {
   return (
     <Greeting>
       <Title>Hello, MOIT</Title>
-      <Text type="h1">스터디 벌금 칙을 생성해주세요</Text>
+      <Text type="h1">Heading1</Text>
       <Text type="h2">Heading2</Text>
       <Text type="h3">Heading3</Text>
       <Text type="h4">Heading4</Text>
