@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
-import { Center, Flex, Text, AbsoluteCenter } from '@chakra-ui/react';
+import { Center, Flex, AbsoluteCenter } from '@chakra-ui/react';
 import theme, { PalleteValueType } from '@styles/theme';
+import Text from './Text';
 
 interface ScreenHeaderProps {
   title?: string;
@@ -24,7 +25,7 @@ const ScreenHeader: FC<ScreenHeaderProps> = ({
     >
       <Center>{leftIcon}</Center>
       <AbsoluteCenter>
-        <Text color={titleColor} css={theme.fonts.h6}>
+        <Text type="h6" color={titleColor}>
           {title}
         </Text>
       </AbsoluteCenter>
