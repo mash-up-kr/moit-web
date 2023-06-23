@@ -11,7 +11,7 @@ interface ScreenHeaderProps {
 
 const ScreenHeader: FC<ScreenHeaderProps> = ({
   title = '',
-  titleColor = theme.palette.gray900,
+  titleColor = theme.colors.text.general,
   leftIcon,
   rightIcon,
 }) => {

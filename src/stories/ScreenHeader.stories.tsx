@@ -49,7 +49,7 @@ export const DarkBg: Story = {
       values: [
         {
           name: 'black',
-          value: theme.palette.black,
+          value: theme.colors.background.black,
         },
       ],
     },
