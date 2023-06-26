@@ -23,7 +23,7 @@ SelectScroller.displayName = 'SelectScroller';
 const Container = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: ${({ theme }) => theme.spacing.md}px;
   width: 50%;
 
   height: 136px;

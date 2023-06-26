@@ -66,8 +66,8 @@ export default TimeSelectBottomSheet;
 
 const ContentWrapper = styled.section`
   display: flex;
-  gap: 20px;
-  margin-top: 20px;
+  gap: ${({ theme }) => theme.spacing.md}px;
+  margin-top: ${({ theme }) => theme.spacing.md}px;
   padding-bottom: 100px;
   position: relative;
 
@@ -88,6 +88,6 @@ const Cursor = styled.div`
 
   transform: translateY(42px);
 
-  background-color: ${({ theme }) => theme.palette.blue100};
-  border-radius: 20px;
+  background-color: ${({ theme }) => theme.colors.primary.selected};
+  border-radius: ${({ theme }) => theme.spacing.md}px;
 `;

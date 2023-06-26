@@ -50,12 +50,12 @@ const Content = styled.div<{ isCurrentCursor: boolean }>`
     font-size: 16px;
     line-height: 23px;
     color: ${({ isCurrentCursor, theme }) =>
-      isCurrentCursor ? theme.palette.blue500 : theme.palette.gray300};
+      theme.palette[isCurrentCursor ? 'blue500' : 'gray300']};
   }
 
   span {
     ${({ theme }) => theme.fonts.h3}
     color: ${({ isCurrentCursor, theme }) =>
-      isCurrentCursor ? theme.colors.primary.default : theme.palette.gray300};
+      theme.palette[isCurrentCursor ? 'blue800' : 'gray300']};
   }
 `;

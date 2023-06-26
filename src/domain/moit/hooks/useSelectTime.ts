@@ -32,12 +32,14 @@ export const useSelectTime = (type: TimeZoneCursor): UseSelectTimeProps => {
     selectedIndex: selectedEndMin,
   } = useSelectScroller({ itemHeight: SELECT_CONTENT_HEIGHT });
 
-  const selectedHour = type === 'start' ? selectedStartHour : selectedEndHour;
-  const hourRef = type === 'start' ? startHourRef : endHourRef;
-  const hourScroll = type === 'start' ? startHourScroll : endHourScroll;
-  const selectedMin = type === 'start' ? selectedStartMin : selectedEndMin;
-  const minRef = type === 'start' ? startMinRef : endMinRef;
-  const minScroll = type === 'start' ? startMinScroll : endMinScroll;
+  const isStart = type === 'start';
+
+  const selectedHour = isStart ? selectedStartHour : selectedEndHour;
+  const hourRef = isStart ? startHourRef : endHourRef;
+  const hourScroll = isStart ? startHourScroll : endHourScroll;
+  const selectedMin = isStart ? selectedStartMin : selectedEndMin;
+  const minRef = isStart ? startMinRef : endMinRef;
+  const minScroll = isStart ? startMinScroll : endMinScroll;
 
   return {
     hour: {
