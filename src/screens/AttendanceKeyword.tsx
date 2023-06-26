@@ -17,13 +17,13 @@ const AttendanceKeyword = () => {
       <Container bgColor={theme.colors.background.black} height={'100vh'}>
         <ScreenHeader
           title={''}
-          leftIcon
-          rightIcon={
+          leftIcon={
             <SvgIcon name="ArrowLeft" size={24} color={theme.palette.white} />
           }
+          rightIcon={<SvgIcon name="Info" size={24} color={''} />}
         />
         <Container centerContent>
-          <Flex mt={theme.spacing.md} mb={theme.spacing.lg}>
+          <Flex mt={theme.space.md} mb={theme.space.lg}>
             <Text type="p1" color={theme.palette.gray500}>
               제한시간 내
             </Text>

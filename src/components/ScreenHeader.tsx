@@ -21,7 +21,7 @@ const ScreenHeader: FC<ScreenHeaderProps> = ({
       align="center"
       justify="space-between"
       position="relative"
-      height={56}
+      height="56px"
     >
       <Center>{leftIcon}</Center>
       <AbsoluteCenter>
