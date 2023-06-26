@@ -24,7 +24,7 @@ const TimeSelectBottomSheet: FC<Props> = ({ modalProps }) => {
     <BottomSheet
       modalProps={modalProps}
       dimColor={palette.modal_dim}
-      headerTitle="시간선택"
+      headerTitle="시간 선택"
       content={
         <main>
           <TimeZone
