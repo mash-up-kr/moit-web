@@ -1,3 +1,4 @@
+import { extendTheme } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 
 export const palette = {
@@ -132,5 +133,9 @@ type FontType = typeof fonts;
 export type PalleteValueType = PalleteType[keyof PalleteType];
 export type FontKeyType = keyof FontType;
 export type Theme = typeof theme;
+
+export const chakraTheme = extendTheme({
+  colors: { ...theme.colors },
+});
 
 export default theme;
