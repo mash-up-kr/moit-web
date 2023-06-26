@@ -130,6 +130,10 @@ export type PalleteValueType = PalleteType[keyof PalleteType];
 export type FontKeyType = keyof FontType;
 export type Theme = typeof theme;
 
+export const chakraTheme = extendTheme({
+  colors: { ...theme.colors },
+});
+
 export default theme;
 
 export const chakraTheme = extendTheme({
