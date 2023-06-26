@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { globalDecorators } from './decorators';
 
 const preview: Preview = {
   parameters: {
@@ -17,4 +18,5 @@ const preview: Preview = {
   },
 };
 
+export const decorators = globalDecorators;
 export default preview;
