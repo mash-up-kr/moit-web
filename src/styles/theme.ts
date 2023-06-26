@@ -135,7 +135,7 @@ export type FontKeyType = keyof FontType;
 export type Theme = typeof theme;
 
 export const chakraTheme = extendTheme({
-  colors: { ...theme.colors },
+  // 여기에 chakra에서 사용할 theme 추가
 });
 
 export default theme;

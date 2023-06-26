@@ -28,7 +28,7 @@ const SvgIcon: FC<SvgIconProps> = ({
   return (
     <Icon
       as={TargetIcon}
-      boxSize={size}
+      boxSize={`${size}px`}
       transform={`rotate(${rotate}deg)`}
       css={getIconCss(color)}
       {...restProps}
