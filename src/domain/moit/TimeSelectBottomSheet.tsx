@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import styled from '@emotion/styled';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
 import { palette } from '@styles/theme';
@@ -16,7 +16,7 @@ interface Props {
 // TODO: 타입 변환시 해당 인덱스로 스크롤 로직 추가
 // TODO: 인풋 로직 개발되면 저장버튼에 싱크 로직 추가
 
-const TimeSelectBottomSheet: FC<Props> = ({ modalProps }) => {
+const TimeSelectBottomSheet = ({ modalProps }: PropsWithChildren<Props>) => {
   const [currentCursor, setCurrentCursor] = useState<TimeZoneCursor>('start');
   const { hour, min, startTime, endTime } = useSelectTime(currentCursor);
 
