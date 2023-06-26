@@ -107,25 +107,19 @@ export const fonts = {
   `,
 } as const;
 
-const spacing = {
-  xl: 60,
-  lg: 30,
-  md: 20,
-  sm: 10,
-  xs: 4,
-};
-
-const zIndex = {
-  header: 999,
-  bottomSheet: 777,
+const space = {
+  xl: '60px',
+  lg: '30px',
+  md: '20px',
+  sm: '10px',
+  xs: '4px',
 };
 
 const theme = {
-  spacing,
+  space,
   palette,
   colors,
   fonts,
-  zIndex,
 } as const;
 
 type PalleteType = typeof palette;
@@ -135,7 +129,9 @@ export type FontKeyType = keyof FontType;
 export type Theme = typeof theme;
 
 export const chakraTheme = extendTheme({
-  // 여기에 chakra에서 사용할 theme 추가
+  colors: { ...colors },
+  space: { ...space },
+  fonts: { ...fonts },
 });
 
 export default theme;
