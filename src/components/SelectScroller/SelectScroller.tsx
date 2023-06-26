@@ -30,6 +30,9 @@ const Container = styled.ul`
   padding: 52px 0;
 
   overflow: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scroll-snap-stop: always;
 
   ::-webkit-scrollbar {
     display: none;
