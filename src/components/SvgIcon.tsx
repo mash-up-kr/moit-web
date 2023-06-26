@@ -11,7 +11,7 @@ interface SvgIconProps extends IconProps {
   color?: PalleteValueType;
 }
 
-const getIconCss = (color: PalleteValueType) => css`
+const getIconCss = (color: PalleteValueType = theme.palette.gray900) => css`
   > * {
     stroke: ${color};
   }
@@ -21,16 +21,16 @@ const SvgIcon: FC<SvgIconProps> = ({
   name,
   size = 16,
   rotate = 0,
-  color = theme.palette.gray900,
+  color,
   ...restProps
 }) => {
   const TargetIcon = customIcons[name];
   return (
     <Icon
       as={TargetIcon}
-      boxSize={size}
+      boxSize={`${size}px`}
       transform={`rotate(${rotate}deg)`}
-      css={getIconCss(color)}
+      css={color && getIconCss(color)}
       {...restProps}
     />
   );
