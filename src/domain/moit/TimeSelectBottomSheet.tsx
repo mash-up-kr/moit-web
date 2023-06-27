@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
 import { palette } from '@styles/theme';
@@ -29,12 +29,25 @@ const TimeSelectBottomSheet = ({
   const [currentCursor, setCurrentCursor] = useState<TimeZoneCursor>('start');
   const { hour, min, startTime, endTime } = useSelectTime(currentCursor);
 
+  // 마운트 시점 스크롤. 지연 로직을 추가하지 않으면, 정상 동작하지 않음
   useEffectOnce(() => {
     setTimeout(() => {
       hour.ref.current?.scrollTo(0, Math.floor((testH + 1) * 52));
       min.ref.current?.scrollTo(0, Math.floor((testM + 1) * 52));
     }, 300);
   });
+
+  // 커서 변경시 스크롤 로직.
+  // 더 좋은 로직이 있는건 확실한디... :(
+  useEffect(() => {
+    setTimeout(() => {
+      hour.ref.current?.scrollTo(0, hour.selectedIndex * 52);
+      min.ref.current?.scrollTo(0, min.selectedIndex * 52);
+    });
+
+    //! don't delete this ignore.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentCursor]);
 
   return (
     <BottomSheet
