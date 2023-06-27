@@ -55,8 +55,8 @@ const Container = styled.div<{ isShow: boolean; height?: number }>`
   overflow: scroll;
   background-color: ${({ theme }) => theme.palette.white};
   padding: 20px 20px 0 20px;
-  border-top-left-radius: ${({ theme }) => theme.spacing.md}px;
-  border-top-right-radius: ${({ theme }) => theme.spacing.md}px;
+  border-top-left-radius: ${({ theme }) => theme.space.md}px;
+  border-top-right-radius: ${({ theme }) => theme.space.md}px;
   transform: translateY(100%);
   transition: 0.24s ease-out;
   ${({ isShow }) =>
@@ -70,7 +70,7 @@ const DefaultHeader = styled.header`
   height: 56px;
   display: flex;
   align-items: center;
-  margin-bottom: ${({ theme }) => theme.spacing.md}px;
+  margin-bottom: ${({ theme }) => theme.space.md}px;
 
   h1 {
     color: ${({ theme }) => theme.palette.gray900};
@@ -89,5 +89,5 @@ const ContentWrapper = styled.section<{ height?: number }>`
 const DefaultBottomCTA = styled.footer`
   height: 100px;
   padding: 8px 0 36px 0;
-  margin-top: ${({ theme }) => theme.spacing.md}px;
+  margin-top: ${({ theme }) => theme.space.md}px;
 `;

@@ -1,3 +1,4 @@
+import { extendTheme } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 
 export const palette = {
@@ -108,26 +109,19 @@ export const fonts = {
   `,
 } as const;
 
-const spacing = {
-  xl: 60,
-  lg: 30,
-  md: 20,
-  sm: 10,
-  xs: 4,
-};
-
-const zIndex = {
-  header: 999,
-  bottomSheet: 777,
-  hide: -1,
+const space = {
+  xl: '60px',
+  lg: '30px',
+  md: '20px',
+  sm: '10px',
+  xs: '4px',
 };
 
 const theme = {
-  spacing,
+  space,
   palette,
   colors,
   fonts,
-  zIndex,
 } as const;
 
 type PalleteType = typeof palette;
@@ -135,5 +129,11 @@ type FontType = typeof fonts;
 export type PalleteValueType = PalleteType[keyof PalleteType];
 export type FontKeyType = keyof FontType;
 export type Theme = typeof theme;
+
+export const chakraTheme = extendTheme({
+  colors: { ...colors },
+  space: { ...space },
+  fonts: { ...fonts },
+});
 
 export default theme;
