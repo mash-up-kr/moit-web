@@ -1,17 +1,12 @@
-import {
-  Container,
-  Flex,
-  HStack,
-  PinInput,
-  PinInputField,
-} from '@chakra-ui/react';
+import { Container, Flex, Grid } from '@chakra-ui/react';
 import theme from '@styles/theme';
+import AttendanceInput from '@components/AttendanceInput';
 import ScreenHeader from '@components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
 import Text from '@components/Text';
 
 const AttendanceKeyword = () => {
-  console.log('hi');
+  console.log('hit');
   return (
     <>
       <Container bgColor={theme.colors.background.black} height={'100vh'}>
@@ -54,14 +49,21 @@ const AttendanceKeyword = () => {
               59:59
             </Text>
           </Flex>
-          <HStack>
-            <PinInput>
-              <PinInputField />
-              <PinInputField />
-              <PinInputField />
-              <PinInputField />
-            </PinInput>
-          </HStack>
+          <Grid
+            w={'303px'}
+            templateColumns="repeat(4, 1fr)"
+            gap={'8px'}
+            mt={'25px'}
+            mb={'60px'}
+          >
+            <AttendanceInput />
+            <AttendanceInput />
+            <AttendanceInput />
+            <AttendanceInput />
+          </Grid>
+          <Text type="p3" color={'rgba(255, 255, 255, 0.50)'}>
+            첫번째 출석자예요! 키워드를 만들어주세요!
+          </Text>
         </Container>
       </Container>
     </>
