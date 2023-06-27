@@ -37,16 +37,7 @@ const BottomSheet: FC<BottomSheetProps> = ({
         ) : (
           <DefaultBottomCTA>
             {/* TODO: 우리 버튼 컴포넌트로 바꾸기 */}
-            <button
-              style={{
-                width: '100%',
-                height: '56px',
-                backgroundColor: 'green',
-                borderRadius: '20px',
-              }}
-            >
-              임시 버튼
-            </button>
+            <button>임시 버튼</button>
           </DefaultBottomCTA>
         )}
       </Container>
@@ -64,8 +55,8 @@ const Container = styled.div<{ isShow: boolean; height?: number }>`
   overflow: scroll;
   background-color: ${({ theme }) => theme.palette.white};
   padding: 20px 20px 0 20px;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  border-top-left-radius: ${({ theme }) => theme.space.md}px;
+  border-top-right-radius: ${({ theme }) => theme.space.md}px;
   transform: translateY(100%);
   transition: 0.24s ease-out;
   ${({ isShow }) =>
@@ -79,10 +70,7 @@ const DefaultHeader = styled.header`
   height: 56px;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-
-  /* TODO: Delete under line  */
-  background-color: red;
+  margin-bottom: ${({ theme }) => theme.space.md}px;
 
   h1 {
     color: ${({ theme }) => theme.palette.gray900};
@@ -94,17 +82,12 @@ const DefaultHeader = styled.header`
 
 const ContentWrapper = styled.section<{ height?: number }>`
   height: ${({ height }) =>
-    `calc(${height}px - 216px)`}; // - (header height + footer height)
-
-  /* TODO: Delete under line  */
-  background-color: yellow;
+    // 216 = (header height + footer height)
+    `calc(${height}px - 216px)`};
 `;
 
 const DefaultBottomCTA = styled.footer`
   height: 100px;
   padding: 8px 0 36px 0;
-  margin-top: 20px;
-
-  /* TODO: Delete under line  */
-  background-color: blue;
+  margin-top: ${({ theme }) => theme.space.md}px;
 `;
