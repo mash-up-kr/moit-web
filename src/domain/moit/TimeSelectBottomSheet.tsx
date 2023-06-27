@@ -2,6 +2,7 @@ import { PropsWithChildren, useState } from 'react';
 import styled from '@emotion/styled';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
 import { palette } from '@styles/theme';
+import { zIndex } from '@styles/z-index';
 import { ModalProps } from 'hooks/useModal';
 import { generateArray } from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
@@ -81,13 +82,10 @@ const ContentWrapper = styled.section`
 
 const Cursor = styled.div`
   position: absolute;
-  z-index: ${({ theme }) => theme.zIndex.hide};
-
+  z-index: ${zIndex.HIDE};
   width: 100%;
   height: 52px;
-
   transform: translateY(42px);
-
   background-color: ${({ theme }) => theme.colors.primary.selected};
   border-radius: ${({ theme }) => theme.space.md}px;
 `;
