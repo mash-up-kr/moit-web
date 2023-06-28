@@ -133,7 +133,18 @@ export type Theme = typeof theme;
 export const chakraTheme = extendTheme({
   colors: { ...colors },
   space: { ...space },
-  fonts: { ...fonts },
+  components: {
+    Progress: {
+      baseStyle: {
+        filledTrack: {
+          bg: theme.colors.primary.default,
+        },
+        track: {
+          bg: theme.palette.gray200,
+        },
+      },
+    },
+  },
 });
 
 export default theme;
