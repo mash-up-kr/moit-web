@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Container } from '@chakra-ui/react';
-import { Button } from '@components/Button';
+import Button from '@components/Button';
 
 interface InfoSettingStepProps {
   onNext: () => void;

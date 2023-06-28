@@ -1,51 +1,67 @@
-import './button.css';
+import { PropsWithChildren } from 'react';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import theme, { PalleteValueType } from '@styles/theme';
+import Text from '@components/Text';
 
-interface ButtonProps {
-  /**
-   * Is this the principal call to action on the page?
-   */
-  primary?: boolean;
-  /**
-   * What background color to use
-   */
-  backgroundColor?: string;
-  /**
-   * How large should the button be?
-   */
-  size?: 'small' | 'medium' | 'large';
-  /**
-   * Button contents
-   */
-  label: string;
-  /**
-   * Optional click handler
-   */
+type ButtonSize = 's' | 'm' | 'l';
+interface ButtonProps extends PropsWithChildren {
   onClick?: () => void;
+  label?: string;
+  bgColor?: PalleteValueType;
+  color?: PalleteValueType;
+  width?: number;
+  size?: ButtonSize;
+  isDisabled?: boolean;
 }
 
-/**
- * Primary UI component for user interaction
- */
-export const Button = ({
-  primary = false,
-  size = 'medium',
-  backgroundColor,
+const DEFAULT_LABEL = '확인';
+
+const Button = ({
   label,
-  ...props
+  onClick,
+  bgColor = theme.colors.primary.default,
+  color = theme.colors.background.white,
+  size = 'l',
+  isDisabled = false,
+  children,
 }: ButtonProps) => {
-  const mode = primary
-    ? 'storybook-button--primary'
-    : 'storybook-button--secondary';
   return (
-    <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(
-        ' ',
-      )}
-      style={{ backgroundColor }}
-      {...props}
+    <StyledButton
+      bgColor={bgColor}
+      color={color}
+      size={size}
+      isDisabled={isDisabled}
+      onClick={onClick}
     >
-      {label}
-    </button>
+      <Text as="span" color={color} type="h6">
+        {label ?? children ?? DEFAULT_LABEL}
+      </Text>
+    </StyledButton>
   );
 };
+
+const disabledStyle = css({
+  backgroundColor: theme.colors.primary.disabled,
+  boxShadow: 'none',
+});
+
+interface StyledButtonProps {
+  bgColor: PalleteValueType;
+  color: PalleteValueType;
+  size: ButtonSize;
+  isDisabled: boolean;
+}
+
+const StyledButton = styled.button<StyledButtonProps>`
+  background-color: ${(p) => p.bgColor};
+  color: ${(p) => p.color};
+  width: ${(p) => ({ l: '100%', m: '100%', s: '163px' }[p.size])};
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  height: 56px;
+
+  ${(p) => p.isDisabled && disabledStyle}
+`;
+
+export default Button;
