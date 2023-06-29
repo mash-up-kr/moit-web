@@ -13,6 +13,7 @@ interface ButtonProps extends PropsWithChildren {
   width?: number;
   size?: ButtonSize;
   isDisabled?: boolean;
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
 }
 
 const DEFAULT_LABEL = '확인';
@@ -25,6 +26,7 @@ const Button = ({
   size = 'l',
   isDisabled = false,
   children,
+  type,
 }: ButtonProps) => {
   return (
     <StyledButton
@@ -33,6 +35,7 @@ const Button = ({
       size={size}
       isDisabled={isDisabled}
       onClick={onClick}
+      type={type}
     >
       <Text as="span" color={color} type="h6">
         {label ?? children ?? DEFAULT_LABEL}
@@ -43,6 +46,7 @@ const Button = ({
 
 const disabledStyle = css({
   backgroundColor: theme.colors.primary.disabled,
+  color: theme.palette.gray700,
   boxShadow: 'none',
 });
 
