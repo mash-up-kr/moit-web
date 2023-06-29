@@ -13,15 +13,26 @@ const STEPS = ['info', 'schedule', 'rule', 'noti'] as const;
 
 const StudyRegisterScreen: FC = () => {
   const [step, setStep] = useState<(typeof STEPS)[number]>(STEPS[0]);
+  const currentStepIdx = STEPS.findIndex((t) => t === step);
+
+  const handleClickPrev = () => {
+    if (currentStepIdx === 0) {
+      // TODO: 웹뷰 종료
+      return;
+    }
+    setStep(STEPS[currentStepIdx - 1]);
+  };
 
   return (
     <Box>
       <ScreenHeader
         title="스터디 생성"
-        leftIcon={<SvgIcon name="ArrowLeft" size={24} />}
+        leftIcon={
+          <SvgIcon name="ArrowLeft" size={24} onClick={handleClickPrev} />
+        }
       />
       <Progress
-        value={(100 / STEPS.length) * (STEPS.findIndex((t) => t === step) + 1)}
+        value={(100 / STEPS.length) * (currentStepIdx + 1)}
         height="3px"
       />
 
