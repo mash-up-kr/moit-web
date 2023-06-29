@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { Container } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import Button from '@components/Button';
+import LargeBottom from '../component/LargeBottom';
 
 interface InfoSettingStepProps {
   onNext: () => void;
@@ -8,10 +9,12 @@ interface InfoSettingStepProps {
 
 const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
   return (
-    <Container>
-      InfoSettingStep
-      <Button label="다음" onClick={onNext} />
-    </Container>
+    <Box>
+      <Box>InfoSettingStep</Box>
+      <LargeBottom>
+        <Button label="다음" onClick={onNext} />
+      </LargeBottom>
+    </Box>
   );
 };
 
