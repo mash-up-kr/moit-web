@@ -6,8 +6,10 @@ import {
   Select,
   Button as ChakraButton,
 } from '@chakra-ui/react';
+import { useRecoilValue } from 'recoil';
 import Button from '@components/Button';
 import { ScheduleStepFormData } from '../../../../types/register';
+import { registerFormDataAtom } from '../atoms';
 import LargeBottom from '../component/LargeBottom';
 
 interface ScheduleSettingStepProps {
@@ -71,11 +73,15 @@ const REPEAT_CYCLE_OPTIONS: {
 ];
 
 const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
+  const formData = useRecoilValue(registerFormDataAtom);
+
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<ScheduleStepFormData>();
+  } = useForm<ScheduleStepFormData>({
+    defaultValues: formData,
+  });
 
   const onSubmit = handleSubmit((values) => {
     onNext(values);
@@ -160,13 +166,20 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
 
       <FormControl>
         <FormLabel>반복</FormLabel>
-        <Select>
-          {REPEAT_CYCLE_OPTIONS.map((item) => (
-            <option key={item.value} value={item.value}>
-              {item.label}
-            </option>
-          ))}
-        </Select>
+
+        <Controller
+          control={control}
+          name="repeatCycle"
+          render={({ field }) => (
+            <Select {...field}>
+              {REPEAT_CYCLE_OPTIONS.map((item) => (
+                <option key={item.value} value={item.value}>
+                  {item.label}
+                </option>
+              ))}
+            </Select>
+          )}
+        />
       </FormControl>
 
       <FormControl>

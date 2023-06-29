@@ -1,8 +1,10 @@
 import { FC, useState } from 'react';
 import { Box, Progress } from '@chakra-ui/react';
+import { useRecoilState } from 'recoil';
 import ScreenHeader from 'components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
 import { RegisterFormData } from '../../../types/register';
+import { registerFormDataAtom } from './atoms';
 import {
   InfoSettingStep,
   NotiSettingStep,
@@ -14,10 +16,8 @@ const STEPS = ['info', 'schedule', 'rule', 'noti'] as const;
 
 const StudyRegisterScreen: FC = () => {
   const [step, setStep] = useState<(typeof STEPS)[number]>(STEPS[0]);
-  const [formData, setFormData] = useState<RegisterFormData>(
-    {} as RegisterFormData,
-  );
-  console.log('🚀 ~ file: StudyRegisterScreen.tsx:20 ~ formData:', formData);
+
+  const [, setRegisterFormData] = useRecoilState(registerFormDataAtom);
 
   const currentStepIdx = STEPS.findIndex((t) => t === step);
 
@@ -30,7 +30,7 @@ const StudyRegisterScreen: FC = () => {
   };
 
   function handleChangeFormData(data: Partial<RegisterFormData>): void {
-    setFormData((prev) => ({ ...prev, ...data }));
+    setRegisterFormData((prev) => ({ ...prev, ...data }));
   }
 
   return (

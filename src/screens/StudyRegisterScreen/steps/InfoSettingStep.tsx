@@ -1,8 +1,10 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormLabel, FormControl, Input, Textarea } from '@chakra-ui/react';
+import { useRecoilValue } from 'recoil';
 import Button from '@components/Button';
 import { InfoStepFormData } from '../../../../types/register';
+import { registerFormDataAtom } from '../atoms';
 import LargeBottom from '../component/LargeBottom';
 
 interface InfoSettingStepProps {
@@ -10,11 +12,15 @@ interface InfoSettingStepProps {
 }
 
 const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
+  const registerFormData = useRecoilValue(registerFormDataAtom);
+
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<InfoStepFormData>();
+  } = useForm<InfoStepFormData>({
+    defaultValues: registerFormData,
+  });
 
   const onSubmit = handleSubmit((values) => {
     onNext(values);
