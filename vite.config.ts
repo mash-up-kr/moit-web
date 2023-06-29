@@ -7,4 +7,10 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), svgr()],
   cacheDir: './.vite',
+  server: {
+    proxy: {
+      '/api':
+        'http://moit-backend-eb-env.eba-qtcnkjjy.ap-northeast-2.elasticbeanstalk.com',
+    },
+  },
 });
