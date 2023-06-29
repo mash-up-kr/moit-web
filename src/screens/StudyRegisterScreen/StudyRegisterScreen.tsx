@@ -56,7 +56,12 @@ const StudyRegisterScreen: FC = () => {
           />
         )}
         {step === 'schedule' && (
-          <ScheduleSettingStep onNext={() => setStep('rule')} />
+          <ScheduleSettingStep
+            onNext={(data) => {
+              setStep('rule');
+              handleChangeFormData(data);
+            }}
+          />
         )}
         {step === 'rule' && <RuleSettingStep onNext={() => setStep('noti')} />}
         {step === 'noti' && <NotiSettingStep onNext={() => setStep('info')} />}

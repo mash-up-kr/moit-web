@@ -17,7 +17,6 @@ const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
   } = useForm<InfoStepFormData>();
 
   const onSubmit = handleSubmit((values) => {
-    console.log('🚀', errors, values);
     onNext(values);
   });
 

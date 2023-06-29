@@ -38,7 +38,7 @@ export interface RegisterFormData {
     | 'SUNDAY';
   startDate: string; //yyyy-mm-dd
   endDate: string; //yyyy-mm-dd
-  repeatCycle: 'NONE' | ' ONE_WEEK' | 'TWO_WEEK' | 'FOUR_WEEK';
+  repeatCycle: 'NONE' | 'ONE_WEEK' | 'TWO_WEEK' | 'FOUR_WEEK';
   startTime: {
     hour: number;
     minute: number;
@@ -67,7 +67,12 @@ export type InfoStepFormData = Pick<RegisterFormData, 'name' | 'description'>;
 
 export type ScheduleStepFormData = Pick<
   RegisterFormData,
-  'dayOfWeeks' | 'startDate' | 'startTime' | 'endDate' | 'endTime'
+  | 'dayOfWeeks'
+  | 'startDate'
+  | 'startTime'
+  | 'endDate'
+  | 'endTime'
+  | 'repeatCycle'
 >;
 
 export type RuleStepFormData = Pick<
