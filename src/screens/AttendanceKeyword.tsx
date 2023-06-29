@@ -17,10 +17,31 @@ const AttendanceKeyword = () => {
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  useEffect(() => {
+  const handleClick = () => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
+  };
+
+  useEffect(() => {
+    const currentRef = inputRef.current;
+
+    const handleTouchStart = (event: TouchEvent) => {
+      event.preventDefault();
+      handleClick();
+    };
+
+    if (currentRef) {
+      currentRef.addEventListener('touchstart', handleTouchStart, {
+        passive: false,
+      });
+    }
+
+    return () => {
+      if (currentRef) {
+        currentRef.removeEventListener('touchstart', handleTouchStart);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -49,7 +70,7 @@ const AttendanceKeyword = () => {
     return answer.length > index ? '#FFFFFF1A' : '#FFFFFF33';
   };
 
-  const disabled = answer.length !== 4;
+  const disabled = answer.length < 4;
 
   return (
     <>
@@ -125,6 +146,8 @@ const AttendanceKeyword = () => {
                 maxLength={4}
                 onKeyDown={handleKeyDown}
                 ref={inputRef}
+                autoFocus
+                onClick={handleClick}
               ></Input>
               <Grid
                 w={'303px'}

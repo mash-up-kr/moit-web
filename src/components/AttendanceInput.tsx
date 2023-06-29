@@ -29,6 +29,7 @@ const AttendanceInput = ({ value, bgColor }: AttendanceInputProps) => {
       backgroundColor={bgColor}
       border="hidden"
       borderRadius={'12px'}
+      pointerEvents={'none'}
     />
   );
 };
