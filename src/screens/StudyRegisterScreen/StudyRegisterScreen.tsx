@@ -5,6 +5,7 @@ import ScreenHeader from 'components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
 import { RegisterFormData } from '../../../types/register';
 import { registerFormDataAtom } from './atoms';
+import { REGISTER_STEPS } from './consts';
 import {
   InfoSettingStep,
   NotiSettingStep,
@@ -12,21 +13,21 @@ import {
   ScheduleSettingStep,
 } from './steps';
 
-const STEPS = ['info', 'schedule', 'rule', 'noti'] as const;
-
 const StudyRegisterScreen: FC = () => {
-  const [step, setStep] = useState<(typeof STEPS)[number]>(STEPS[0]);
+  const [step, setStep] = useState<(typeof REGISTER_STEPS)[number]>(
+    REGISTER_STEPS[0],
+  );
 
   const [, setRegisterFormData] = useRecoilState(registerFormDataAtom);
 
-  const currentStepIdx = STEPS.findIndex((t) => t === step);
+  const currentStepIdx = REGISTER_STEPS.findIndex((t) => t === step);
 
   const handleClickPrev = () => {
     if (currentStepIdx === 0) {
       // TODO: 웹뷰 종료
       return;
     }
-    setStep(STEPS[currentStepIdx - 1]);
+    setStep(REGISTER_STEPS[currentStepIdx - 1]);
   };
 
   function handleChangeFormData(data: Partial<RegisterFormData>): void {
@@ -42,7 +43,7 @@ const StudyRegisterScreen: FC = () => {
         }
       />
       <Progress
-        value={(100 / STEPS.length) * (currentStepIdx + 1)}
+        value={(100 / REGISTER_STEPS.length) * (currentStepIdx + 1)}
         height="3px"
       />
 
