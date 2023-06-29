@@ -1,10 +1,21 @@
-import { Input } from '@chakra-ui/react';
+import { ReactNode } from 'react';
+import {
+  Input as ChakraInput,
+  InputProps as ChakraInputProps,
+} from '@chakra-ui/react';
 import theme from '@styles/theme';
 
-const AttendanceInput = () => {
-  console.log('hit');
+interface AttendanceInputProps extends ChakraInputProps {
+  value: string;
+  bgColor: string;
+  displayInput?: ReactNode;
+}
+
+const AttendanceInput = ({ value, bgColor }: AttendanceInputProps) => {
   return (
-    <Input
+    <ChakraInput
+      value={value}
+      onChange={() => {}}
       w="100%"
       h="70px"
       bg="blue.500"
@@ -15,7 +26,7 @@ const AttendanceInput = () => {
       fontFamily={'body'}
       fontWeight={'700'}
       lineHeight={'32px'}
-      backgroundColor={'#FFFFFF33'}
+      backgroundColor={bgColor}
       border="hidden"
       borderRadius={'12px'}
     />
