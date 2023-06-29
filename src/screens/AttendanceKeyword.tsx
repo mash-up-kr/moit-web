@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Box, Button, Container, Flex, Grid, Input } from '@chakra-ui/react';
 import theme from '@styles/theme';
 import AttendanceInput from '@components/AttendanceInput';
@@ -7,6 +8,10 @@ import SvgIcon from '@components/SvgIcon';
 import Text from '@components/Text';
 
 const AttendanceKeyword = () => {
+  const [searchParams] = useSearchParams();
+  const status = searchParams.get('status') as 'present' | 'tardy' | null;
+  const isTardy = status === 'tardy';
+
   const [answer, setAnswer] = useState('');
   const [answerList, setAnswerList] = useState(['', '', '', '']);
 
@@ -46,8 +51,6 @@ const AttendanceKeyword = () => {
 
   const disabled = answer.length !== 4;
 
-  console.log(answer.length);
-
   return (
     <>
       <Box bgColor={theme.colors.background.black}>
@@ -79,12 +82,21 @@ const AttendanceKeyword = () => {
               p={'4px 14px'}
               justifyContent={'space-between'}
               alignItems={'center'}
-              bg="linear-gradient(0deg, rgba(88, 95, 240, 0.20) 0%, rgba(88, 95, 240, 0.00) 100%), #000"
+              bg={
+                isTardy
+                  ? 'linear-gradient(0deg, rgba(255, 138, 0, 0.20) 0%, rgba(255, 138, 0, 0.00) 100%), #000'
+                  : 'linear-gradient(0deg, rgba(88, 95, 240, 0.20) 0%, rgba(88, 95, 240, 0.00) 100%), #000'
+              }
             >
               <Text type="h6" color={theme.palette.gray100} opacity="0.6">
-                출석 인정 시간
+                {isTardy ? '지각' : '출석'} 인정 시간
               </Text>
-              <Text type={'h1'} color={theme.palette.blue500}>
+              <Text
+                type={'h1'}
+                color={
+                  isTardy ? theme.palette.orange200 : theme.palette.blue500
+                }
+              >
                 59:59
               </Text>
             </Flex>

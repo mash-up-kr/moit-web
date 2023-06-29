@@ -22,6 +22,8 @@ export const palette = {
   gray100: '#F2F4F6',
   gray50: '#F9FAFB',
 
+  orange200: '#FF8A00',
+
   white: '#FFF',
   white_08: 'rgba(255, 255, 255, 0.8)',
   white_07: 'rgba(255, 255, 255, 0.7)',
