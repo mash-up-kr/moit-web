@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import TimeSelectBottomSheet from 'domain/moit/TimeSelectBottomSheet';
-import useGetCheckImFirst from 'domain/study/hooks/useGetCheckImFirst';
+import useGetCheckIsFirst from 'domain/study/hooks/useGetCheckIsFirst';
 import { useModal } from 'hooks/useModal';
 
 const DUMMY_SUTDY_ID = 1;
@@ -12,8 +12,8 @@ const Example: FC = () => {
   const [exampleHour, setExapmleHour] = useState<number>(0);
   const [exampleMin, setExampleMin] = useState<number>(0);
 
-  const { imFirst } = useGetCheckImFirst(DUMMY_SUTDY_ID);
-  console.log(imFirst);
+  const { isFirst } = useGetCheckIsFirst(DUMMY_SUTDY_ID);
+  console.log(isFirst);
 
   return (
     <Greeting>

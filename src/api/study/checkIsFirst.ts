@@ -1,11 +1,11 @@
 import { Response, HTTP } from 'api/http';
 
-interface CheckImFirstResSchema {
+interface CheckIsFirstResSchema {
   isFirstAttendance: boolean;
 }
 
-export const checkImFirst = async (studyId: number) => {
-  const res = await HTTP.get<Response<CheckImFirstResSchema>>(
+export const checkIsFirst = async (studyId: number) => {
+  const res = await HTTP.get<Response<CheckIsFirstResSchema>>(
     `/api/v1/study/${studyId}/attendance/is-first`,
   );
 
