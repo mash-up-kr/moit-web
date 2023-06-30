@@ -5,6 +5,7 @@ import theme, { chakraTheme } from '../src/styles/theme';
 import globalStyle from '../src/styles/globalStyle';
 import { Decorator } from '@storybook/react';
 import { ChakraProvider } from '@chakra-ui/react';
+import { RecoilRoot } from 'recoil';
 
 const withTheme: Decorator = (StoryFn) => {
   return (
@@ -17,4 +18,12 @@ const withTheme: Decorator = (StoryFn) => {
   );
 };
 
-export const globalDecorators = [withTheme];
+const withRecoil: Decorator = (StoryFn) => {
+  return (
+    <RecoilRoot>
+      <StoryFn />
+    </RecoilRoot>
+  );
+};
+
+export const globalDecorators = [withTheme, withRecoil];
