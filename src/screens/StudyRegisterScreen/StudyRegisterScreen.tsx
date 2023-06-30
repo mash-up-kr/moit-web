@@ -18,7 +18,13 @@ const StudyRegisterScreen: FC = () => {
     REGISTER_STEPS[0],
   );
 
-  const [, setRegisterFormData] = useRecoilState(registerFormDataAtom);
+  const [registerFormData, setRegisterFormData] =
+    useRecoilState(registerFormDataAtom);
+
+  console.log(
+    '🚀 ~ file: StudyRegisterScreen.tsx:22 ~ registerFormData:',
+    registerFormData,
+  );
 
   const currentStepIdx = REGISTER_STEPS.findIndex((t) => t === step);
 
@@ -64,8 +70,22 @@ const StudyRegisterScreen: FC = () => {
             }}
           />
         )}
-        {step === 'rule' && <RuleSettingStep onNext={() => setStep('noti')} />}
-        {step === 'noti' && <NotiSettingStep onNext={() => setStep('info')} />}
+        {step === 'rule' && (
+          <RuleSettingStep
+            onNext={(data) => {
+              setStep('noti');
+              handleChangeFormData(data);
+            }}
+          />
+        )}
+        {step === 'noti' && (
+          <NotiSettingStep
+            onNext={(data) => {
+              setStep('info');
+              handleChangeFormData(data);
+            }}
+          />
+        )}
       </Box>
     </Box>
   );

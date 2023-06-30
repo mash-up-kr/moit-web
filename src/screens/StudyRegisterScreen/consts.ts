@@ -57,3 +57,25 @@ export const REPEAT_CYCLE_OPTIONS: {
     label: '4주',
   },
 ];
+
+export const REMIND_OPTIONS: {
+  value: RegisterFormData['remindOption'];
+  label: string;
+}[] = [
+  {
+    value: 'STUDY_DAY_10_AM',
+    label: '당일 오전 10시',
+  },
+  {
+    value: 'BEFORE_1_HOUR',
+    label: '1시간 전',
+  },
+  {
+    value: 'BEFORE_30_MINUTE',
+    label: '30분 전',
+  },
+  {
+    value: 'BEFORE_10_MINUTE',
+    label: '10분 전',
+  },
+];
