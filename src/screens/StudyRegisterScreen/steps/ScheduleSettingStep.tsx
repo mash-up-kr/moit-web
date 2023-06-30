@@ -22,6 +22,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
 
   const {
     handleSubmit,
+    getValues,
     control,
     formState: { errors },
   } = useForm<ScheduleStepFormData>({
@@ -107,6 +108,13 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
         >
           클릭시 자동등록 (임시)
         </ChakraButton>
+
+        {getValues('startTime') && (
+          <>
+            <div>startTime {JSON.stringify(getValues('startTime'))}</div>
+            <div>endTime {JSON.stringify(getValues('endTime'))}</div>
+          </>
+        )}
       </FormControl>
 
       <FormControl>
@@ -137,6 +145,13 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
         >
           클릭시 자동등록 (임시)
         </ChakraButton>
+
+        {getValues('startDate') && (
+          <>
+            <div>startDate {getValues('startDate')}</div>
+            <div>endDate {getValues('endDate')}</div>
+          </>
+        )}
       </FormControl>
 
       <LargeBottom>
