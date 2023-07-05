@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Example from 'Example';
-import AttendanceKeyword from 'screens/AttendanceKeyword';
+import AttendanceKeyword from 'screens/AttendanceScreen/AttendanceKeyword';
 import StudyRegisterScreen from 'screens/StudyRegisterScreen';
 
 const Router: FC = () => {
