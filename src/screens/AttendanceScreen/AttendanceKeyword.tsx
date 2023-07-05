@@ -11,6 +11,7 @@ import AttendanceTimer from './components/AttendanceTimer';
 const AttendanceKeyword = () => {
   const [searchParams] = useSearchParams();
   const status = searchParams.get('status') as 'present' | 'tardy';
+  const isFirst = searchParams.get('isFirst');
   const isTardy: boolean = status === 'tardy';
 
   const [answer, setAnswer] = useState<string>('');
@@ -59,7 +60,7 @@ const AttendanceKeyword = () => {
             opacity="0.5"
             mt={'60px'}
           >
-            {isTardy
+            {isFirst === 'true'
               ? '오늘의 첫 출석자: 김모잇'
               : '첫번째 출석자예요! 키워드를 만들어주세요!'}
           </Text>
