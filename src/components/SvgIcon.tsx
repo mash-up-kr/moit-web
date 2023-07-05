@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Icon, IconProps } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import * as customIcons from '@styles/icons';
-import { PalleteValueType } from '@styles/theme';
+import theme, { PalleteValueType } from '@styles/theme';
 
 interface SvgIconProps extends IconProps {
   name: keyof typeof customIcons;
@@ -11,7 +11,7 @@ interface SvgIconProps extends IconProps {
   color?: PalleteValueType | '';
 }
 
-const getIconCss = (color: PalleteValueType | '') => css`
+const getIconCss = (color: PalleteValueType = theme.palette.gray900) => css`
   > * {
     stroke: ${color};
   }
@@ -21,7 +21,7 @@ const SvgIcon: FC<SvgIconProps> = ({
   name,
   size = 16,
   rotate = 0,
-  color = theme.palette.gray900,
+  color,
   ...restProps
 }) => {
   const TargetIcon = customIcons[name];
@@ -30,7 +30,7 @@ const SvgIcon: FC<SvgIconProps> = ({
       as={TargetIcon}
       boxSize={`${size}px`}
       transform={`rotate(${rotate}deg)`}
-      css={getIconCss(color)}
+      css={color && getIconCss(color)}
       {...restProps}
     />
   );

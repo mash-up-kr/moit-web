@@ -35,6 +35,8 @@ export const palette = {
   white_01: 'rgba(255, 255, 255, 0.1)',
 
   black: '#000',
+
+  modal_dim: 'rgba(24, 24, 24, 0.5)',
 } as const;
 
 export const colors = {
@@ -131,7 +133,8 @@ export type FontKeyType = keyof FontType;
 export type Theme = typeof theme;
 
 export const chakraTheme = extendTheme({
-  colors: { ...theme.colors },
+  colors: { ...colors },
+  space: { ...space },
 });
 
 export default theme;

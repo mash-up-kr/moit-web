@@ -1,30 +1,36 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
 
-type TimeZoneCursor = 'start' | 'end';
-type TimeParams = {
-  hour: number;
-  minuete: number;
-};
-
 interface Props {
   currentCursor: TimeZoneCursor;
   startTime: TimeParams;
   endTime: TimeParams;
+  onTimeZoneClick: (type: TimeZoneCursor) => void;
 }
 
-const TimeZone: FC<Props> = ({ currentCursor, startTime, endTime }) => {
+const TimeZone: FC<Props> = ({
+  currentCursor,
+  startTime,
+  endTime,
+  onTimeZoneClick,
+}) => {
   return (
     <Container>
-      <Content isCurrentCursor={currentCursor === 'start'}>
+      <Content
+        isCurrentCursor={currentCursor === 'start'}
+        onClick={() => onTimeZoneClick('start')}
+      >
         <p>시작</p>
         <span>{`${startTime.hour}시 `}</span>
-        <span>{`${startTime.minuete}분 `}</span>
+        <span>{`${startTime.minute}분 `}</span>
       </Content>
-      <Content isCurrentCursor={currentCursor === 'end'}>
+      <Content
+        isCurrentCursor={currentCursor === 'end'}
+        onClick={() => onTimeZoneClick('end')}
+      >
         <p>종료</p>
         <span>{`${endTime.hour}시 `}</span>
-        <span>{`${endTime.minuete}분 `}</span>
+        <span>{`${endTime.minute}분 `}</span>
       </Content>
     </Container>
   );
@@ -44,12 +50,14 @@ const Content = styled.div<{ isCurrentCursor: boolean }>`
     font-size: 16px;
     line-height: 23px;
     color: ${({ isCurrentCursor, theme }) =>
-      isCurrentCursor ? theme.palette.blue500 : theme.palette.gray300};
+      theme.palette[isCurrentCursor ? 'blue500' : 'gray300']};
   }
 
   span {
-    ${({ theme }) => theme.fonts.h3}
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: 600;
     color: ${({ isCurrentCursor, theme }) =>
-      isCurrentCursor ? theme.colors.primary.default : theme.palette.gray300};
+      theme.palette[isCurrentCursor ? 'blue800' : 'gray300']};
   }
 `;
