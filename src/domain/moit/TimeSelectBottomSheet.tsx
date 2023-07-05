@@ -1,13 +1,13 @@
 import { PropsWithChildren, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
-import { SelectScroller } from '@components/SelectScroller/index';
 import { palette } from '@styles/theme';
 import { zIndex } from '@styles/z-index';
 import useEffectOnce from 'hooks/useEffectOnce';
 import { ModalProps } from 'hooks/useModal';
 import { generateArray } from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
+import { SelectScroller } from '@components/SelectScroller';
 import TimeZone from './components/TimeZone';
 import { useSelectTime } from './hooks/useSelectTime';
 
