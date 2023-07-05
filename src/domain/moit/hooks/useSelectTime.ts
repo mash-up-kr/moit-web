@@ -1,5 +1,5 @@
 import { UseSelectScroller } from '@components/SelectScroller/SelectScroller.hooks';
-import { useSelectScroller } from '@components/SelectScroller/index';
+import { useSelectScroller } from '@components/SelectScroller';
 
 const SELECT_CONTENT_HEIGHT = 52;
 
