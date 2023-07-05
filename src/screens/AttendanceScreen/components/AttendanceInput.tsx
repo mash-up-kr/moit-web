@@ -46,6 +46,7 @@ const AttendanceInput = ({
             border="hidden"
             borderRadius={'12px'}
             pointerEvents={'none'}
+            onChange={() => {}}
           />
         ))}
       </Grid>

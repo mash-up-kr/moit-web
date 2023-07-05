@@ -135,8 +135,3 @@ export const chakraTheme = extendTheme({
 });
 
 export default theme;
-
-export const chakraTheme = extendTheme({
-  colors: { ...colors },
-  space: { ...space },
-});

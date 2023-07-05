@@ -13,9 +13,9 @@ const AttendanceTimer = ({ isTardy }: AttendanceTimerProps) => {
 
   const [time, setTime] = useState<Date>(calcTimeDiff(dummyStartTime));
 
-  function setOneSecBefore() {
+  const setOneSecBefore = () => {
     setTime(subtractOneSecond(time));
-  }
+  };
 
   useEffect(() => {
     const timer = setInterval(setOneSecBefore, 1000);
