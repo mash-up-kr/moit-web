@@ -18,7 +18,7 @@ export const useSelectScroller = ({
 
   const onScroll = () => {
     const top = ref.current && ref.current.scrollTop;
-    const currentItemIndex = top ? Math.round(top / itemHeight) : 0;
+    const currentItemIndex = top ? Math.floor(top / itemHeight) : 0;
 
     setSelectedIndex(currentItemIndex);
   };

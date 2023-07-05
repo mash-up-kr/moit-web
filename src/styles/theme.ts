@@ -133,7 +133,6 @@ export type Theme = typeof theme;
 export const chakraTheme = extendTheme({
   colors: { ...colors },
   space: { ...space },
-  fonts: { ...fonts },
 });
 
 export default theme;

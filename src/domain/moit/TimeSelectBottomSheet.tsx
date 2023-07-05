@@ -1,8 +1,9 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
 import { palette } from '@styles/theme';
 import { zIndex } from '@styles/z-index';
+import useEffectOnce from 'hooks/useEffectOnce';
 import { ModalProps } from 'hooks/useModal';
 import { generateArray } from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
@@ -12,14 +13,41 @@ import { useSelectTime } from './hooks/useSelectTime';
 
 interface Props {
   modalProps: ModalProps;
+  testH: number;
+  testM: number;
+  testHSetter: (n: number) => void;
+  testMSetter: (n: number) => void;
 }
 
-// TODO: 타입 변환시 해당 인덱스로 스크롤 로직 추가
-// TODO: 인풋 로직 개발되면 저장버튼에 싱크 로직 추가
-
-const TimeSelectBottomSheet = ({ modalProps }: PropsWithChildren<Props>) => {
+const TimeSelectBottomSheet = ({
+  modalProps,
+  testHSetter,
+  testH,
+  testM,
+  testMSetter,
+}: PropsWithChildren<Props>) => {
   const [currentCursor, setCurrentCursor] = useState<TimeZoneCursor>('start');
   const { hour, min, startTime, endTime } = useSelectTime(currentCursor);
+
+  // 마운트 시점 스크롤. 지연 로직을 추가하지 않으면, 정상 동작하지 않음
+  useEffectOnce(() => {
+    setTimeout(() => {
+      hour.ref.current?.scrollTo(0, Math.floor((testH + 1) * 52));
+      min.ref.current?.scrollTo(0, Math.floor((testM + 1) * 52));
+    }, 300);
+  });
+
+  // 커서 변경시 스크롤 로직.
+  // 더 좋은 로직이 있는건 확실한디... :(
+  useEffect(() => {
+    setTimeout(() => {
+      hour.ref.current?.scrollTo(0, hour.selectedIndex * 52);
+      min.ref.current?.scrollTo(0, min.selectedIndex * 52);
+    });
+
+    //! don't delete this ignore.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentCursor]);
 
   return (
     <BottomSheet
@@ -35,7 +63,13 @@ const TimeSelectBottomSheet = ({ modalProps }: PropsWithChildren<Props>) => {
             onTimeZoneClick={(type: TimeZoneCursor) => setCurrentCursor(type)}
           />
           <ContentWrapper>
-            <SelectScroller ref={hour.ref} onScroll={hour.onScroll}>
+            <SelectScroller
+              ref={hour.ref}
+              onScroll={() => {
+                testHSetter(hour.selectedIndex);
+                hour.onScroll();
+              }}
+            >
               {generateArray(23).map((h) => (
                 <SelectScrollerOption
                   isActive={hour.selectedIndex === h}
@@ -45,7 +79,13 @@ const TimeSelectBottomSheet = ({ modalProps }: PropsWithChildren<Props>) => {
                 </SelectScrollerOption>
               ))}
             </SelectScroller>
-            <SelectScroller ref={min.ref} onScroll={min.onScroll}>
+            <SelectScroller
+              ref={min.ref}
+              onScroll={() => {
+                testMSetter(min.selectedIndex);
+                min.onScroll();
+              }}
+            >
               {generateArray(59).map((m) => (
                 <SelectScrollerOption
                   isActive={min.selectedIndex === m}
@@ -67,11 +107,10 @@ export default TimeSelectBottomSheet;
 
 const ContentWrapper = styled.section`
   display: flex;
-  gap: ${({ theme }) => theme.space.md}px;
-  margin-top: ${({ theme }) => theme.space.md}px;
+  gap: ${({ theme }) => theme.space.md};
+  margin-top: ${({ theme }) => theme.space.md};
   padding-bottom: 100px;
   position: relative;
-
   /* 드래그 방지 */
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -79,7 +118,6 @@ const ContentWrapper = styled.section`
   -ms-user-select: none;
   user-select: none;
 `;
-
 const Cursor = styled.div`
   position: absolute;
   z-index: ${zIndex.HIDE};
@@ -87,5 +125,5 @@ const Cursor = styled.div`
   height: 52px;
   transform: translateY(42px);
   background-color: ${({ theme }) => theme.colors.primary.selected};
-  border-radius: ${({ theme }) => theme.space.md}px;
+  border-radius: ${({ theme }) => theme.space.md};
 `;

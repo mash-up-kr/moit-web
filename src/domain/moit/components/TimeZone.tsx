@@ -54,7 +54,9 @@ const Content = styled.div<{ isCurrentCursor: boolean }>`
   }
 
   span {
-    ${({ theme }) => theme.fonts.h3}
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: 600;
     color: ${({ isCurrentCursor, theme }) =>
       theme.palette[isCurrentCursor ? 'blue800' : 'gray300']};
   }
