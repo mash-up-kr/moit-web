@@ -10,6 +10,7 @@ const App: FC = () => {
         defaultOptions: {
           queries: {
             refetchOnWindowFocus: false,
+            retry: 0,
           },
         },
       }),
