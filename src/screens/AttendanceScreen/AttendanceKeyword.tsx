@@ -57,7 +57,7 @@ const AttendanceKeyword = () => {
           <Text
             type="p3"
             color={theme.palette.gray100}
-            opacity="0.5"
+            opacity={'0.5'}
             mt={'60px'}
           >
             {isFirst === 'true'

@@ -49,32 +49,32 @@ const TransparentInput = ({ setAnswer }: TransparentInputProps) => {
 
   return (
     <Input
-      position={'absolute'}
+      autoFocus
+      maxLength={4}
+      ref={inputRef}
       onChange={(e) => handleAnswer(e.target.value)}
+      position={'absolute'}
+      onKeyDown={handleKeyDown}
+      onClick={handleClick}
+      cursor={'none'}
       w={'303px'}
+      h={'70px'}
+      p={'0px 19px'}
       bg={'transparent'}
+      mt={'25px'}
       border={'none'}
       fontSize={'32px'}
       fontWeight={'700'}
       letterSpacing={'51px'}
-      h={'70px'}
-      p={'0px 19px'}
       outline={'none'}
-      focusBorderColor="none"
+      focusBorderColor={'none'}
       textDecorationLine={'none'}
       textDecor={'none'}
-      cursor={'none'}
+      style={{ caretColor: 'transparent' }}
       textDecoration={'none'}
       color={'rgba(0, 0, 0, 0)'}
-      style={{ caretColor: 'transparent' }}
-      mt={'25px'}
       zIndex={'30'}
-      maxLength={4}
-      onKeyDown={handleKeyDown}
-      ref={inputRef}
-      autoFocus
-      onClick={handleClick}
-    ></Input>
+    />
   );
 };
 

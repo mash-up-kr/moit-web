@@ -39,7 +39,7 @@ const AttendanceTimer = ({ isTardy }: AttendanceTimerProps) => {
           : 'linear-gradient(0deg, rgba(88, 95, 240, 0.20) 0%, rgba(88, 95, 240, 0.00) 100%), #000'
       }
     >
-      <Text type="h6" color={theme.palette.gray100} opacity="0.6">
+      <Text type="h6" color={theme.palette.gray100} opacity={'0.6'}>
         {isTardy ? '지각' : '출석'} 인정 시간
       </Text>
       <Text
