@@ -54,38 +54,42 @@ const StudyRegisterScreen: FC = () => {
       />
 
       <Box>
-        {step === 'info' && (
-          <InfoSettingStep
-            onNext={(data) => {
-              setStep('schedule');
-              handleChangeFormData(data);
-            }}
-          />
-        )}
-        {step === 'schedule' && (
-          <ScheduleSettingStep
-            onNext={(data) => {
-              setStep('rule');
-              handleChangeFormData(data);
-            }}
-          />
-        )}
-        {step === 'rule' && (
-          <RuleSettingStep
-            onNext={(data) => {
-              setStep('noti');
-              handleChangeFormData(data);
-            }}
-          />
-        )}
-        {step === 'noti' && (
-          <NotiSettingStep
-            onNext={(data) => {
-              setStep('info');
-              handleChangeFormData(data);
-            }}
-          />
-        )}
+        {
+          {
+            [REGISTER_STEPS[0]]: (
+              <InfoSettingStep
+                onNext={(data) => {
+                  setStep('schedule');
+                  handleChangeFormData(data);
+                }}
+              />
+            ),
+            [REGISTER_STEPS[1]]: (
+              <ScheduleSettingStep
+                onNext={(data) => {
+                  setStep('rule');
+                  handleChangeFormData(data);
+                }}
+              />
+            ),
+            [REGISTER_STEPS[2]]: (
+              <RuleSettingStep
+                onNext={(data) => {
+                  setStep('noti');
+                  handleChangeFormData(data);
+                }}
+              />
+            ),
+            [REGISTER_STEPS[3]]: (
+              <NotiSettingStep
+                onNext={(data) => {
+                  setStep('info');
+                  handleChangeFormData(data);
+                }}
+              />
+            ),
+          }[step]
+        }
       </Box>
     </Box>
   );
