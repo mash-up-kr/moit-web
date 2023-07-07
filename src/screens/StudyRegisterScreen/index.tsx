@@ -35,7 +35,7 @@ const StudyRegisterScreen: FC = () => {
     setStep(REGISTER_STEPS[currentStepIdx - 1]);
   };
 
-  function handleChangeFormData(data: Partial<RegisterFormData>): void {
+  function handleChangeFormData(data: Partial<CreateMoitFormData>): void {
     setRegisterFormData((prev) => ({ ...prev, ...data }));
   }
 

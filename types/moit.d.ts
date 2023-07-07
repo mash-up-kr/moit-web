@@ -1,12 +1,14 @@
 type TimeZoneCursor = 'start' | 'end';
-type TimeParams = {
+interface Time {
   hour: number;
   minute: number;
-};
+  second: number;
+  nano: number;
+}
 
-interface RegisterFormData {
+interface CreateMoitFormData {
   name: string;
-  description: string;
+  description?: string;
   dayOfWeeks:
     | 'MONDAY'
     | 'TUESDAY'
@@ -15,37 +17,27 @@ interface RegisterFormData {
     | 'FRIDAY'
     | 'SATURDAY'
     | 'SUNDAY';
-  startDate: string; //yyyy-mm-dd
-  endDate: string; //yyyy-mm-dd
+  startDate: string;
+  endDate: string;
   repeatCycle: 'NONE' | 'ONE_WEEK' | 'TWO_WEEK' | 'FOUR_WEEK';
-  startTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
-  endTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
+  startTime: Time;
+  endTime: Time;
   lateTime: number;
   lateAmount: number;
   absenceTime: number;
   absenceAmount: number;
   isRemindActive: boolean;
-  remindOption:
+  remindOption?:
     | 'STUDY_DAY_10_AM'
     | 'BEFORE_1_HOUR'
     | 'BEFORE_30_MINUTE'
     | 'BEFORE_10_MINUTE';
 }
 
-type InfoStepFormData = Pick<RegisterFormData, 'name' | 'description'>;
+type InfoStepFormData = Pick<CreateMoitFormData, 'name' | 'description'>;
 
 type ScheduleStepFormData = Pick<
-  RegisterFormData,
+  CreateMoitFormData,
   | 'dayOfWeeks'
   | 'startDate'
   | 'startTime'
@@ -55,11 +47,11 @@ type ScheduleStepFormData = Pick<
 >;
 
 type RuleStepFormData = Pick<
-  RegisterFormData,
+  CreateMoitFormData,
   'lateTime' | 'lateAmount' | 'absenceTime' | 'absenceAmount'
 >;
 
 type NotiStepFormData = Pick<
-  RegisterFormData,
+  CreateMoitFormData,
   'isRemindActive' | 'remindOption'
 >;

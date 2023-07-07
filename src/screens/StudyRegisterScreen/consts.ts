@@ -1,7 +1,7 @@
 export const REGISTER_STEPS = ['info', 'schedule', 'rule', 'noti'] as const;
 
 export const DAY_OF_WEEKS_OPTIONS: {
-  value: RegisterFormData['dayOfWeeks'];
+  value: CreateMoitFormData['dayOfWeeks'];
   label: string;
 }[] = [
   {
@@ -35,7 +35,7 @@ export const DAY_OF_WEEKS_OPTIONS: {
 ];
 
 export const REPEAT_CYCLE_OPTIONS: {
-  value: RegisterFormData['repeatCycle'];
+  value: CreateMoitFormData['repeatCycle'];
   label: string;
 }[] = [
   {
@@ -57,7 +57,7 @@ export const REPEAT_CYCLE_OPTIONS: {
 ];
 
 export const REMIND_OPTIONS: {
-  value: RegisterFormData['remindOption'];
+  value: CreateMoitFormData['remindOption'];
   label: string;
 }[] = [
   {

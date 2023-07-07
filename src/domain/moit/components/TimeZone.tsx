@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 
 interface Props {
   currentCursor: TimeZoneCursor;
-  startTime: TimeParams;
-  endTime: TimeParams;
+  startTime: Time;
+  endTime: Time;
   onTimeZoneClick: (type: TimeZoneCursor) => void;
 }
 
