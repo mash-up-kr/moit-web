@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 import theme from '@styles/theme';
 import Text from '@components/Text';
@@ -8,30 +8,45 @@ import {
   timeBeforeOneSecond,
 } from '../utils/timer';
 
+// TODO: API 연결하기
 const AttendanceTimer = () => {
-  const currentTime = new Date();
-  // 10분 후를 스터디 시작 시간으로 가정
-  const dummyStartAtTime = new Date(new Date().getTime() + 10 * 60000);
-  // 사용자가 10분 후까지를 지각으로 설정했다고 가정
-  const dummyLateAtTime = new Date(new Date().getTime() + 20 * 60000);
-  const isLate = dummyStartAtTime < currentTime;
+  // 1분 후를 스터디 시작 시간으로 가정
+  const dummyStartAtTime = new Date(new Date().getTime() + 1 * 5000);
+  // 사용자가 2분 후까지를 지각으로 설정했다고 가정
+  const dummyLateAtTime = new Date(new Date().getTime() + 2 * 5000);
 
   const [time, setTime] = useState<Date>(remainingTime(dummyStartAtTime));
+  const [isLate, setIsLate] = useState(dummyStartAtTime < new Date());
+  const [expired, setExpired] = useState(false);
+
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const setOneSecBefore = () => {
+    const currentTime = new Date();
+    if (dummyLateAtTime < currentTime && !expired && timerRef.current) {
+      setExpired(true);
+      clearInterval(timerRef.current);
+      window.alert('EXPIRED!!!');
+      return;
+    }
+    if (dummyStartAtTime < currentTime) {
+      setIsLate(true);
+      setTime(remainingTime(dummyLateAtTime));
+      return;
+    }
     setTime(timeBeforeOneSecond(time));
   };
 
   useEffect(() => {
-    if (currentTime > dummyLateAtTime) {
-      // iOS Alert 띄우고 바로 다른데 보내버림
-      return console.log('EXPIRED!!!');
-    }
-    const timer = setInterval(setOneSecBefore, 1000);
-    return () => clearInterval(timer);
+    timerRef.current = setInterval(setOneSecBefore, 1000);
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
   }, []);
 
-  const timeText = formattedTime(time);
+  const timeText = expired ? 'EXPIRED' : formattedTime(time);
 
   return (
     <Flex
