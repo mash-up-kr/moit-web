@@ -1,31 +1,10 @@
-// const SAMPLE = {
-//   name: 'string',
-//   description: 'string',
-//   dayOfWeeks: ['MONDAY'],
-//   startDate: '2023-06-29',
-//   endDate: '2023-06-29',
-//   repeatCycle: 'NONE',
-//   startTime: {
-//     hour: 0,
-//     minute: 0,
-//     second: 0,
-//     nano: 0,
-//   },
-//   endTime: {
-//     hour: 0,
-//     minute: 0,
-//     second: 0,
-//     nano: 0,
-//   },
-//   lateTime: 0,
-//   lateAmount: 0,
-//   absenceTime: 0,
-//   absenceAmount: 0,
-//   isRemindActive: true,
-//   remindOption: 'STUDY_DAY_10_AM',
-// };
+type TimeZoneCursor = 'start' | 'end';
+type TimeParams = {
+  hour: number;
+  minute: number;
+};
 
-export interface RegisterFormData {
+interface RegisterFormData {
   name: string;
   description: string;
   dayOfWeeks:
@@ -63,9 +42,9 @@ export interface RegisterFormData {
     | 'BEFORE_10_MINUTE';
 }
 
-export type InfoStepFormData = Pick<RegisterFormData, 'name' | 'description'>;
+type InfoStepFormData = Pick<RegisterFormData, 'name' | 'description'>;
 
-export type ScheduleStepFormData = Pick<
+type ScheduleStepFormData = Pick<
   RegisterFormData,
   | 'dayOfWeeks'
   | 'startDate'
@@ -75,12 +54,12 @@ export type ScheduleStepFormData = Pick<
   | 'repeatCycle'
 >;
 
-export type RuleStepFormData = Pick<
+type RuleStepFormData = Pick<
   RegisterFormData,
   'lateTime' | 'lateAmount' | 'absenceTime' | 'absenceAmount'
 >;
 
-export type NotiStepFormData = Pick<
+type NotiStepFormData = Pick<
   RegisterFormData,
   'isRemindActive' | 'remindOption'
 >;

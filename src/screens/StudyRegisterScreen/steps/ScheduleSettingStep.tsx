@@ -8,7 +8,6 @@ import {
 } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import Button from '@components/Button';
-import { ScheduleStepFormData } from '../../../../types/register';
 import { registerFormDataAtom } from '../atoms';
 import LargeBottom from '../component/LargeBottom';
 import { DAY_OF_WEEKS_OPTIONS, REPEAT_CYCLE_OPTIONS } from '../consts';
