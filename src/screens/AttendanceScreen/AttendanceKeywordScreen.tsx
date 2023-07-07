@@ -8,7 +8,7 @@ import Text from '@components/Text';
 import AttendanceInput from './components/AttendanceInput';
 import AttendanceTimer from './components/AttendanceTimer';
 
-const AttendanceKeyword = () => {
+const AttendanceKeywordScreen = () => {
   const [answer, setAnswer] = useState('');
   const [answerList, setAnswerList] = useState<string[]>(['', '', '', '']);
 
@@ -82,4 +82,4 @@ const AttendanceKeyword = () => {
   );
 };
 
-export default AttendanceKeyword;
+export default AttendanceKeywordScreen;
