@@ -8,7 +8,6 @@ import {
 } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import Button from '@components/Button';
-import { NotiStepFormData } from '../../../../types/register';
 import { registerFormDataAtom } from '../atoms';
 import LargeBottom from '../component/LargeBottom';
 import { REMIND_OPTIONS } from '../consts';

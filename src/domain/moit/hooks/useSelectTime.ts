@@ -6,8 +6,8 @@ const SELECT_CONTENT_HEIGHT = 52;
 interface UseSelectTimeProps {
   hour: UseSelectScroller;
   min: UseSelectScroller;
-  startTime: TimeParams;
-  endTime: TimeParams;
+  startTime: Time;
+  endTime: Time;
 }
 
 export const useSelectTime = (type: TimeZoneCursor): UseSelectTimeProps => {
@@ -51,10 +51,14 @@ export const useSelectTime = (type: TimeZoneCursor): UseSelectTimeProps => {
     startTime: {
       hour: selectedStartHour,
       minute: selectedStartMin,
+      second: 0,
+      nano: 0,
     },
     endTime: {
       hour: selectedEndHour,
       minute: selectedEndMin,
+      second: 0,
+      nano: 0,
     },
   };
 };
