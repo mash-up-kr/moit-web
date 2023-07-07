@@ -17,16 +17,23 @@ const AttendanceTimer = () => {
 
   const [time, setTime] = useState<Date>(remainingTime(dummyStartAtTime));
   const [isLate, setIsLate] = useState(dummyStartAtTime < new Date());
-  const [expired, setExpired] = useState(false);
+  const [expired, setExpired] = useState(dummyLateAtTime < new Date());
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+  const alertMethod = () => window.alert('EXPIRED!!!');
+  const clearTimer = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+  };
+
   const setOneSecBefore = () => {
     const currentTime = new Date();
-    if (dummyLateAtTime < currentTime && !expired && timerRef.current) {
+    if (dummyLateAtTime < currentTime && !expired) {
       setExpired(true);
-      clearInterval(timerRef.current);
-      window.alert('EXPIRED!!!');
+      alertMethod();
+      clearTimer();
       return;
     }
     if (dummyStartAtTime < currentTime) {
@@ -38,11 +45,13 @@ const AttendanceTimer = () => {
   };
 
   useEffect(() => {
+    if (dummyLateAtTime < new Date()) {
+      alertMethod();
+      return;
+    }
     timerRef.current = setInterval(setOneSecBefore, 1000);
     return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
+      clearTimer();
     };
   }, []);
 
