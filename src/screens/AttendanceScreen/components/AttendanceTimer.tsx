@@ -10,9 +10,9 @@ import {
 
 // TODO: API 연결하기
 const AttendanceTimer = () => {
-  // 1분 후를 스터디 시작 시간으로 가정
+  // 5초 후를 스터디 시작 시간으로 가정
   const dummyStartAtTime = new Date(new Date().getTime() + 1 * 5000);
-  // 사용자가 2분 후까지를 지각으로 설정했다고 가정
+  // 사용자가 출석시간 기준 5초 후까지를 지각으로 설정했다고 가정
   const dummyLateAtTime = new Date(new Date().getTime() + 2 * 5000);
 
   const [time, setTime] = useState<Date>(remainingTime(dummyStartAtTime));
