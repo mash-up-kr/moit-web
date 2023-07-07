@@ -7,6 +7,7 @@ import SvgIcon from '@components/SvgIcon';
 import Text from '@components/Text';
 import AttendanceInput from './components/AttendanceInput';
 import AttendanceTimer from './components/AttendanceTimer';
+import { TooltipWithTouch } from './components/TooltipWithTouch';
 
 const AttendanceKeywordScreen = () => {
   const [answer, setAnswer] = useState('');
@@ -26,12 +27,20 @@ const AttendanceKeywordScreen = () => {
 
   return (
     <Box bgColor={theme.colors.background.black}>
-      <Container>
+      <Box>
         <ScreenHeader
           leftIcon={
             <SvgIcon name="ArrowLeft" size={24} color={theme.palette.white} />
           }
-          rightIcon={<SvgIcon name="Info" size={24} />}
+          rightIcon={
+            <TooltipWithTouch
+              label={
+                '첫 출석자가 공유한 키워드를\n 시간 내 입력하면 출석 완료되어요!'
+              }
+            >
+              <SvgIcon name="Info" size={24} />
+            </TooltipWithTouch>
+          }
         />
         <Container centerContent>
           <Flex mt={theme.space.md} mb={theme.space.lg}>
@@ -62,7 +71,7 @@ const AttendanceKeywordScreen = () => {
               : '첫번째 출석자예요! 키워드를 만들어주세요!'}
           </Text>
         </Container>
-      </Container>
+      </Box>
       <Button
         w={'100%'}
         h={'56px'}
