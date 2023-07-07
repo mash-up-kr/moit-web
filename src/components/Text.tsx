@@ -5,10 +5,9 @@ import {
 } from '@chakra-ui/react';
 import theme, { FontKeyType, PalleteValueType, fonts } from '@styles/theme';
 
-interface TextProps extends ChakraTextProps {
+interface TextProps extends Omit<ChakraTextProps, 'color'> {
   type: FontKeyType;
   color?: PalleteValueType;
-  opacity?: string;
 }
 
 const Text = ({
@@ -16,7 +15,6 @@ const Text = ({
   children,
   display = 'block',
   color = theme.colors.text.general,
-  opacity = '1',
   ...restProps
 }: PropsWithChildren<TextProps>) => {
   return (
@@ -24,7 +22,6 @@ const Text = ({
       display={display}
       color={color}
       css={fonts[type]}
-      opacity={opacity}
       {...restProps}
     >
       {children}

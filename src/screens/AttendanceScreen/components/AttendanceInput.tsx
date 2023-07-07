@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import { Box, Input as ChakraInput, Grid } from '@chakra-ui/react';
 import theme from '@styles/theme';
 import TransparentInput from './TransparentInput';
@@ -6,7 +5,7 @@ import TransparentInput from './TransparentInput';
 interface AttendanceInputProps {
   answer: string;
   answerList: string[];
-  setAnswer: Dispatch<SetStateAction<string>>;
+  setAnswer: Util.SetStateType<string>;
 }
 
 const AttendanceInput = ({
@@ -14,9 +13,9 @@ const AttendanceInput = ({
   answerList,
   setAnswer,
 }: AttendanceInputProps) => {
-  const handleBgColor = (index: number) => {
+  const handleBgColor = (answerLength: number, index: number) => {
     if (index === 0) return '#FFFFFF1A';
-    return answer.length > index ? '#FFFFFF1A' : '#FFFFFF33';
+    return answerLength > index ? '#FFFFFF1A' : '#FFFFFF33';
   };
 
   return (
@@ -33,7 +32,7 @@ const AttendanceInput = ({
           <ChakraInput
             key={idx}
             value={ans}
-            bg={handleBgColor(idx)}
+            bg={handleBgColor(answer.length, idx)}
             w={'100%'}
             h={'70px'}
             p={theme.space.sm}

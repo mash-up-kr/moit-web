@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { Box, Button, Container, Flex } from '@chakra-ui/react';
 import theme from '@styles/theme';
+import useGetCheckIsFirst from 'domain/study/hooks/useGetCheckIsFirst';
 import ScreenHeader from '@components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
 import Text from '@components/Text';
@@ -9,13 +9,11 @@ import AttendanceInput from './components/AttendanceInput';
 import AttendanceTimer from './components/AttendanceTimer';
 
 const AttendanceKeyword = () => {
-  const [searchParams] = useSearchParams();
-  const status = searchParams.get('status') as 'present' | 'tardy';
-  const isFirst = searchParams.get('isFirst');
-  const isTardy: boolean = status === 'tardy';
-
-  const [answer, setAnswer] = useState<string>('');
+  const [answer, setAnswer] = useState('');
   const [answerList, setAnswerList] = useState<string[]>(['', '', '', '']);
+
+  const studyId = 1; // dummy
+  const { isFirst } = useGetCheckIsFirst(studyId);
 
   useEffect(() => {
     const inputAnswerList = answer
@@ -24,17 +22,16 @@ const AttendanceKeyword = () => {
     setAnswerList(inputAnswerList);
   }, [answer]);
 
-  const disabled = answer.length < 4;
+  const buttonDisabled = answer.length < 4;
 
   return (
     <Box bgColor={theme.colors.background.black}>
       <Container>
         <ScreenHeader
-          title={''}
           leftIcon={
             <SvgIcon name="ArrowLeft" size={24} color={theme.palette.white} />
           }
-          rightIcon={<SvgIcon name="Info" size={24} color={''} />}
+          rightIcon={<SvgIcon name="Info" size={24} />}
         />
         <Container centerContent>
           <Flex mt={theme.space.md} mb={theme.space.lg}>
@@ -48,7 +45,7 @@ const AttendanceKeyword = () => {
               를 입력하세요!
             </Text>
           </Flex>
-          <AttendanceTimer isTardy={isTardy} />
+          <AttendanceTimer />
           <AttendanceInput
             answer={answer}
             answerList={answerList}
@@ -60,7 +57,7 @@ const AttendanceKeyword = () => {
             opacity={'0.5'}
             mt={'60px'}
           >
-            {isFirst === 'true'
+            {isFirst
               ? '오늘의 첫 출석자: 김모잇'
               : '첫번째 출석자예요! 키워드를 만들어주세요!'}
           </Text>
@@ -73,9 +70,9 @@ const AttendanceKeyword = () => {
         fontWeight={'600'}
         lineHeight={'23px'}
         mt={theme.space.md}
-        color={disabled ? theme.palette.gray700 : theme.colors.text.white}
+        color={buttonDisabled ? theme.palette.gray700 : theme.colors.text.white}
         backgroundColor={
-          disabled ? theme.palette.gray200 : theme.colors.primary.default
+          buttonDisabled ? theme.palette.gray200 : theme.colors.primary.default
         }
         borderRadius={'0'}
       >

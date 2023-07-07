@@ -1,4 +1,11 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import {
+  ChangeEventHandler,
+  Dispatch,
+  KeyboardEventHandler,
+  SetStateAction,
+  useEffect,
+  useRef,
+} from 'react';
 import { Input } from '@chakra-ui/react';
 
 interface TransparentInputProps {
@@ -35,13 +42,13 @@ const TransparentInput = ({ setAnswer }: TransparentInputProps) => {
     }
   };
 
-  const handleAnswer = (value: string) => {
-    if (value !== '') {
-      setAnswer(value);
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (e.target.value !== '') {
+      setAnswer(e.target.value);
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     if (e.key == 'Backspace') {
       setAnswer('');
     }
@@ -52,7 +59,7 @@ const TransparentInput = ({ setAnswer }: TransparentInputProps) => {
       autoFocus
       maxLength={4}
       ref={inputRef}
-      onChange={(e) => handleAnswer(e.target.value)}
+      onChange={handleChange}
       position={'absolute'}
       onKeyDown={handleKeyDown}
       onClick={handleClick}
@@ -72,7 +79,7 @@ const TransparentInput = ({ setAnswer }: TransparentInputProps) => {
       textDecor={'none'}
       style={{ caretColor: 'transparent' }}
       textDecoration={'none'}
-      color={'rgba(0, 0, 0, 0)'}
+      color={'transparent'}
       zIndex={'30'}
     />
   );

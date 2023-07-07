@@ -8,7 +8,7 @@ interface SvgIconProps extends IconProps {
   name: keyof typeof customIcons;
   size?: number;
   rotate?: number;
-  color?: PalleteValueType | '';
+  color?: PalleteValueType;
 }
 
 const getIconCss = (color: PalleteValueType = theme.palette.gray900) => css`

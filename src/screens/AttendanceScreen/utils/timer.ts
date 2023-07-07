@@ -1,29 +1,29 @@
 /**
  *
- * @param dueDate 기준이 되는 시간 값 (Date 객체)
- * @returns dueDate와 현재 시간의 차이 값
+ * @param date 기준 시간
+ * @returns 기준 시간과 현재 시간의 차이
  */
-export const calcTimeDiff = (dueDate: Date) => {
+export const remainingTime = (date: Date): Date => {
   const currentTime = new Date();
-  const timeDiff = new Date(dueDate.getTime() - currentTime.getTime());
+  const timeDiff = new Date(date.getTime() - currentTime.getTime());
   return new Date(timeDiff);
 };
 
 /**
  *
- * @param time 1초씩 뺄 시간 값 (Date 객체)
- * @returns 1초 빼진 값
+ * @param date 1초 뺄 시간
+ * @returns 1초 뺀 시간
  */
-export const subtractOneSecond = (stDate: Date) => {
-  return new Date(stDate.setTime(stDate.getTime() - 1000));
+export const timeBeforeOneSecond = (date: Date): Date => {
+  return new Date(date.setTime(date.getTime() - 1000));
 };
 
 /**
  *
- * @param date 렌더링 할 시간 값 (Date 객체)
- * @returns mm:ss에 사용할 수 있는 { minutes, seconds }
+ * @param date mm:ss로 나타내고 싶은 시간
+ * @returns mm:ss
  */
-export const formattedTime = (date: Date) => {
+export const formattedTime = (date: Date): string => {
   const minutes = Math.floor(date.getTime() / 60000);
   const seconds = Math.floor((date.getTime() / 1000) % 60);
   return `${minutes.toString().padStart(2, '0')}:${seconds
