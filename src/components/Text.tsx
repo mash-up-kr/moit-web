@@ -5,7 +5,7 @@ import {
 } from '@chakra-ui/react';
 import theme, { FontKeyType, PalleteValueType, fonts } from '@styles/theme';
 
-interface TextProps extends ChakraTextProps {
+interface TextProps extends Omit<ChakraTextProps, 'color'> {
   type: FontKeyType;
   color?: PalleteValueType;
 }
