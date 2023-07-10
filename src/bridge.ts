@@ -16,7 +16,7 @@ declare global {
     webkit: {
       messageHandlers: {
         MOIT: {
-          postMessage(params: BridgeParams): void;
+          postMessage: (params: BridgeParams) => void;
         };
       };
     };
