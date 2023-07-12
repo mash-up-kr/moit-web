@@ -53,7 +53,7 @@ const StudyRegisterScreen: FC = () => {
         height="3px"
       />
 
-      <Box>
+      <Box p="20px">
         {
           {
             [REGISTER_STEPS[0]]: (

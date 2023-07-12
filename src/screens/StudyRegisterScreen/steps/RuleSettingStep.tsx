@@ -9,7 +9,7 @@ import { useRecoilValue } from 'recoil';
 import Button from '@components/Button';
 import { RuleStepFormData } from '../../../../types/register';
 import { registerFormDataAtom } from '../atoms';
-import LargeBottom from '../component/LargeBottom';
+import LargeBottom from '../components/LargeBottom';
 
 interface RuleSettingStepProps {
   onNext: (data: RuleStepFormData) => void;
