@@ -1,15 +1,15 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Controller, useController, useForm } from 'react-hook-form';
-import {
-  FormLabel,
-  FormControl,
-  Select,
-  Button as ChakraButton,
-} from '@chakra-ui/react';
+import { Button as ChakraButton, Box } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import Button from '@components/Button';
+import Text from '@components/Text';
 import { ScheduleStepFormData } from '../../../../types/register';
 import { registerFormDataAtom } from '../atoms';
+import ButtonSelect from '../components/ButtonSelect';
+import Form from '../components/Form';
+import FormItem from '../components/FormItem';
+import Input from '../components/Input';
 import LargeBottom from '../components/LargeBottom';
 import { DAY_OF_WEEKS_OPTIONS, REPEAT_CYCLE_OPTIONS } from '../consts';
 
@@ -19,7 +19,6 @@ interface ScheduleSettingStepProps {
 
 const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
   const formData = useRecoilValue(registerFormDataAtom);
-
   const {
     handleSubmit,
     getValues,
@@ -28,6 +27,11 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
   } = useForm<ScheduleStepFormData>({
     defaultValues: formData,
   });
+
+  const startTime = getValues('startTime');
+  const endTime = getValues('endTime');
+  const startDate = getValues('startDate');
+  const endDate = getValues('endDate');
 
   const onSubmit = handleSubmit((values) => {
     onNext(values);
@@ -68,28 +72,87 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
 
   const isDisabled = Object.keys(errors).length > 0;
 
-  return (
-    <form onSubmit={onSubmit}>
-      <FormControl>
-        <FormLabel>스터디 날짜</FormLabel>
-        <Controller
-          control={control}
-          name="dayOfWeeks"
-          rules={{ required: true }}
-          render={({ field }) => (
-            <Select {...field}>
-              {DAY_OF_WEEKS_OPTIONS.map((item) => (
-                <option key={item.value} value={item.label}>
-                  {item.label}
-                </option>
-              ))}
-            </Select>
-          )}
-        />
-      </FormControl>
+  const timeValue = useMemo(() => {
+    if (!startTime || !endTime) return '';
 
-      <FormControl>
-        <FormLabel>시간</FormLabel>
+    return `${startTime.hour.toString().padStart(2, '0')}시 ${startTime.minute
+      .toString()
+      .padStart(2, '0')}분 - ${endTime.hour
+      .toString()
+      .padStart(2, '0')}시 ${endTime.minute.toString().padStart(2, '0')}분
+      `;
+  }, [startTime, endTime]);
+
+  const dateValue = useMemo(() => {
+    if (!startDate || !endDate) return '';
+
+    const sd = new Date(startDate);
+    const ed = new Date(endDate);
+
+    return `${sd.getMonth() + 1}월 ${sd.getDate()}일 - ${
+      ed.getMonth() + 1
+    }월-${ed.getDate()}일`;
+  }, [startDate, endDate]);
+
+  return (
+    <Box>
+      <Text type="h4" mb="20px">
+        {'스터디 진행 일정을\n모두 입력해주세요'}
+      </Text>
+
+      <Form onSubmit={onSubmit}>
+        <FormItem label="스터디 날짜">
+          <Controller
+            control={control}
+            name="dayOfWeeks"
+            rules={{ required: true }}
+            render={({ field }) => (
+              <ButtonSelect
+                options={DAY_OF_WEEKS_OPTIONS}
+                value={getValues('dayOfWeeks')}
+                onChange={(v) => field.onChange(v)}
+              />
+            )}
+          />
+        </FormItem>
+
+        <FormItem label="시간" direction="row">
+          <Input
+            readOnly
+            placeholder="17시 00분 - 20시 00분"
+            value={timeValue}
+            onClick={() => {}}
+          />
+        </FormItem>
+
+        <FormItem label="반복" direction="row">
+          <Controller
+            control={control}
+            name="repeatCycle"
+            render={({ field }) => (
+              <Input
+                readOnly
+                placeholder="2주"
+                value={
+                  REPEAT_CYCLE_OPTIONS.find(
+                    (item) => item.value === getValues('repeatCycle'),
+                  )?.label ?? ''
+                }
+                onClick={() => {
+                  // TODO: 팝업띄우기
+                  // REPEAT_CYCLE_OPTIONS , field.onChange() 사용해주세용
+                  console.log(REPEAT_CYCLE_OPTIONS);
+                  field.onChange('TWO_WEEK');
+                }}
+              />
+            )}
+          />
+        </FormItem>
+
+        <FormItem label="진행기간" direction="row">
+          <Input readOnly placeholder="6월 27일 - 8월 30일" value={dateValue} />
+        </FormItem>
+
         <ChakraButton
           onClick={() => {
             onChangeStartTime({
@@ -106,58 +169,22 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             });
           }}
         >
-          클릭시 자동등록 (임시)
+          클릭시 시간등록 (임시)
         </ChakraButton>
 
-        {getValues('startTime') && (
-          <>
-            <div>startTime {JSON.stringify(getValues('startTime'))}</div>
-            <div>endTime {JSON.stringify(getValues('endTime'))}</div>
-          </>
-        )}
-      </FormControl>
-
-      <FormControl>
-        <FormLabel>반복</FormLabel>
-
-        <Controller
-          control={control}
-          name="repeatCycle"
-          render={({ field }) => (
-            <Select {...field}>
-              {REPEAT_CYCLE_OPTIONS.map((item) => (
-                <option key={item.value} value={item.value}>
-                  {item.label}
-                </option>
-              ))}
-            </Select>
-          )}
-        />
-      </FormControl>
-
-      <FormControl>
-        <FormLabel>진행기간</FormLabel>
         <ChakraButton
           onClick={() => {
-            onChangeStartDate('2011-11-23');
-            onChangeEndDate('2022-11-23');
+            onChangeStartDate('2023-10-13');
+            onChangeEndDate('2023-11-23');
           }}
         >
-          클릭시 자동등록 (임시)
+          클릭시 날짜등록 (임시)
         </ChakraButton>
-
-        {getValues('startDate') && (
-          <>
-            <div>startDate {getValues('startDate')}</div>
-            <div>endDate {getValues('endDate')}</div>
-          </>
-        )}
-      </FormControl>
-
-      <LargeBottom>
-        <Button label="다음" type="submit" isDisabled={isDisabled} />
-      </LargeBottom>
-    </form>
+        <LargeBottom>
+          <Button label="다음" type="submit" isDisabled={isDisabled} />
+        </LargeBottom>
+      </Form>
+    </Box>
   );
 };
 
