@@ -10,7 +10,7 @@ import { useRecoilValue } from 'recoil';
 import Button from '@components/Button';
 import { NotiStepFormData } from '../../../../types/register';
 import { registerFormDataAtom } from '../atoms';
-import LargeBottom from '../component/LargeBottom';
+import LargeBottom from '../components/LargeBottom';
 import { REMIND_OPTIONS } from '../consts';
 
 interface NotiSettingStepProps {
