@@ -12,53 +12,40 @@ import { SelectScroller } from '@components/SelectScroller';
 import { useSelectTime } from '../hooks/useSelectTime';
 import TimeZone from './TimeZone';
 
+export type CreateMoitRegisterTime = {
+  startTime: TimeParams;
+  endTime: TimeParams;
+};
+
 interface Props {
   modalProps: ModalProps;
-  initalStartTime: TimeParams;
-  initalEndTime: TimeParams;
-  timeUpdate: ({
-    startTime,
-    endTime,
-  }: {
-    startTime: TimeParams;
-    endTime: TimeParams;
-  }) => void;
+  initialTime: CreateMoitRegisterTime;
+  timeUpdate: (times: CreateMoitRegisterTime) => void;
 }
 
 const TimeSelectBottomSheet = ({
   modalProps,
-  initalStartTime,
-  initalEndTime,
+  initialTime,
   timeUpdate,
 }: PropsWithChildren<Props>) => {
   const [currentCursor, setCurrentCursor] = useState<TimeZoneCursor>('start');
-  const { hour, min, startTime, endTime } = useSelectTime(currentCursor);
+  const { hour, min, startTime, endTime } = useSelectTime(
+    currentCursor,
+    initialTime,
+  );
 
   // 마운트 시점 스크롤. 지연 로직을 추가하지 않으면, 정상 동작하지 않음
   useEffectOnce(() => {
-    if (currentCursor === 'start') {
-      setTimeout(() => {
-        hour.ref.current?.scrollTo(
-          0,
-          Math.floor((initalStartTime.hour + 1) * 52),
-        );
-        min.ref.current?.scrollTo(
-          0,
-          Math.floor((initalStartTime.minute + 1) * 52),
-        );
-      }, 300);
-    } else {
-      setTimeout(() => {
-        hour.ref.current?.scrollTo(
-          0,
-          Math.floor((initalEndTime.hour + 1) * 52),
-        );
-        min.ref.current?.scrollTo(
-          0,
-          Math.floor((initalEndTime.minute + 1) * 52),
-        );
-      }, 300);
-    }
+    setTimeout(() => {
+      hour.ref.current?.scrollTo(
+        0,
+        Math.floor(initialTime.startTime.hour * 52),
+      );
+      min.ref.current?.scrollTo(
+        0,
+        Math.floor(initialTime.startTime.minute * 52),
+      );
+    }, 300);
   });
 
   // 커서 변경시 스크롤 로직.
@@ -123,6 +110,8 @@ const TimeSelectBottomSheet = ({
             <Button
               label="선택하기"
               onClick={() => {
+                console.log(endTime);
+
                 timeUpdate({ startTime, endTime });
                 modalProps.hideModal();
               }}

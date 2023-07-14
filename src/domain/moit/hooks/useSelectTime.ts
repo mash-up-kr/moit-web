@@ -1,5 +1,6 @@
 import { UseSelectScroller } from '@components/SelectScroller/SelectScroller.hooks';
 import { useSelectScroller } from '@components/SelectScroller';
+import { CreateMoitRegisterTime } from '../components/TimeSelectBottomSheet';
 
 const SELECT_CONTENT_HEIGHT = 52;
 
@@ -10,27 +11,42 @@ interface UseSelectTimeProps {
   endTime: TimeParams;
 }
 
-export const useSelectTime = (type: TimeZoneCursor): UseSelectTimeProps => {
+export const useSelectTime = (
+  type: TimeZoneCursor,
+  initialTime: CreateMoitRegisterTime,
+): UseSelectTimeProps => {
   const {
     onScroll: startHourScroll,
     ref: startHourRef,
     selectedIndex: selectedStartHour,
-  } = useSelectScroller({ itemHeight: SELECT_CONTENT_HEIGHT });
+  } = useSelectScroller({
+    itemHeight: SELECT_CONTENT_HEIGHT,
+    initialSelectedIndex: initialTime.startTime.hour,
+  });
   const {
     onScroll: startMinScroll,
     ref: startMinRef,
     selectedIndex: selectedStartMin,
-  } = useSelectScroller({ itemHeight: SELECT_CONTENT_HEIGHT });
+  } = useSelectScroller({
+    itemHeight: SELECT_CONTENT_HEIGHT,
+    initialSelectedIndex: initialTime.startTime.minute,
+  });
   const {
     onScroll: endHourScroll,
     ref: endHourRef,
     selectedIndex: selectedEndHour,
-  } = useSelectScroller({ itemHeight: SELECT_CONTENT_HEIGHT });
+  } = useSelectScroller({
+    itemHeight: SELECT_CONTENT_HEIGHT,
+    initialSelectedIndex: initialTime.endTime.hour,
+  });
   const {
     onScroll: endMinScroll,
     ref: endMinRef,
     selectedIndex: selectedEndMin,
-  } = useSelectScroller({ itemHeight: SELECT_CONTENT_HEIGHT });
+  } = useSelectScroller({
+    itemHeight: SELECT_CONTENT_HEIGHT,
+    initialSelectedIndex: initialTime.endTime.minute,
+  });
 
   const isStart = type === 'start';
 

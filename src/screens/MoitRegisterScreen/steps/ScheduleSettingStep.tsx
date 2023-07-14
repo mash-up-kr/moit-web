@@ -194,28 +194,17 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
       {selectTimeBottomsheetProps.modalShowing && (
         <TimeSelectBottomSheet
           modalProps={selectTimeBottomsheetProps}
-          initalStartTime={
-            startTime
+          initialTime={{
+            startTime: startTime
               ? {
                   hour: startTime.hour,
                   minute: startTime.minute,
                 }
-              : {
-                  hour: 0,
-                  minute: 0,
-                }
-          }
-          initalEndTime={
-            endTime
-              ? {
-                  hour: endTime.hour,
-                  minute: endTime.minute,
-                }
-              : {
-                  hour: 0,
-                  minute: 0,
-                }
-          }
+              : { hour: 0, minute: 0 },
+            endTime: endTime
+              ? { hour: endTime.hour, minute: endTime.minute }
+              : { hour: 0, minute: 0 },
+          }}
           timeUpdate={(selected: SelctTimeParams) => {
             onChangeStartTime({
               hour: selected.startTime.hour,
