@@ -4,7 +4,6 @@ import { Box } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import Button from '@components/Button';
 import Text from '@components/Text';
-import { InfoStepFormData } from '../../../../types/register';
 import { registerFormDataAtom } from '../atoms';
 import Form from '../components/Form';
 import FormItem from '../components/FormItem';

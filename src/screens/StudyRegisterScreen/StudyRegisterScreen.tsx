@@ -3,7 +3,6 @@ import { Box, Progress } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import ScreenHeader from 'components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
-import { RegisterFormData } from '../../../types/register';
 import { registerFormDataAtom } from './atoms';
 import { REGISTER_STEPS } from './consts';
 import {

@@ -1,5 +1,3 @@
-import { RegisterFormData } from '../../../types/register';
-
 export const REGISTER_STEPS = ['info', 'schedule', 'rule', 'noti'] as const;
 
 export const DAY_OF_WEEKS_OPTIONS: {
