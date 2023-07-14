@@ -5,7 +5,7 @@ import { palette } from '@styles/theme';
 import { zIndex } from '@styles/z-index';
 import useEffectOnce from 'hooks/useEffectOnce';
 import { ModalProps } from 'hooks/useModal';
-import { generateArray } from 'utils/generateArray';
+import { generateArrayFromZero } from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
 import Button from '@components/Button';
 import { SelectScroller } from '@components/SelectScroller';
@@ -28,7 +28,7 @@ const TimeSelectBottomSheet = ({
   initialTime,
   timeUpdate,
 }: PropsWithChildren<Props>) => {
-  const [currentCursor, setCurrentCursor] = useState<TimeZoneCursor>('start');
+  const [currentCursor, setCurrentCursor] = useState<SelectCursor>('start');
   const { hour, min, startTime, endTime } = useSelectTime(
     currentCursor,
     initialTime,
@@ -71,7 +71,7 @@ const TimeSelectBottomSheet = ({
             currentCursor={currentCursor}
             startTime={startTime}
             endTime={endTime}
-            onTimeZoneClick={(type: TimeZoneCursor) => setCurrentCursor(type)}
+            onTimeZoneClick={(type: SelectCursor) => setCurrentCursor(type)}
           />
           <ContentWrapper>
             <SelectScroller
@@ -80,7 +80,7 @@ const TimeSelectBottomSheet = ({
                 hour.onScroll();
               }}
             >
-              {generateArray(23).map((h) => (
+              {generateArrayFromZero(23).map((h) => (
                 <SelectScrollerOption
                   isActive={hour.selectedIndex === h}
                   key={h}
@@ -95,7 +95,7 @@ const TimeSelectBottomSheet = ({
                 min.onScroll();
               }}
             >
-              {generateArray(59).map((m) => (
+              {generateArrayFromZero(59).map((m) => (
                 <SelectScrollerOption
                   isActive={min.selectedIndex === m}
                   key={m}
@@ -110,8 +110,6 @@ const TimeSelectBottomSheet = ({
             <Button
               label="선택하기"
               onClick={() => {
-                console.log(endTime);
-
                 timeUpdate({ startTime, endTime });
                 modalProps.hideModal();
               }}

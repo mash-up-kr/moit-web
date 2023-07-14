@@ -1,4 +1,9 @@
-type TimeZoneCursor = 'start' | 'end';
+type SelectCursor = 'start' | 'end';
+type DateParams = {
+  y: number;
+  m: number;
+  d: number;
+};
 type TimeParams = {
   hour: number;
   minute: number;

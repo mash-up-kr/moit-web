@@ -12,7 +12,7 @@ interface UseSelectTimeProps {
 }
 
 export const useSelectTime = (
-  type: TimeZoneCursor,
+  type: SelectCursor,
   initialTime: CreateMoitRegisterTime,
 ): UseSelectTimeProps => {
   const {
