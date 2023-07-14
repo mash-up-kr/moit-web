@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 import { Controller, useController, useForm } from 'react-hook-form';
-import { Button as ChakraButton, Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import DateSelectScreen from 'domain/moit/components/DateSelectScreen';
 import TimeSelectBottomSheet from 'domain/moit/components/TimeSelectBottomSheet';
@@ -166,15 +166,6 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             onClick={() => selectDateBottomsheetProps.showModal()}
           />
         </FormItem>
-
-        <ChakraButton
-          onClick={() => {
-            onChangeStartDate('2023-10-13');
-            onChangeEndDate('2023-11-23');
-          }}
-        >
-          클릭시 날짜등록 (임시)
-        </ChakraButton>
         <LargeBottom>
           <Button label="다음" type="submit" isDisabled={isDisabled} />
         </LargeBottom>
@@ -210,7 +201,13 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
         />
       )}
       {selectDateBottomsheetProps.modalShowing && (
-        <DateSelectScreen modalProps={selectDateBottomsheetProps} />
+        <DateSelectScreen
+          modalProps={selectDateBottomsheetProps}
+          dateUpdate={(start: string, end: string) => {
+            onChangeStartDate(start);
+            onChangeEndDate(end);
+          }}
+        />
       )}
     </Box>
   );

@@ -13,10 +13,11 @@ import DateZone from './DateZone';
 
 interface Props {
   modalProps: ModalProps;
+  dateUpdate: (startDate: string, endDate: string) => void;
 }
 
 // 이름이 Screen인 이유는,, 이번 PR이든 다음 PR이든 바텀시트를 하나로 통합할 예정이기 때문.
-const DateSelectScreen: FC<Props> = ({ modalProps }) => {
+const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
   const [currentCursor, setCurrentCursor] = useState<SelectCursor>('start');
   const { year, month, date, startDate, endDate } =
     useSelectDate(currentCursor);
@@ -83,7 +84,16 @@ const DateSelectScreen: FC<Props> = ({ modalProps }) => {
             <Cursor />
           </ContentWrapper>
           <DefaultBottomCTA>
-            <Button label="선택하기" onClick={() => console.log('!!')} />
+            <Button
+              label="선택하기"
+              onClick={() => {
+                dateUpdate(
+                  `${startDate.y}-${startDate.m}-${startDate.d}`,
+                  `${endDate.y}-${endDate.m}-${endDate.d}`,
+                );
+                modalProps.hideModal();
+              }}
+            />
           </DefaultBottomCTA>
         </main>
       }
