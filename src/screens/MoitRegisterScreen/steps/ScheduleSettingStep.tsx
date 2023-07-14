@@ -2,6 +2,8 @@ import { FC, useMemo } from 'react';
 import { Controller, useController, useForm } from 'react-hook-form';
 import { Button as ChakraButton, Box } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
+import TimeSelectBottomSheet from 'domain/moit/components/TimeSelectBottomSheet';
+import { useModal } from 'hooks/useModal';
 import Button from '@components/Button';
 import Text from '@components/Text';
 import { registerFormDataAtom } from '../atoms';
@@ -12,11 +14,17 @@ import Input from '../components/Input';
 import LargeBottom from '../components/LargeBottom';
 import { DAY_OF_WEEKS_OPTIONS, REPEAT_CYCLE_OPTIONS } from '../consts';
 
+type SelctTimeParams = {
+  startTime: TimeParams;
+  endTime: TimeParams;
+};
+
 interface ScheduleSettingStepProps {
   onNext: (data: ScheduleStepFormData) => void;
 }
 
 const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
+  const selectTimeBottomsheetProps = useModal();
   const formData = useRecoilValue(registerFormDataAtom);
   const {
     handleSubmit,
@@ -120,7 +128,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             readOnly
             placeholder="17시 00분 - 20시 00분"
             value={timeValue}
-            onClick={() => {}}
+            onClick={() => selectTimeBottomsheetProps.showModal()}
           />
         </FormItem>
 
@@ -183,6 +191,47 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
           <Button label="다음" type="submit" isDisabled={isDisabled} />
         </LargeBottom>
       </Form>
+      {selectTimeBottomsheetProps.modalShowing && (
+        <TimeSelectBottomSheet
+          modalProps={selectTimeBottomsheetProps}
+          initalStartTime={
+            startTime
+              ? {
+                  hour: startTime.hour,
+                  minute: startTime.minute,
+                }
+              : {
+                  hour: 0,
+                  minute: 0,
+                }
+          }
+          initalEndTime={
+            endTime
+              ? {
+                  hour: endTime.hour,
+                  minute: endTime.minute,
+                }
+              : {
+                  hour: 0,
+                  minute: 0,
+                }
+          }
+          timeUpdate={(selected: SelctTimeParams) => {
+            onChangeStartTime({
+              hour: selected.startTime.hour,
+              minute: selected.startTime.minute,
+              second: 0,
+              nano: 0,
+            });
+            onChangeEndTime({
+              hour: selected.endTime.hour,
+              minute: selected.endTime.minute,
+              second: 0,
+              nano: 0,
+            });
+          }}
+        />
+      )}
     </Box>
   );
 };

@@ -7,34 +7,58 @@ import useEffectOnce from 'hooks/useEffectOnce';
 import { ModalProps } from 'hooks/useModal';
 import { generateArray } from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
+import Button from '@components/Button';
 import { SelectScroller } from '@components/SelectScroller';
-import TimeZone from './components/TimeZone';
-import { useSelectTime } from './hooks/useSelectTime';
+import { useSelectTime } from '../hooks/useSelectTime';
+import TimeZone from './TimeZone';
 
 interface Props {
   modalProps: ModalProps;
-  testH: number;
-  testM: number;
-  testHSetter: (n: number) => void;
-  testMSetter: (n: number) => void;
+  initalStartTime: TimeParams;
+  initalEndTime: TimeParams;
+  timeUpdate: ({
+    startTime,
+    endTime,
+  }: {
+    startTime: TimeParams;
+    endTime: TimeParams;
+  }) => void;
 }
 
 const TimeSelectBottomSheet = ({
   modalProps,
-  testHSetter,
-  testH,
-  testM,
-  testMSetter,
+  initalStartTime,
+  initalEndTime,
+  timeUpdate,
 }: PropsWithChildren<Props>) => {
   const [currentCursor, setCurrentCursor] = useState<TimeZoneCursor>('start');
   const { hour, min, startTime, endTime } = useSelectTime(currentCursor);
 
   // 마운트 시점 스크롤. 지연 로직을 추가하지 않으면, 정상 동작하지 않음
   useEffectOnce(() => {
-    setTimeout(() => {
-      hour.ref.current?.scrollTo(0, Math.floor((testH + 1) * 52));
-      min.ref.current?.scrollTo(0, Math.floor((testM + 1) * 52));
-    }, 300);
+    if (currentCursor === 'start') {
+      setTimeout(() => {
+        hour.ref.current?.scrollTo(
+          0,
+          Math.floor((initalStartTime.hour + 1) * 52),
+        );
+        min.ref.current?.scrollTo(
+          0,
+          Math.floor((initalStartTime.minute + 1) * 52),
+        );
+      }, 300);
+    } else {
+      setTimeout(() => {
+        hour.ref.current?.scrollTo(
+          0,
+          Math.floor((initalEndTime.hour + 1) * 52),
+        );
+        min.ref.current?.scrollTo(
+          0,
+          Math.floor((initalEndTime.minute + 1) * 52),
+        );
+      }, 300);
+    }
   });
 
   // 커서 변경시 스크롤 로직.
@@ -66,7 +90,6 @@ const TimeSelectBottomSheet = ({
             <SelectScroller
               ref={hour.ref}
               onScroll={() => {
-                testHSetter(hour.selectedIndex);
                 hour.onScroll();
               }}
             >
@@ -82,7 +105,6 @@ const TimeSelectBottomSheet = ({
             <SelectScroller
               ref={min.ref}
               onScroll={() => {
-                testMSetter(min.selectedIndex);
                 min.onScroll();
               }}
             >
@@ -97,6 +119,15 @@ const TimeSelectBottomSheet = ({
             </SelectScroller>
             <Cursor />
           </ContentWrapper>
+          <DefaultBottomCTA>
+            <Button
+              label="선택하기"
+              onClick={() => {
+                timeUpdate({ startTime, endTime });
+                modalProps.hideModal();
+              }}
+            />
+          </DefaultBottomCTA>
         </main>
       }
     />
@@ -109,15 +140,15 @@ const ContentWrapper = styled.section`
   display: flex;
   gap: ${({ theme }) => theme.space.md};
   margin-top: ${({ theme }) => theme.space.md};
-  padding-bottom: 100px;
   position: relative;
-  /* 드래그 방지 */
+
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 `;
+
 const Cursor = styled.div`
   position: absolute;
   z-index: ${zIndex.HIDE};
@@ -126,4 +157,10 @@ const Cursor = styled.div`
   transform: translateY(42px);
   background-color: ${({ theme }) => theme.colors.primary.selected};
   border-radius: ${({ theme }) => theme.space.md};
+`;
+
+const DefaultBottomCTA = styled.footer`
+  height: 100px;
+  padding: 8px 0 36px 0;
+  margin-top: ${({ theme }) => theme.space.md};
 `;
