@@ -12,7 +12,7 @@ import {
   ScheduleSettingStep,
 } from './steps';
 
-const StudyRegisterScreen: FC = () => {
+const MoitRegisterScreen: FC = () => {
   const [step, setStep] = useState<(typeof REGISTER_STEPS)[number]>(
     REGISTER_STEPS[0],
   );
@@ -94,4 +94,4 @@ const StudyRegisterScreen: FC = () => {
   );
 };
 
-export default StudyRegisterScreen;
+export default MoitRegisterScreen;

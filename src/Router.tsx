@@ -1,15 +1,14 @@
 import { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Example from 'Example';
 import AttendanceKeywordScreen from 'screens/AttendanceScreen/AttendanceKeywordScreen';
-import StudyRegisterScreen from 'screens/StudyRegisterScreen';
+import MoitRegisterScreen from 'screens/MoitRegisterScreen';
 
 const Router: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Example />} />
-        <Route path="/register" element={<StudyRegisterScreen />} />
+        <Route path="/" element={<MoitRegisterScreen />} />
+        <Route path="/register" element={<MoitRegisterScreen />} />
         <Route path="/attendance" element={<AttendanceKeywordScreen />} />
       </Routes>
     </BrowserRouter>
