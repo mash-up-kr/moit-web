@@ -75,6 +75,7 @@ export const useSelectDate = (
     // initialSelectedIndex: initialDate.endDate.d,
   });
 
+  const nowYear = new Date().getFullYear();
   const isStart = type === 'start';
 
   const selectedYear = isStart ? selectedStartYear : selectedEndYear;
@@ -104,14 +105,14 @@ export const useSelectDate = (
       onScroll: dateScroll,
     },
     startDate: {
-      y: selectedStartYear,
-      m: selectedStartMonth,
-      d: selectedStartDate,
+      y: selectedStartYear + nowYear,
+      m: selectedStartMonth + 1,
+      d: selectedStartDate + 1,
     },
     endDate: {
-      y: selectedEndYear,
-      m: selectedEndMonth,
-      d: selectedEndDate,
+      y: selectedEndYear + nowYear,
+      m: selectedEndMonth + 1,
+      d: selectedEndDate + 1,
     },
   };
 };

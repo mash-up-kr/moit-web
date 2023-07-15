@@ -18,6 +18,7 @@ interface Props {
 
 // 이름이 Screen인 이유는,, 이번 PR이든 다음 PR이든 바텀시트를 하나로 통합할 예정이기 때문.
 const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
+  const nowYear = new Date().getFullYear();
   const [currentCursor, setCurrentCursor] = useState<SelectCursor>('start');
   const { year, month, date, startDate, endDate } =
     useSelectDate(currentCursor);
@@ -44,7 +45,7 @@ const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
             >
               {generateArray(2023, 2033).map((y) => (
                 <SelectScrollerOption
-                  isActive={year.selectedIndex === y}
+                  isActive={year.selectedIndex + nowYear === y}
                   key={y}
                 >
                   {y}
@@ -60,7 +61,7 @@ const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
               {generateArray(1, 12).map((m) => (
                 <SelectScrollerOption
                   key={m}
-                  isActive={month.selectedIndex === m}
+                  isActive={month.selectedIndex + 1 === m}
                 >
                   {m}
                 </SelectScrollerOption>
@@ -75,7 +76,7 @@ const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
               {generateArray(1, 30).map((d) => (
                 <SelectScrollerOption
                   key={d}
-                  isActive={date.selectedIndex === d}
+                  isActive={date.selectedIndex + 1 === d}
                 >
                   {d}
                 </SelectScrollerOption>
