@@ -3,6 +3,7 @@ import { Controller, useController, useForm } from 'react-hook-form';
 import { Box } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import DateSelectScreen from 'domain/moit/components/DateSelectScreen';
+import RepeatScreen from 'domain/moit/components/RepeatScreen';
 import TimeSelectBottomSheet from 'domain/moit/components/TimeSelectBottomSheet';
 import { useModal } from 'hooks/useModal';
 import Button from '@components/Button';
@@ -27,6 +28,8 @@ interface ScheduleSettingStepProps {
 const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
   const selectTimeBottomsheetProps = useModal();
   const selectDateBottomsheetProps = useModal();
+  const selectRepeatBottomsheetProps = useModal();
+
   const formData = useRecoilValue(registerFormDataAtom);
   const {
     handleSubmit,
@@ -141,17 +144,17 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             render={({ field }) => (
               <Input
                 readOnly
-                placeholder="2주"
+                placeholder={field.value}
                 value={
                   REPEAT_CYCLE_OPTIONS.find(
                     (item) => item.value === getValues('repeatCycle'),
                   )?.label ?? ''
                 }
                 onClick={() => {
-                  // TODO: 팝업띄우기
+                  selectRepeatBottomsheetProps.showModal();
                   // REPEAT_CYCLE_OPTIONS , field.onChange() 사용해주세용
-                  console.log(REPEAT_CYCLE_OPTIONS);
-                  field.onChange('TWO_WEEK');
+                  // console.log(REPEAT_CYCLE_OPTIONS);
+                  // field.onChange('TWO_WEEK');
                 }}
               />
             )}
@@ -170,6 +173,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
           <Button label="다음" type="submit" isDisabled={isDisabled} />
         </LargeBottom>
       </Form>
+
       {selectTimeBottomsheetProps.modalShowing && (
         <TimeSelectBottomSheet
           modalProps={selectTimeBottomsheetProps}
@@ -200,12 +204,22 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
           }}
         />
       )}
+
       {selectDateBottomsheetProps.modalShowing && (
         <DateSelectScreen
           modalProps={selectDateBottomsheetProps}
           dateUpdate={(start: string, end: string) => {
             onChangeStartDate(start);
             onChangeEndDate(end);
+          }}
+        />
+      )}
+
+      {selectRepeatBottomsheetProps.modalShowing && (
+        <RepeatScreen
+          modalProps={selectRepeatBottomsheetProps}
+          repeatUpdate={function (): void {
+            throw new Error('Function not implemented.');
           }}
         />
       )}
