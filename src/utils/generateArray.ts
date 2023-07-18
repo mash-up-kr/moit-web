@@ -22,3 +22,19 @@ export const generateArray = (start: number, end: number): number[] => {
 
   return generateArrayFromZero(end);
 };
+
+export const generateMinuteArray = (interval?: number): number[] => {
+  if (!interval) {
+    return generateArray(1, 60);
+  }
+  if (interval <= 0 || interval > 60) {
+    return generateArray(1, 60);
+  }
+
+  const result = Array.from(
+    { length: Math.floor(60 / interval) },
+    (_, index) => (index + 1) * interval,
+  );
+
+  return result;
+};
