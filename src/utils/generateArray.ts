@@ -23,6 +23,10 @@ export const generateArray = (start: number, end: number): number[] => {
   return generateArrayFromZero(end);
 };
 
+/**
+ * @param interval 생성하고자 하는 배열의 분 단위
+ * e.g interval:5 => [5,10,15, ... ,60]
+ */
 export const generateMinuteArray = (interval?: number): number[] => {
   if (!interval) {
     return generateArray(1, 60);
@@ -31,10 +35,8 @@ export const generateMinuteArray = (interval?: number): number[] => {
     return generateArray(1, 60);
   }
 
-  const result = Array.from(
+  return Array.from(
     { length: Math.floor(60 / interval) },
     (_, index) => (index + 1) * interval,
   );
-
-  return result;
 };

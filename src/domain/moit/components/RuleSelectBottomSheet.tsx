@@ -57,6 +57,7 @@ export default RuleSelectBottomSheet;
 
 const ContentWrapper = styled.section`
   display: flex;
+  justify-content: center;
   gap: ${({ theme }) => theme.space.md};
   position: relative;
 
