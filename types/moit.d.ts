@@ -39,7 +39,8 @@ interface RegisterFormData {
     | 'STUDY_DAY_10_AM'
     | 'BEFORE_1_HOUR'
     | 'BEFORE_30_MINUTE'
-    | 'BEFORE_10_MINUTE';
+    | 'BEFORE_10_MINUTE'
+    | null;
 }
 
 type InfoStepFormData = Pick<RegisterFormData, 'name' | 'description'>;
