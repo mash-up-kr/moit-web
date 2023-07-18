@@ -22,7 +22,8 @@
     "baseUrl": "./src",
     "paths": {
       "@styles/*": ["styles/*"],
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@assets/*": ["assets/*"]
     }
   },
   "include": ["src", "types"],
