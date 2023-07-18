@@ -12147,6 +12147,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lottie-web@npm:^5.12.2":
+  version: 5.12.2
+  resolution: "lottie-web@npm:5.12.2"
+  checksum: af5bc3bc405fd760de8b17a36158d5a8c3e8c586c711d0c63681ddf056b65bc6b54ea36b1fcad782fb02dbe12e696a40e0ba72daf41b8f10ab5b5d1113793636
+  languageName: node
+  linkType: hard
+
 "lowercase-keys@npm:^2.0.0":
   version: 2.0.0
   resolution: "lowercase-keys@npm:2.0.0"
@@ -12661,6 +12668,7 @@ __metadata:
     framer-motion: ^10.12.16
     husky: ^8.0.3
     lint-staged: ^13.0.3
+    lottie-web: ^5.12.2
     prettier: ^2.8.8
     prop-types: ^15.8.1
     react: ^18.2.0
