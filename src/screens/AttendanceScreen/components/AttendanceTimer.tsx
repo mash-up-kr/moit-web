@@ -53,6 +53,7 @@ const AttendanceTimer = () => {
     return () => {
       clearTimer();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const timeText = expired ? 'EXPIRED' : formattedTime(time);
