@@ -120,6 +120,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             readOnly
             placeholder="17시 00분 - 20시 00분"
             value={timeValue}
+            variant="s"
             onClick={() => {}}
           />
         </FormItem>
@@ -132,6 +133,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
               <Input
                 readOnly
                 placeholder="2주"
+                variant="s"
                 value={
                   REPEAT_CYCLE_OPTIONS.find(
                     (item) => item.value === getValues('repeatCycle'),
@@ -140,7 +142,6 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
                 onClick={() => {
                   // TODO: 팝업띄우기
                   // REPEAT_CYCLE_OPTIONS , field.onChange() 사용해주세용
-                  console.log(REPEAT_CYCLE_OPTIONS);
                   field.onChange('TWO_WEEK');
                 }}
               />
@@ -149,7 +150,12 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
         </FormItem>
 
         <FormItem label="진행기간" direction="row">
-          <Input readOnly placeholder="6월 27일 - 8월 30일" value={dateValue} />
+          <Input
+            readOnly
+            placeholder="6월 27일 - 8월 30일"
+            value={dateValue}
+            variant="s"
+          />
         </FormItem>
 
         <ChakraButton
