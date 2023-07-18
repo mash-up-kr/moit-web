@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import { useRef, useEffect, MutableRefObject, memo } from 'react';
 import lottie, { AnimationItem } from 'lottie-web';
 
@@ -56,3 +55,5 @@ const Lottie = memo(
 );
 
 export default Lottie;
+
+Lottie.displayName = 'Lottie';
