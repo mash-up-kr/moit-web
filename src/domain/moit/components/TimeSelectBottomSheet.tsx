@@ -5,11 +5,17 @@ import { palette } from '@styles/theme';
 import { zIndex } from '@styles/z-index';
 import useEffectOnce from 'hooks/useEffectOnce';
 import { ModalProps } from 'hooks/useModal';
-import { generateArrayFromZero } from 'utils/generateArray';
+import {
+  generateArrayFromZero,
+  generateMinuteArray,
+} from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
 import Button from '@components/Button';
 import { SelectScroller } from '@components/SelectScroller';
-import { useSelectTime } from '../hooks/useSelectTime';
+import {
+  SELECT_TIME_MINUTE_INTERVAL,
+  useSelectTime,
+} from '../hooks/useSelectTime';
 import TimeZone from './TimeZone';
 
 export type CreateMoitRegisterTime = {
@@ -95,7 +101,13 @@ const TimeSelectBottomSheet = ({
                 min.onScroll();
               }}
             >
-              {generateArrayFromZero(59).map((m) => (
+              {[
+                0,
+                ...generateMinuteArray(
+                  'startZero',
+                  SELECT_TIME_MINUTE_INTERVAL,
+                ),
+              ].map((m) => (
                 <SelectScrollerOption
                   isActive={min.selectedIndex === m}
                   key={m}

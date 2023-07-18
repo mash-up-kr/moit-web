@@ -28,7 +28,7 @@ const RuleSelectBottomSheet: FC<Props> = ({ modalProps, timeRuleUpdate }) => {
         <main>
           <ContentWrapper>
             <SelectScroller ref={ref} onScroll={onScroll}>
-              {generateMinuteArray(5).map((min, i) => (
+              {generateMinuteArray('endSixty', 5).map((min, i) => (
                 <SelectScrollerOption
                   isActive={selectedIndex === i}
                   key={`${i}-${min}`}

@@ -11,6 +11,8 @@ interface UseSelectTimeProps {
   endTime: TimeParams;
 }
 
+export const SELECT_TIME_MINUTE_INTERVAL = 5;
+
 export const useSelectTime = (
   type: SelectCursor,
   initialTime: CreateMoitRegisterTime,
@@ -63,14 +65,18 @@ export const useSelectTime = (
       ref: hourRef,
       onScroll: hourScroll,
     },
-    min: { selectedIndex: selectedMin, ref: minRef, onScroll: minScroll },
+    min: {
+      selectedIndex: selectedMin * SELECT_TIME_MINUTE_INTERVAL,
+      ref: minRef,
+      onScroll: minScroll,
+    },
     startTime: {
       hour: selectedStartHour,
-      minute: selectedStartMin,
+      minute: selectedStartMin * SELECT_TIME_MINUTE_INTERVAL,
     },
     endTime: {
       hour: selectedEndHour,
-      minute: selectedEndMin,
+      minute: selectedEndMin * SELECT_TIME_MINUTE_INTERVAL,
     },
   };
 };
