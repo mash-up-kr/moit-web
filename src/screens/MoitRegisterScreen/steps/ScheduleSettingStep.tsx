@@ -1,7 +1,11 @@
 import { FC, useMemo } from 'react';
 import { Controller, useController, useForm } from 'react-hook-form';
-import { Button as ChakraButton, Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
+import DateSelectScreen from 'domain/moit/components/DateSelectScreen';
+import RepeatScreen from 'domain/moit/components/RepeatScreen';
+import TimeSelectBottomSheet from 'domain/moit/components/TimeSelectBottomSheet';
+import { useModal } from 'hooks/useModal';
 import Button from '@components/Button';
 import Text from '@components/Text';
 import { registerFormDataAtom } from '../atoms';
@@ -12,11 +16,20 @@ import Input from '../components/Input';
 import LargeBottom from '../components/LargeBottom';
 import { DAY_OF_WEEKS_OPTIONS, REPEAT_CYCLE_OPTIONS } from '../consts';
 
+type SelctTimeParams = {
+  startTime: TimeParams;
+  endTime: TimeParams;
+};
+
 interface ScheduleSettingStepProps {
   onNext: (data: ScheduleStepFormData) => void;
 }
 
 const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
+  const selectTimeBottomsheetProps = useModal();
+  const selectDateBottomsheetProps = useModal();
+  const selectRepeatBottomsheetProps = useModal();
+
   const formData = useRecoilValue(registerFormDataAtom);
   const {
     handleSubmit,
@@ -124,7 +137,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             placeholder="17시 00분 - 20시 00분"
             value={timeValue}
             variant="s"
-            onClick={() => {}}
+            onClick={() => selectTimeBottomsheetProps.showModal()}
           />
         </FormItem>
 
@@ -151,41 +164,64 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             readOnly
             placeholder="6월 27일 - 8월 30일"
             value={dateValue}
+            onClick={() => selectDateBottomsheetProps.showModal()}
             variant="s"
           />
         </FormItem>
-
-        <ChakraButton
-          onClick={() => {
-            onChangeStartTime({
-              hour: 1,
-              minute: 0,
-              second: 0,
-              nano: 0,
-            });
-            onChangeEndTime({
-              hour: 2,
-              minute: 5,
-              second: 0,
-              nano: 0,
-            });
-          }}
-        >
-          클릭시 시간등록 (임시)
-        </ChakraButton>
-
-        <ChakraButton
-          onClick={() => {
-            onChangeStartDate('2023-10-13');
-            onChangeEndDate('2023-11-23');
-          }}
-        >
-          클릭시 날짜등록 (임시)
-        </ChakraButton>
         <LargeBottom>
           <Button label="다음" type="submit" isDisabled={isDisabled} />
         </LargeBottom>
       </Form>
+
+      {selectTimeBottomsheetProps.modalShowing && (
+        <TimeSelectBottomSheet
+          modalProps={selectTimeBottomsheetProps}
+          initialTime={{
+            startTime: startTime
+              ? {
+                  hour: startTime.hour,
+                  minute: startTime.minute,
+                }
+              : { hour: 0, minute: 0 },
+            endTime: endTime
+              ? { hour: endTime.hour, minute: endTime.minute }
+              : { hour: 0, minute: 0 },
+          }}
+          timeUpdate={(selected: SelctTimeParams) => {
+            onChangeStartTime({
+              hour: selected.startTime.hour,
+              minute: selected.startTime.minute,
+              second: 0,
+              nano: 0,
+            });
+            onChangeEndTime({
+              hour: selected.endTime.hour,
+              minute: selected.endTime.minute,
+              second: 0,
+              nano: 0,
+            });
+          }}
+        />
+      )}
+
+      {selectDateBottomsheetProps.modalShowing && (
+        <DateSelectScreen
+          modalProps={selectDateBottomsheetProps}
+          dateUpdate={(start: string, end: string) => {
+            onChangeStartDate(start);
+            onChangeEndDate(end);
+          }}
+        />
+      )}
+
+      {selectRepeatBottomsheetProps.modalShowing && (
+        <RepeatScreen
+          modalProps={selectRepeatBottomsheetProps}
+          repeatUpdate={function (): void {
+            throw new Error('Function not implemented.');
+          }}
+        />
+      )}
     </Box>
   );
 };

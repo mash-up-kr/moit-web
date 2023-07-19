@@ -39,10 +39,6 @@ export const REPEAT_CYCLE_OPTIONS: {
   label: string;
 }[] = [
   {
-    value: 'NONE',
-    label: '없음',
-  },
-  {
     value: 'ONE_WEEK',
     label: '1주',
   },
@@ -53,6 +49,10 @@ export const REPEAT_CYCLE_OPTIONS: {
   {
     value: 'FOUR_WEEK',
     label: '4주',
+  },
+  {
+    value: 'NONE',
+    label: '없음',
   },
 ];
 

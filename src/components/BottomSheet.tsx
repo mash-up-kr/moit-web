@@ -9,7 +9,6 @@ interface BottomSheetProps extends Omit<BaseModalProps, 'children'> {
   header?: ReactNode;
   headerTitle?: string;
   content: ReactNode;
-  footer?: ReactNode;
 }
 
 const BottomSheet: FC<BottomSheetProps> = ({
@@ -19,7 +18,6 @@ const BottomSheet: FC<BottomSheetProps> = ({
   header,
   headerTitle,
   content,
-  footer,
 }) => {
   return (
     <BaseModal modalProps={modalProps} dimColor={dimColor}>
@@ -31,15 +29,7 @@ const BottomSheet: FC<BottomSheetProps> = ({
             <h1>{headerTitle}</h1>
           </DefaultHeader>
         )}
-        <ContentWrapper height={containerHeight}>{content}</ContentWrapper>
-        {footer ? (
-          <footer>{footer}</footer>
-        ) : (
-          <DefaultBottomCTA>
-            {/* TODO: 우리 버튼 컴포넌트로 바꾸기 */}
-            <button>임시 버튼</button>
-          </DefaultBottomCTA>
-        )}
+        {content}
       </Container>
     </BaseModal>
   );
@@ -78,16 +68,4 @@ const DefaultHeader = styled.header`
     font-weight: 600;
     line-height: 27px;
   }
-`;
-
-const ContentWrapper = styled.section<{ height?: number }>`
-  height: ${({ height }) =>
-    // 216 = (header height + footer height)
-    `calc(${height}px - 216px)`};
-`;
-
-const DefaultBottomCTA = styled.footer`
-  height: 100px;
-  padding: 8px 0 36px 0;
-  margin-top: ${({ theme }) => theme.space.md};
 `;
