@@ -1,13 +1,14 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  FormLabel,
-  FormControl,
-  Button as ChakraButton,
-} from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
+import theme from '@styles/theme';
 import Button from '@components/Button';
+import Text from '@components/Text';
 import { registerFormDataAtom } from '../atoms';
+import Form from '../components/Form';
+import FormItem from '../components/FormItem';
+import Input from '../components/Input';
 import LargeBottom from '../components/LargeBottom';
 
 interface RuleSettingStepProps {
@@ -22,7 +23,12 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
     getValues,
     formState: { errors },
   } = useForm<RuleStepFormData>({
-    defaultValues: registerFormData,
+    defaultValues: {
+      lateTime: registerFormData.lateTime ?? 10,
+      lateAmount: registerFormData.lateAmount ?? 5000,
+      absenceTime: registerFormData.absenceTime ?? 30,
+      absenceAmount: registerFormData.absenceAmount ?? 8000,
+    },
   });
 
   const onSubmit = handleSubmit((values) => {
@@ -32,23 +38,67 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
   const isDisabled = Object.keys(errors).length > 0;
 
   return (
-    <form onSubmit={onSubmit}>
-      <FormControl>
-        <FormLabel>지각벌금</FormLabel>
-        출결 후<ChakraButton>{getValues('lateTime')}분</ChakraButton>
-        부터 지각 <ChakraButton>{getValues('lateAmount')}원</ChakraButton>
-      </FormControl>
+    <Box>
+      <Text type="h4" mb="10px">
+        {'스터디 벌금 규칙을\n설정해주세요'}
+      </Text>
 
-      <FormControl>
-        <FormLabel>결석벌금</FormLabel>
-        출결 후<ChakraButton>{getValues('absenceTime')}분</ChakraButton>
-        부터 지각 <ChakraButton>{getValues('absenceAmount')}원</ChakraButton>
-      </FormControl>
+      <Text type="p3" mb="60px" color={theme.palette.gray500}>
+        {
+          '클릭 한번으로 벌금을 추가할 수 있어요\n규칙은 나중에 수정할 수 있어요'
+        }
+      </Text>
 
-      <LargeBottom>
-        <Button label="다음" type="submit" isDisabled={isDisabled} />
-      </LargeBottom>
-    </form>
+      <Form onSubmit={onSubmit}>
+        <FormItem label="지각벌금">
+          <Flex justify="space-between" align="center">
+            <Flex gap="10px" align="center">
+              <Text type="h6">출결 후</Text>
+              <Input
+                value={`${getValues('lateTime')}분`}
+                width={75}
+                readOnly
+                variant="s"
+              />
+              <Text type="h6">부터 지각</Text>
+            </Flex>
+
+            <Input
+              value={`${getValues('lateAmount').toLocaleString()}원`}
+              variant="s"
+              width={100}
+              readOnly
+            />
+          </Flex>
+        </FormItem>
+
+        <FormItem label="결석벌금">
+          <Flex justify="space-between" align="center">
+            <Flex gap="10px" align="center">
+              <Text type="h6">출결 후</Text>
+              <Input
+                value={`${getValues('absenceTime')}분`}
+                width={75}
+                readOnly
+                variant="s"
+              />
+              <Text type="h6">부터 결석</Text>
+            </Flex>
+
+            <Input
+              value={`${getValues('absenceAmount').toLocaleString()}원`}
+              variant="s"
+              width={100}
+              readOnly
+            />
+          </Flex>
+        </FormItem>
+
+        <LargeBottom>
+          <Button label="다음" type="submit" isDisabled={isDisabled} />
+        </LargeBottom>
+      </Form>
+    </Box>
   );
 };
 

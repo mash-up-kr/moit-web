@@ -37,7 +37,10 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
     control,
     formState: { errors },
   } = useForm<ScheduleStepFormData>({
-    defaultValues: formData,
+    defaultValues: {
+      ...formData,
+      repeatCycle: 'TWO_WEEK',
+    },
   });
 
   const startTime = getValues('startTime');
@@ -133,31 +136,26 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             readOnly
             placeholder="17시 00분 - 20시 00분"
             value={timeValue}
+            variant="s"
             onClick={() => selectTimeBottomsheetProps.showModal()}
           />
         </FormItem>
 
         <FormItem label="반복" direction="row">
-          <Controller
-            control={control}
-            name="repeatCycle"
-            render={({ field }) => (
-              <Input
-                readOnly
-                placeholder={field.value}
-                value={
-                  REPEAT_CYCLE_OPTIONS.find(
-                    (item) => item.value === getValues('repeatCycle'),
-                  )?.label ?? ''
-                }
-                onClick={() => {
-                  selectRepeatBottomsheetProps.showModal();
-                  // REPEAT_CYCLE_OPTIONS , field.onChange() 사용해주세용
-                  // console.log(REPEAT_CYCLE_OPTIONS);
-                  // field.onChange('TWO_WEEK');
-                }}
-              />
-            )}
+          <Input
+            readOnly
+            placeholder="2주"
+            variant="s"
+            value={
+              REPEAT_CYCLE_OPTIONS.find(
+                (item) => item.value === getValues('repeatCycle'),
+              )?.label ?? ''
+            }
+            onClick={() => {
+              // TODO: 팝업띄우기
+              // REPEAT_CYCLE_OPTIONS , field.onChange() 사용해주세용
+              // field.onChange('TWO_WEEK');
+            }}
           />
         </FormItem>
 
@@ -167,6 +165,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             placeholder="6월 27일 - 8월 30일"
             value={dateValue}
             onClick={() => selectDateBottomsheetProps.showModal()}
+            variant="s"
           />
         </FormItem>
         <LargeBottom>
