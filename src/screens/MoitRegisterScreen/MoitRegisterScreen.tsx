@@ -1,9 +1,9 @@
 import { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Progress } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import ScreenHeader from 'components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
-import { RegisterFormData } from '../../../types/register';
 import { registerFormDataAtom } from './atoms';
 import { REGISTER_STEPS } from './consts';
 import {
@@ -13,11 +13,11 @@ import {
   ScheduleSettingStep,
 } from './steps';
 
-const StudyRegisterScreen: FC = () => {
+const MoitRegisterScreen: FC = () => {
+  const navigate = useNavigate();
   const [step, setStep] = useState<(typeof REGISTER_STEPS)[number]>(
     REGISTER_STEPS[0],
   );
-
   const [registerFormData, setRegisterFormData] =
     useRecoilState(registerFormDataAtom);
 
@@ -53,7 +53,7 @@ const StudyRegisterScreen: FC = () => {
         height="3px"
       />
 
-      <Box>
+      <Box p="20px">
         {
           {
             [REGISTER_STEPS[0]]: (
@@ -85,6 +85,7 @@ const StudyRegisterScreen: FC = () => {
                 onNext={(data) => {
                   setStep('info');
                   handleChangeFormData(data);
+                  navigate('/complete');
                 }}
               />
             ),
@@ -95,4 +96,4 @@ const StudyRegisterScreen: FC = () => {
   );
 };
 
-export default StudyRegisterScreen;
+export default MoitRegisterScreen;

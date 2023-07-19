@@ -5,35 +5,52 @@ import { palette } from '@styles/theme';
 import { zIndex } from '@styles/z-index';
 import useEffectOnce from 'hooks/useEffectOnce';
 import { ModalProps } from 'hooks/useModal';
-import { generateArray } from 'utils/generateArray';
+import {
+  generateArrayFromZero,
+  generateMinuteArray,
+} from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
+import Button from '@components/Button';
 import { SelectScroller } from '@components/SelectScroller';
-import TimeZone from './components/TimeZone';
-import { useSelectTime } from './hooks/useSelectTime';
+import {
+  SELECT_TIME_MINUTE_INTERVAL,
+  useSelectTime,
+} from '../hooks/useSelectTime';
+import TimeZone from './TimeZone';
+
+export type CreateMoitRegisterTime = {
+  startTime: TimeParams;
+  endTime: TimeParams;
+};
 
 interface Props {
   modalProps: ModalProps;
-  testH: number;
-  testM: number;
-  testHSetter: (n: number) => void;
-  testMSetter: (n: number) => void;
+  initialTime: CreateMoitRegisterTime;
+  timeUpdate: (times: CreateMoitRegisterTime) => void;
 }
 
 const TimeSelectBottomSheet = ({
   modalProps,
-  testHSetter,
-  testH,
-  testM,
-  testMSetter,
+  initialTime,
+  timeUpdate,
 }: PropsWithChildren<Props>) => {
-  const [currentCursor, setCurrentCursor] = useState<TimeZoneCursor>('start');
-  const { hour, min, startTime, endTime } = useSelectTime(currentCursor);
+  const [currentCursor, setCurrentCursor] = useState<SelectCursor>('start');
+  const { hour, min, startTime, endTime } = useSelectTime(
+    currentCursor,
+    initialTime,
+  );
 
   // 마운트 시점 스크롤. 지연 로직을 추가하지 않으면, 정상 동작하지 않음
   useEffectOnce(() => {
     setTimeout(() => {
-      hour.ref.current?.scrollTo(0, Math.floor((testH + 1) * 52));
-      min.ref.current?.scrollTo(0, Math.floor((testM + 1) * 52));
+      hour.ref.current?.scrollTo(
+        0,
+        Math.floor(initialTime.startTime.hour * 52),
+      );
+      min.ref.current?.scrollTo(
+        0,
+        Math.floor(initialTime.startTime.minute * 52),
+      );
     }, 300);
   });
 
@@ -60,17 +77,16 @@ const TimeSelectBottomSheet = ({
             currentCursor={currentCursor}
             startTime={startTime}
             endTime={endTime}
-            onTimeZoneClick={(type: TimeZoneCursor) => setCurrentCursor(type)}
+            onTimeZoneClick={(type: SelectCursor) => setCurrentCursor(type)}
           />
           <ContentWrapper>
             <SelectScroller
               ref={hour.ref}
               onScroll={() => {
-                testHSetter(hour.selectedIndex);
                 hour.onScroll();
               }}
             >
-              {generateArray(23).map((h) => (
+              {generateArrayFromZero(23).map((h) => (
                 <SelectScrollerOption
                   isActive={hour.selectedIndex === h}
                   key={h}
@@ -82,11 +98,16 @@ const TimeSelectBottomSheet = ({
             <SelectScroller
               ref={min.ref}
               onScroll={() => {
-                testMSetter(min.selectedIndex);
                 min.onScroll();
               }}
             >
-              {generateArray(59).map((m) => (
+              {[
+                0,
+                ...generateMinuteArray(
+                  'startZero',
+                  SELECT_TIME_MINUTE_INTERVAL,
+                ),
+              ].map((m) => (
                 <SelectScrollerOption
                   isActive={min.selectedIndex === m}
                   key={m}
@@ -97,6 +118,15 @@ const TimeSelectBottomSheet = ({
             </SelectScroller>
             <Cursor />
           </ContentWrapper>
+          <DefaultBottomCTA>
+            <Button
+              label="선택하기"
+              onClick={() => {
+                timeUpdate({ startTime, endTime });
+                modalProps.hideModal();
+              }}
+            />
+          </DefaultBottomCTA>
         </main>
       }
     />
@@ -109,15 +139,15 @@ const ContentWrapper = styled.section`
   display: flex;
   gap: ${({ theme }) => theme.space.md};
   margin-top: ${({ theme }) => theme.space.md};
-  padding-bottom: 100px;
   position: relative;
-  /* 드래그 방지 */
+
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 `;
+
 const Cursor = styled.div`
   position: absolute;
   z-index: ${zIndex.HIDE};
@@ -126,4 +156,10 @@ const Cursor = styled.div`
   transform: translateY(42px);
   background-color: ${({ theme }) => theme.colors.primary.selected};
   border-radius: ${({ theme }) => theme.space.md};
+`;
+
+const DefaultBottomCTA = styled.footer`
+  height: 100px;
+  padding: 8px 0 36px 0;
+  margin-top: ${({ theme }) => theme.space.md};
 `;

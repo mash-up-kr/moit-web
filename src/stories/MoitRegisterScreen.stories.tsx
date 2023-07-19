@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import StudyRegisterScreen from 'screens/StudyRegisterScreen';
+import MoitRegisterScreen from 'screens/MoitRegisterScreen';
 
 const meta = {
-  title: 'Screen/StudyRegisterScreen',
-  component: StudyRegisterScreen,
+  title: 'Screen/MoitRegisterScreen',
+  component: MoitRegisterScreen,
   parameters: {
     layout: 'fullscreen',
   },
-} satisfies Meta<typeof StudyRegisterScreen>;
+} satisfies Meta<typeof MoitRegisterScreen>;
 
 export default meta;
 
