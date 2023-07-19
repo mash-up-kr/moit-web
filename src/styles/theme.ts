@@ -119,17 +119,38 @@ const space = {
   xs: '4px',
 };
 
+const avatar = {
+  sm: css`
+    width: 40px;
+    height: 40px;
+    border-radius: 18px;
+  `,
+  md: css`
+    width: 60px;
+    height: 60px;
+    border-radius: 28px;
+  `,
+  lg: css`
+    width: 90px;
+    height: 90px;
+    border-radius: 38px;
+  `,
+};
+
 const theme = {
   space,
   palette,
   colors,
   fonts,
+  avatar,
 } as const;
 
 type PalleteType = typeof palette;
 type FontType = typeof fonts;
+type AvatarType = typeof avatar;
 export type PalleteValueType = PalleteType[keyof PalleteType];
 export type FontKeyType = keyof FontType;
+export type AvatarKeyType = keyof AvatarType;
 export type Theme = typeof theme;
 
 export const chakraTheme = extendTheme({
