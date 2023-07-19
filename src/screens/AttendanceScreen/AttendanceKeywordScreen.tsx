@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Box, Button, Container, Flex } from '@chakra-ui/react';
 import theme from '@styles/theme';
-import useGetCheckIsFirst from 'domain/study/hooks/useGetCheckIsFirst';
+import useGetCheckIsFirst from 'hooks/study/useGetCheckIsFirst';
 import ScreenHeader from '@components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
 import Text from '@components/Text';
@@ -10,6 +10,9 @@ import AttendanceTimer from './components/AttendanceTimer';
 import { TooltipWithTouch } from './components/TooltipWithTouch';
 
 const AttendanceKeywordScreen = () => {
+  // const [searchParams] = useSearchParams();
+  // const studyId = searchParams.get('studyId');
+
   const [answer, setAnswer] = useState('');
   const [answerList, setAnswerList] = useState<string[]>(['', '', '', '']);
 

@@ -2,14 +2,13 @@ import {
   AvatarProps as ChakraAvatarProps,
   Avatar as ChakraAvatar,
 } from '@chakra-ui/react';
-import * as pngType from '@styles/pngs';
-import { defaultAvatar } from '@styles/pngs';
+import pngs from '@styles/pngs';
 import theme, { AvatarKeyType } from '@styles/theme';
 
 type AvatarImage =
-  | typeof pngType.ghost
-  | typeof pngType.character
-  | (typeof pngType.profile)[number];
+  | typeof pngs.ghost
+  | typeof pngs.character
+  | (typeof pngs.profile)[number];
 
 interface AvatarProps extends ChakraAvatarProps {
   src?: AvatarImage;
@@ -25,7 +24,7 @@ const Avatar = ({ type = 'md', src, ...restProps }: AvatarProps) => {
   const isEmpty = Boolean(!src);
   return (
     <ChakraAvatar
-      src={src || defaultAvatar}
+      src={src || pngs.defaultAvatar}
       css={theme.avatar[type]}
       bg={isEmpty ? theme.palette.gray300 : theme.palette.gray100}
       border={`1px solid ${theme.palette.gray200}`}

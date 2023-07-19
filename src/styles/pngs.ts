@@ -21,4 +21,12 @@ const profile = [
   profile8,
 ];
 
-export { character, ghost, profile, defaultAvatar };
+const pngs = {
+  character,
+  ghost,
+  profile,
+  defaultAvatar,
+};
+
+export type PngKeyTypes = keyof typeof pngs;
+export default pngs;
