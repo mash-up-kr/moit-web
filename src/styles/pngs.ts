@@ -1,5 +1,6 @@
 import character from '../../assets/png/card-char.png';
 import ghost from '../../assets/png/card-ghost.png';
+import defaultAvatar from '../../assets/png/default-avatar.png';
 import profile1 from '../../assets/png/profile1.png';
 import profile2 from '../../assets/png/profile2.png';
 import profile3 from '../../assets/png/profile3.png';
@@ -20,4 +21,4 @@ const profile = [
   profile8,
 ];
 
-export { character, ghost, profile };
+export { character, ghost, profile, defaultAvatar };
