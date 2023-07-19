@@ -35,6 +35,7 @@ const MoitCompleteScreen = () => {
   //     value: '매주',
   //   },
   // ];
+  //
 
   return (
     <Box>
