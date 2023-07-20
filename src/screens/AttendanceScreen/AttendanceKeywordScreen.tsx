@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Box, Button, Container, Flex } from '@chakra-ui/react';
 import theme from '@styles/theme';
-import useGetCheckIsFirst from 'hooks/study/useGetCheckIsFirst';
+import { useGetCheckIsFirst } from 'hooks';
 import ScreenHeader from '@components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
 import Text from '@components/Text';

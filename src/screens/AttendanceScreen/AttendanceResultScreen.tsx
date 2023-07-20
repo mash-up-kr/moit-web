@@ -1,6 +1,6 @@
 import { Box, Container } from '@chakra-ui/react';
 import theme from '@styles/theme';
-import useGetCheckIsFirst from 'hooks/study/useGetCheckIsFirst';
+import { useGetCheckIsFirst } from 'hooks';
 import Lottie from '@components/Lottie';
 import ScreenHeader from '@components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
