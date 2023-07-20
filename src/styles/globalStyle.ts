@@ -29,6 +29,7 @@ const globalStyle = css`
   body {
     font-family: 'Pretendard';
     color: ${colors.text.general};
+    -webkit-tap-highlight-color: transparent !important;
 
     @media only screen and (-webkit-device-pixel-ratio: 3) {
       padding-top: env(safe-area-inset-top);

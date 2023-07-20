@@ -12,18 +12,6 @@ import { zIndex } from '@styles/z-index';
 import { ModalProps } from 'hooks/useModal';
 import useScrollLock from 'hooks/useScrollLock';
 
-const Container = styled.div<{ dimColor?: string }>`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: ${({ dimColor }) => dimColor};
-  z-index: ${zIndex.MODAL_BACKGROUND};
-`;
-
 export interface BaseModalProps {
   children: ReactNode;
   modalProps: ModalProps;
@@ -70,3 +58,15 @@ const BaseModal = ({
 };
 
 export default BaseModal;
+
+const Container = styled.div<{ dimColor?: string }>`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${({ dimColor }) => dimColor};
+  z-index: ${zIndex.MODAL_BACKGROUND};
+`;
