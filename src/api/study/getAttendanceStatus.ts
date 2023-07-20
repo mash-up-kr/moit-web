@@ -1,15 +1,8 @@
 import { Response, HTTP } from 'api/http';
-
-interface UserData {
-  userId: number;
-  nickname: string;
-  profileImage: number;
-  attendanceStatus: AttendanceStatus;
-  attendanceAt: Date;
-}
+import { AttendantData } from '../../../types/study';
 
 export const getAttendanceStatus = async (studyId: number) => {
-  const res = await HTTP.get<Response<UserData[]>>(
+  const res = await HTTP.get<Response<AttendantData[]>>(
     `/api/v1/study/${studyId}/attendance/status`,
   );
 

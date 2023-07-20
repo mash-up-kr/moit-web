@@ -4,3 +4,11 @@ declare enum AttendanceStatus {
   LATE = 'LATE',
   ABSENCE = 'ABSENCE',
 }
+
+export interface AttendantData {
+  userId: number;
+  nickname: string;
+  profileImage: 0;
+  status: AttendanceStatus;
+  attendanceAt: Date;
+}

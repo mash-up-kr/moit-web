@@ -20,13 +20,17 @@ export const useGetCheckIsFirst = (studyId: number) => {
 };
 
 export const useGetAttendanceStatus = (studyId: number) => {
-  useQuery(QUERY_KEYS.STUDY.CHECK_IS_FIRST(studyId), () =>
-    getAttendanceStatus(studyId),
+  const { data } = useQuery(
+    QUERY_KEYS.STUDY.GET_ATTENDANCE_STATUS(studyId),
+    () => getAttendanceStatus(studyId),
   );
+  return data?.data || [];
 };
 
 export const useGetStudyKeyword = (studyId: number) => {
-  useQuery(QUERY_KEYS.STUDY.CHECK_IS_FIRST(studyId), () =>
+  const { data } = useQuery(QUERY_KEYS.STUDY.GET_STUDY_KEYWORD(studyId), () =>
     getStudyKeyword(studyId),
   );
+
+  return data?.data.attendanceKeyword || '';
 };

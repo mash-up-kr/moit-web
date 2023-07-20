@@ -3,19 +3,24 @@ import { Box, Flex } from '@chakra-ui/react';
 import pngs from '@styles/pngs';
 import theme from '@styles/theme';
 import Text from '@components/Text';
+import { AttendantData } from '../../../../types/study';
 
 interface LiveStatusCardProps {
-  failCount: number;
-  successCount: number;
-  currentUser: any;
+  attendantList: AttendantData[];
+  currentUser: AttendantData;
 }
 
 const LiveStatusCard = ({
-  failCount,
-  successCount,
+  attendantList,
   currentUser,
 }: LiveStatusCardProps) => {
-  const isSuccess = currentUser.attendanceStatus === 'ATTENDANCE';
+  const isSuccess = currentUser?.status === 'ATTENDANCE';
+  const totalCount = attendantList.length;
+  const successCount = attendantList.filter(
+    (attendance) => attendance.status === 'ATTENDANCE',
+  ).length;
+  const failCount = totalCount - successCount;
+
   return (
     <Box bg={theme.palette.gray900} w={'100%'} borderRadius={'20px'} p={'30px'}>
       <Text type="h5" color={theme.colors.text.white} textAlign={'center'}>
@@ -29,7 +34,7 @@ const LiveStatusCard = ({
         w={'100%'}
       >
         <Box textAlign={'center'}>
-          <Image src={pngs.ghost} w={'60px'} h={'60px'}></Image>
+          <Image src={pngs.ghost} w={'60px'} h={'60px'} />
           <Text type="p3" color={theme.palette.gray400}>
             지각 결석
           </Text>
@@ -61,7 +66,7 @@ const LiveStatusCard = ({
           </ChakraText>
         </Flex>
         <Box textAlign={'center'}>
-          <Image src={pngs.character} w={'60px'} h={'60px'}></Image>
+          <Image src={pngs.character} w={'60px'} h={'60px'} />
           <Text type="p3" color={theme.palette.gray400}>
             출석 성공
           </Text>

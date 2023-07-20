@@ -1,44 +1,39 @@
+import { useSearchParams } from 'react-router-dom';
 import { Box, Container } from '@chakra-ui/react';
 import theme from '@styles/theme';
-import { useGetCheckIsFirst } from 'hooks';
+import {
+  useGetAttendanceStatus,
+  useGetCheckIsFirst,
+  useGetStudyKeyword,
+} from 'hooks';
+import { useGetUser } from 'hooks/useGetUser';
 import Lottie from '@components/Lottie';
 import ScreenHeader from '@components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
 import Text from '@components/Text';
+import { AttendantData } from '../../../types/study';
 import AttendanceList from './components/AttendanceList';
 import KeywordCard from './components/KeywordCard';
 import LiveStatusCard from './components/LiveStatusCard';
 import MVPCard from './components/MVPCard';
 
 const AttendanceResultScreen = () => {
-  // const [searchParams] = useSearchParams();
-  // const studyId = searchParams.get('studyId');
+  const [searchParams] = useSearchParams();
+  const studyId = parseInt(searchParams.get('studyId') ?? '0');
 
-  const studyId = 1; // dummy
+  const attendantList = useGetAttendanceStatus(studyId);
+  const studyKeyword = useGetStudyKeyword(studyId);
+  const user = useGetUser();
 
-  // 추후에 hook 연결하기
-  const { data: dummyData } = {
-    data: [
-      {
-        userId: 1,
-        nickname: '김모잇',
-        profileImage: 0,
-        attendanceStatus: 'A',
-        attendanceAt: new Date(),
-      },
-    ],
-  };
-
-  const dummyKeyword = '오늘홧팅';
-  const keywordList = Array.from(dummyKeyword);
-  const dummyUser = {
-    id: 1,
-  };
+  const keywordList = Array.from(studyKeyword);
 
   const { isFirst } = useGetCheckIsFirst(studyId);
 
-  const currentUser = dummyData.find((user) => user.userId === dummyUser.id);
-  const isAttendance = currentUser?.attendanceStatus === 'ATTENDANCE';
+  const currentUser = attendantList.find(
+    (attendant: AttendantData) => attendant.userId === user?.id,
+  ) as AttendantData;
+
+  const isAttendance = currentUser?.status === 'ATTENDANCE';
 
   return (
     <Box
@@ -85,14 +80,13 @@ const AttendanceResultScreen = () => {
         {isFirst && <KeywordCard keywordList={keywordList} />}
 
         <LiveStatusCard
-          failCount={0}
-          successCount={1}
           currentUser={currentUser}
+          attendantList={attendantList}
         />
 
-        <MVPCard />
+        <MVPCard attendantList={attendantList} />
 
-        <AttendanceList />
+        <AttendanceList attendantList={attendantList} />
       </Container>
     </Box>
   );
