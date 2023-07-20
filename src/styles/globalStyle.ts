@@ -8,22 +8,22 @@ const globalStyle = css`
   @font-face {
     font-family: 'Pretendard';
     font-weight: 700;
-    src: url('styles/fonts/Pretendard-Bold.woff');
+    src: url('/fonts/Pretendard-Bold.woff');
   }
   @font-face {
     font-family: 'Pretendard';
     font-weight: 600;
-    src: url('styles/fonts/Pretendard-SemiBold.woff');
+    src: url('/fonts/Pretendard-SemiBold.woff');
   }
   @font-face {
     font-family: 'Pretendard';
     font-weight: 500;
-    src: url('styles/fonts/Pretendard-Medium.woff');
+    src: url('/fonts/Pretendard-Medium.woff');
   }
   @font-face {
     font-family: 'Pretendard';
     font-weight: 400;
-    src: url('styles/fonts/Pretendard-Regular.woff');
+    src: url('/fonts/Pretendard-Regular.woff');
   }
 
   body {
