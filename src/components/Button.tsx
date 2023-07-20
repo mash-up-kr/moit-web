@@ -1,11 +1,12 @@
 import { PropsWithChildren } from 'react';
+import { ButtonProps as ChakraButtonProps } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import theme, { PalleteValueType } from '@styles/theme';
 import Text from '@components/Text';
 
 type ButtonSize = 's' | 'm' | 'l';
-interface ButtonProps extends PropsWithChildren {
+interface ButtonProps extends ChakraButtonProps, PropsWithChildren {
   onClick?: () => void;
   label?: string;
   bgColor?: PalleteValueType;
@@ -27,6 +28,7 @@ const Button = ({
   isDisabled = false,
   children,
   type,
+  ...restProps
 }: ButtonProps) => {
   return (
     <StyledButton
@@ -36,6 +38,7 @@ const Button = ({
       isDisabled={isDisabled}
       onClick={onClick}
       type={type}
+      {...restProps}
     >
       <Text as="span" color={color} type="h6">
         {label ?? children ?? DEFAULT_LABEL}
