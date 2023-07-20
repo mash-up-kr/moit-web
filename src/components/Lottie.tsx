@@ -13,6 +13,7 @@ const Lottie = memo(
   ({ src, loop = true, autoplay = true, controller, className }: Props) => {
     const container = useRef<HTMLDivElement | null>(null);
     const player = useRef<AnimationItem | null>(null);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const [, assetsPath, name] = /(.+)\/(.+)\..+/.exec(src)!;
 
     useEffect(() => {

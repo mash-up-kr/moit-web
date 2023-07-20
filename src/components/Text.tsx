@@ -22,6 +22,7 @@ const Text = ({
       display={display}
       color={color}
       css={fonts[type]}
+      whiteSpace="pre-wrap"
       {...restProps}
     >
       {children}

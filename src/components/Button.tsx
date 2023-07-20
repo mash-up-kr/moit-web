@@ -7,7 +7,7 @@ import Text from '@components/Text';
 
 type ButtonSize = 's' | 'm' | 'l';
 interface ButtonProps extends ChakraButtonProps, PropsWithChildren {
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   label?: string;
   bgColor?: PalleteValueType;
   color?: PalleteValueType;
@@ -47,11 +47,13 @@ const Button = ({
   );
 };
 
-const disabledStyle = css({
-  backgroundColor: theme.colors.primary.disabled,
-  color: theme.palette.gray700,
-  boxShadow: 'none',
-});
+const disabledStyle = css`
+  background-color: ${theme.colors.primary.disabled};
+  box-shadow: none;
+  span {
+    color: ${theme.palette.gray700};
+  }
+`;
 
 interface StyledButtonProps {
   bgColor: PalleteValueType;
@@ -65,10 +67,13 @@ const StyledButton = styled.button<StyledButtonProps>`
   color: ${(p) => p.color};
   width: ${(p) => ({ l: '100%', m: '100%', s: '163px' }[p.size])};
   border-radius: 20px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: ${(p) =>
+    p.size === 'l' ? '0px 4px 4px 0px rgba(0, 0, 0, 0.25)' : 'none'};
   height: 56px;
 
   ${(p) => p.isDisabled && disabledStyle}
+
+  user-select: none;
 `;
 
 export default Button;

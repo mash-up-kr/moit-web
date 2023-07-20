@@ -3,40 +3,42 @@ import styled from '@emotion/styled';
 
 interface Props {
   currentCursor: SelectCursor;
-  startTime: TimeParams;
-  endTime: TimeParams;
-  onTimeZoneClick: (type: SelectCursor) => void;
+  startDate: DateParams;
+  endDate: DateParams;
+  onDateZoneClick: (type: SelectCursor) => void;
 }
 
-const TimeZone: FC<Props> = ({
+const DateZone: FC<Props> = ({
   currentCursor,
-  startTime,
-  endTime,
-  onTimeZoneClick,
+  startDate,
+  endDate,
+  onDateZoneClick,
 }) => {
   return (
     <Container>
       <Content
         isCurrentCursor={currentCursor === 'start'}
-        onClick={() => onTimeZoneClick('start')}
+        onClick={() => onDateZoneClick('start')}
       >
         <p>시작</p>
-        <span>{`${startTime.hour}시 `}</span>
-        <span>{`${startTime.minute}분 `}</span>
+        <span>{`${startDate.y}. `}</span>
+        <span>{`${startDate.m}. `}</span>
+        <span>{`${startDate.d} `}</span>
       </Content>
       <Content
         isCurrentCursor={currentCursor === 'end'}
-        onClick={() => onTimeZoneClick('end')}
+        onClick={() => onDateZoneClick('end')}
       >
         <p>종료</p>
-        <span>{`${endTime.hour}시 `}</span>
-        <span>{`${endTime.minute}분 `}</span>
+        <span>{`${endDate.y}. `}</span>
+        <span>{`${endDate.m}. `}</span>
+        <span>{`${endDate.d} `}</span>
       </Content>
     </Container>
   );
 };
 
-export default TimeZone;
+export default DateZone;
 
 const Container = styled.section`
   display: flex;

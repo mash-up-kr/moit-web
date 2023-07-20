@@ -57,7 +57,7 @@ const AttendanceResultScreen = () => {
         </Box>
       )}
 
-      <ScreenHeader rightIcon={<SvgIcon name={'X'} />}></ScreenHeader>
+      <ScreenHeader rightIcon={<SvgIcon name={'Close'} />}></ScreenHeader>
       <Box textAlign={'center'}>
         <Text type="h1" color={theme.colors.text.white}>
           {isAttendance ? '출석 완료!' : '앗, 지각이에요'}
