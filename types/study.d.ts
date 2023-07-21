@@ -5,7 +5,7 @@ declare enum AttendanceStatus {
   ABSENCE = 'ABSENCE',
 }
 
-export interface AttendantData {
+interface AttendantData {
   userId: number;
   nickname: string;
   profileImage: 0;

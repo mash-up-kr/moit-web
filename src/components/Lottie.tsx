@@ -1,8 +1,9 @@
 import { useRef, useEffect, MutableRefObject, memo } from 'react';
 import lottie, { AnimationItem } from 'lottie-web';
+import { lottiesPath } from '@styles/lotties';
 
 interface Props {
-  src: string;
+  src: keyof typeof lottiesPath;
   loop?: boolean;
   autoplay?: boolean;
   controller?: MutableRefObject<AnimationItem | null>;
@@ -11,10 +12,11 @@ interface Props {
 
 const Lottie = memo(
   ({ src, loop = true, autoplay = true, controller, className }: Props) => {
+    const srcPath = lottiesPath[src];
     const container = useRef<HTMLDivElement | null>(null);
     const player = useRef<AnimationItem | null>(null);
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const [, assetsPath, name] = /(.+)\/(.+)\..+/.exec(src)!;
+    const [, assetsPath, name] = /(.+)\/(.+)\..+/.exec(srcPath)!;
 
     useEffect(() => {
       if (container.current == null) {
@@ -26,7 +28,7 @@ const Lottie = memo(
         loop,
         autoplay,
         renderer: 'svg',
-        path: src,
+        path: srcPath,
         assetsPath,
         name,
         rendererSettings: {
@@ -42,7 +44,7 @@ const Lottie = memo(
       return () => {
         player.current?.destroy();
       };
-    }, [assetsPath, autoplay, controller, loop, name, src]);
+    }, [assetsPath, autoplay, controller, loop, name, srcPath]);
 
     return <div className={className} ref={container} />;
   },

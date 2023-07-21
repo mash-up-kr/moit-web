@@ -28,9 +28,15 @@ export const useGetAttendanceStatus = (studyId: number) => {
 };
 
 export const useGetStudyKeyword = (studyId: number) => {
-  const { data } = useQuery(QUERY_KEYS.STUDY.GET_STUDY_KEYWORD(studyId), () =>
-    getStudyKeyword(studyId),
+  const [attendanceKeyword, setAttendanceKeyword] = useState('');
+
+  const { isLoading } = useQuery(
+    QUERY_KEYS.STUDY.GET_STUDY_KEYWORD(studyId),
+    () => getStudyKeyword(studyId),
+    {
+      onSuccess: (res) => setAttendanceKeyword(res.data.attendanceKeyword),
+    },
   );
 
-  return data?.data.attendanceKeyword || '';
+  return { isLoading, attendanceKeyword };
 };

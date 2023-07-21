@@ -14,8 +14,8 @@ const Router: FC = () => {
         <Route path="/register" element={<MoitRegisterScreen />} />
         <Route path="/attendance" element={<AttendanceKeywordScreen />} />
         <Route path="/attendanceResult" element={<AttendanceResultScreen />} />
-        <Route path="/notFound" element={<NotFoundScreen />} />
         <Route path="/complete" element={<MoitCompleteScreen />} />
+        <Route path="*" element={<NotFoundScreen />} />
       </Routes>
     </BrowserRouter>
   );

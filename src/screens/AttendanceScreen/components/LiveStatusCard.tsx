@@ -3,7 +3,6 @@ import { Box, Flex } from '@chakra-ui/react';
 import pngs from '@styles/pngs';
 import theme from '@styles/theme';
 import Text from '@components/Text';
-import { AttendantData } from '../../../../types/study';
 
 interface LiveStatusCardProps {
   attendantList: AttendantData[];

@@ -3,7 +3,6 @@ import pngs from '@styles/pngs';
 import theme from '@styles/theme';
 import Avatar from '@components/Avatar';
 import Text from '@components/Text';
-import { AttendantData } from '../../../../types/study';
 
 interface AttendanceListProps {
   attendantList: AttendantData[];

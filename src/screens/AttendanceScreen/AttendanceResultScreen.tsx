@@ -11,7 +11,6 @@ import Lottie from '@components/Lottie';
 import ScreenHeader from '@components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
 import Text from '@components/Text';
-import { AttendantData } from '../../../types/study';
 import AttendanceList from './components/AttendanceList';
 import KeywordCard from './components/KeywordCard';
 import LiveStatusCard from './components/LiveStatusCard';
@@ -22,10 +21,10 @@ const AttendanceResultScreen = () => {
   const studyId = parseInt(searchParams.get('studyId') ?? '0');
 
   const attendantList = useGetAttendanceStatus(studyId);
-  const studyKeyword = useGetStudyKeyword(studyId);
+  const { attendanceKeyword } = useGetStudyKeyword(studyId);
   const user = useGetUser();
 
-  const keywordList = Array.from(studyKeyword);
+  const keywordList = Array.from(attendanceKeyword);
 
   const { isFirst } = useGetCheckIsFirst(studyId);
 
@@ -53,7 +52,7 @@ const AttendanceResultScreen = () => {
           bottom={0}
           zIndex={2}
         >
-          <Lottie src={'../../../assets/lotties/confetti.json'} />
+          <Lottie src={'confetti'} />
         </Box>
       )}
 
@@ -68,13 +67,7 @@ const AttendanceResultScreen = () => {
             : '다음에는 꼭 제시간에 출석하세요!'}
         </Text>
       </Box>
-      <Lottie
-        src={
-          isAttendance
-            ? '../../../assets/lotties/success.json'
-            : '../../../assets/lotties/fail.json'
-        }
-      />
+      <Lottie src={isAttendance ? 'success' : 'fail'} />
 
       <Container centerContent pb={'20%'}>
         {isFirst && <KeywordCard keywordList={keywordList} />}
