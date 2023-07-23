@@ -48,7 +48,7 @@ const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
                   isActive={year.selectedIndex + nowYear === y}
                   key={y}
                 >
-                  {y}
+                  {`${y}년`}
                 </SelectScrollerOption>
               ))}
             </SelectScroller>
@@ -63,7 +63,7 @@ const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
                   key={m}
                   isActive={month.selectedIndex + 1 === m}
                 >
-                  {m}
+                  {`${m}월`}
                 </SelectScrollerOption>
               ))}
             </SelectScroller>
@@ -78,7 +78,7 @@ const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
                   key={d}
                   isActive={date.selectedIndex + 1 === d}
                 >
-                  {d}
+                  {`${d}일`}
                 </SelectScrollerOption>
               ))}
             </SelectScroller>

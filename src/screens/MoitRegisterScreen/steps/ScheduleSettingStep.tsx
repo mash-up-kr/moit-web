@@ -47,6 +47,12 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
   const endTime = getValues('endTime');
   const startDate = getValues('startDate');
   const endDate = getValues('endDate');
+  const repeat = getValues('repeatCycle');
+  const repeatCycle = useMemo(() => {
+    return (
+      REPEAT_CYCLE_OPTIONS.find((item) => item.value === repeat)?.label ?? ''
+    );
+  }, [repeat]);
 
   const onSubmit = handleSubmit((values) => {
     onNext(values);
@@ -85,6 +91,13 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
     rules: { required: true },
   });
 
+  const {
+    field: { onChange: onChangeRepeat },
+  } = useController({
+    name: 'repeatCycle',
+    control: control,
+    rules: { required: true },
+  });
   const isDisabled = Object.keys(errors).length > 0;
 
   const timeValue = useMemo(() => {
@@ -108,6 +121,8 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
       ed.getMonth() + 1
     }월-${ed.getDate()}일`;
   }, [startDate, endDate]);
+
+  console.log(repeatCycle);
 
   return (
     <Box>
@@ -137,7 +152,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             placeholder="17시 00분 - 20시 00분"
             value={timeValue}
             variant="s"
-            onClick={() => selectTimeBottomsheetProps.showModal()}
+            onClick={selectTimeBottomsheetProps.showModal}
           />
         </FormItem>
 
@@ -146,16 +161,8 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             readOnly
             placeholder="2주"
             variant="s"
-            value={
-              REPEAT_CYCLE_OPTIONS.find(
-                (item) => item.value === getValues('repeatCycle'),
-              )?.label ?? ''
-            }
-            onClick={() => {
-              // TODO: 팝업띄우기
-              // REPEAT_CYCLE_OPTIONS , field.onChange() 사용해주세용
-              // field.onChange('TWO_WEEK');
-            }}
+            value={repeatCycle}
+            onClick={selectRepeatBottomsheetProps.showModal}
           />
         </FormItem>
 
@@ -164,7 +171,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             readOnly
             placeholder="6월 27일 - 8월 30일"
             value={dateValue}
-            onClick={() => selectDateBottomsheetProps.showModal()}
+            onClick={selectDateBottomsheetProps.showModal}
             variant="s"
           />
         </FormItem>
@@ -217,9 +224,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
       {selectRepeatBottomsheetProps.modalShowing && (
         <RepeatScreen
           modalProps={selectRepeatBottomsheetProps}
-          repeatUpdate={function (): void {
-            throw new Error('Function not implemented.');
-          }}
+          repeatUpdate={(v) => onChangeRepeat(v)}
         />
       )}
     </Box>

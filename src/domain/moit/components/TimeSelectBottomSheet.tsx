@@ -40,7 +40,6 @@ const TimeSelectBottomSheet = ({
     initialTime,
   );
 
-  // 마운트 시점 스크롤. 지연 로직을 추가하지 않으면, 정상 동작하지 않음
   useEffectOnce(() => {
     setTimeout(() => {
       hour.ref.current?.scrollTo(
@@ -54,15 +53,12 @@ const TimeSelectBottomSheet = ({
     }, 300);
   });
 
-  // 커서 변경시 스크롤 로직.
-  // 더 좋은 로직이 있는건 확실한디... :(
   useEffect(() => {
     setTimeout(() => {
       hour.ref.current?.scrollTo(0, hour.selectedIndex * 52);
       min.ref.current?.scrollTo(0, min.selectedIndex * 52);
     });
 
-    //! don't delete this ignore.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCursor]);
 
@@ -91,7 +87,7 @@ const TimeSelectBottomSheet = ({
                   isActive={hour.selectedIndex === h}
                   key={h}
                 >
-                  {h}
+                  {`${h}시`}
                 </SelectScrollerOption>
               ))}
             </SelectScroller>
@@ -112,7 +108,7 @@ const TimeSelectBottomSheet = ({
                   isActive={min.selectedIndex === m}
                   key={m}
                 >
-                  {m}
+                  {`${m}분`}
                 </SelectScrollerOption>
               ))}
             </SelectScroller>

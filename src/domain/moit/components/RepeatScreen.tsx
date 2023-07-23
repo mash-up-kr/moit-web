@@ -2,6 +2,7 @@ import { FC } from 'react';
 import styled from '@emotion/styled';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
 import { palette } from '@styles/theme';
+import { zIndex } from '@styles/z-index';
 import { ModalProps } from 'hooks/useModal';
 import { REPEAT_CYCLE_OPTIONS } from 'screens/MoitRegisterScreen/consts';
 import BottomSheet from '@components/BottomSheet';
@@ -10,7 +11,7 @@ import { SelectScroller, useSelectScroller } from '@components/SelectScroller';
 
 interface Props {
   modalProps: ModalProps;
-  repeatUpdate: () => void;
+  repeatUpdate: (v: RegisterFormData['repeatCycle']) => void;
 }
 
 const RepeatScreen: FC<Props> = ({ modalProps, repeatUpdate }) => {
@@ -37,12 +38,15 @@ const RepeatScreen: FC<Props> = ({ modalProps, repeatUpdate }) => {
                 </SelectScrollerOption>
               ))}
             </SelectScroller>
+            <Cursor />
           </ContentWrapper>
           <DefaultBottomCTA>
             <Button
               label="선택하기"
               onClick={() => {
-                repeatUpdate();
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-ignore
+                repeatUpdate(REPEAT_CYCLE_OPTIONS[selectedIndex]);
                 modalProps.hideModal();
               }}
             />
@@ -72,4 +76,15 @@ const DefaultBottomCTA = styled.footer`
   height: 100px;
   padding: 8px 0 36px 0;
   margin-top: ${({ theme }) => theme.space.md};
+`;
+
+const Cursor = styled.div`
+  position: absolute;
+  z-index: ${zIndex.HIDE};
+  width: 100%;
+  height: 52px;
+  left: 0;
+  transform: translateY(42px);
+  background-color: ${({ theme }) => theme.colors.primary.selected};
+  border-radius: ${({ theme }) => theme.space.md};
 `;
