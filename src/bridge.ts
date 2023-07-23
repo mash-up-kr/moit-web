@@ -1,5 +1,4 @@
-//TODO: 쿠키에 오는 token 문자 key
-const TOKEN_KEY = 'TOKEN';
+const TOKEN_KEY = 'accessToken';
 
 enum BridgeModel {
   alert,

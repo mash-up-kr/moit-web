@@ -1,5 +1,3 @@
-Git READ ME
-
 <p align="center">
   <a href="" rel="noopener">
   <img width=200px height=200px src="https://github.com/mash-up-kr/moit-web/assets/82315118/0e793d2b-3673-4dc1-a45e-075e33025c38" alt="Project logo"></a>
