@@ -2,6 +2,8 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { Box } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
+import pngs from '@styles/pngs';
+import Avatar from '@components/Avatar';
 import Button from '@components/Button';
 import Text from '@components/Text';
 import { registerFormDataAtom } from '../atoms';
@@ -40,6 +42,7 @@ const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
       </Text>
 
       <Form onSubmit={onSubmit}>
+        <Avatar type="lg" src={pngs.trophy} />
         <FormItem label="스터디명 (필수)">
           <Input
             placeholder="스터디명을 10자 이내로 입력해주세요"
