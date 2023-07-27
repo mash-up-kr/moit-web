@@ -47,6 +47,6 @@ export const generateMinuteArray = (
   if (type === 'startZero' && base.length > 1) {
     return base.slice(0, base.length - 1);
   } else {
-    return base.slice(0, base.length - 1);
+    return base;
   }
 };

@@ -18,7 +18,7 @@ import MVPCard from './components/MVPCard';
 
 const AttendanceResultScreen = () => {
   const [searchParams] = useSearchParams();
-  const studyId = parseInt(searchParams.get('studyId') ?? '0');
+  const studyId = parseInt(searchParams.get('studyId') ?? '1'); // TODO: 영지 확인 필요
 
   const attendantList = useGetAttendanceStatus(studyId);
   const { attendanceKeyword } = useGetStudyKeyword(studyId);

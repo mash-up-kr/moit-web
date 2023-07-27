@@ -4,39 +4,39 @@ import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.
 import { palette } from '@styles/theme';
 import { zIndex } from '@styles/z-index';
 import { ModalProps } from 'hooks/useModal';
-import { REPEAT_CYCLE_OPTIONS } from 'screens/MoitRegisterScreen/consts';
+import { generateMinuteArray } from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
 import Button from '@components/Button';
 import { SelectScroller, useSelectScroller } from '@components/SelectScroller';
+import { SELECT_TIME_MINUTE_INTERVAL } from '../hooks/useSelectTime';
 
 interface Props {
   modalProps: ModalProps;
-  repeatUpdate: (v: (typeof REPEAT_CYCLE_OPTIONS)[number]) => void;
+  update: (v: number) => void;
 }
 
-const RepeatScreen: FC<Props> = ({ modalProps, repeatUpdate }) => {
+const MinuteScreen: FC<Props> = ({ modalProps, update }) => {
   const { ref, onScroll, selectedIndex } = useSelectScroller({
     itemHeight: 52,
   });
 
   return (
     <BottomSheet
-      headerTitle="반복 선택"
-      dimColor={palette.modal_dim}
       modalProps={modalProps}
+      headerTitle="시간 선택"
+      dimColor={palette.modal_dim}
       containerHeight={352}
       content={
         <main>
           <ContentWrapper>
             <SelectScroller ref={ref} onScroll={onScroll}>
-              {REPEAT_CYCLE_OPTIONS.map((option, i) => (
-                <SelectScrollerOption
-                  isActive={selectedIndex === i}
-                  key={option.value}
-                >
-                  {option.label}
-                </SelectScrollerOption>
-              ))}
+              {generateMinuteArray('endSixty', SELECT_TIME_MINUTE_INTERVAL).map(
+                (m, i) => (
+                  <SelectScrollerOption isActive={selectedIndex === i} key={m}>
+                    {`${m}분`}
+                  </SelectScrollerOption>
+                ),
+              )}
             </SelectScroller>
             <Cursor />
           </ContentWrapper>
@@ -44,7 +44,7 @@ const RepeatScreen: FC<Props> = ({ modalProps, repeatUpdate }) => {
             <Button
               label="선택하기"
               onClick={() => {
-                repeatUpdate(REPEAT_CYCLE_OPTIONS[selectedIndex]);
+                update(selectedIndex * SELECT_TIME_MINUTE_INTERVAL);
                 modalProps.hideModal();
               }}
             />
@@ -55,12 +55,13 @@ const RepeatScreen: FC<Props> = ({ modalProps, repeatUpdate }) => {
   );
 };
 
-export default RepeatScreen;
+export default MinuteScreen;
 
 const ContentWrapper = styled.section`
   display: flex;
   justify-content: center;
   gap: ${({ theme }) => theme.space.md};
+  margin-top: ${({ theme }) => theme.space.md};
   position: relative;
 
   -webkit-user-select: none;
@@ -70,19 +71,18 @@ const ContentWrapper = styled.section`
   user-select: none;
 `;
 
-const DefaultBottomCTA = styled.footer`
-  height: 100px;
-  padding: 8px 0 36px 0;
-  margin-top: ${({ theme }) => theme.space.md};
-`;
-
 const Cursor = styled.div`
   position: absolute;
   z-index: ${zIndex.HIDE};
   width: 100%;
   height: 52px;
-  left: 0;
   transform: translateY(42px);
   background-color: ${({ theme }) => theme.colors.primary.selected};
   border-radius: ${({ theme }) => theme.space.md};
+`;
+
+const DefaultBottomCTA = styled.footer`
+  height: 100px;
+  padding: 8px 0 36px 0;
+  margin-top: ${({ theme }) => theme.space.md};
 `;
