@@ -122,8 +122,6 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
     }월-${ed.getDate()}일`;
   }, [startDate, endDate]);
 
-  console.log(repeatCycle);
-
   return (
     <Box>
       <Text type="h4" mb="20px">
@@ -224,7 +222,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
       {selectRepeatBottomsheetProps.modalShowing && (
         <RepeatScreen
           modalProps={selectRepeatBottomsheetProps}
-          repeatUpdate={(v) => onChangeRepeat(v)}
+          repeatUpdate={(v) => onChangeRepeat(v.value)}
         />
       )}
     </Box>
