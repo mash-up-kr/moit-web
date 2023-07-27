@@ -40,6 +40,8 @@ const MoitRegisterScreen: FC = () => {
     setRegisterFormData((prev) => ({ ...prev, ...data }));
   }
 
+  console.log(document.cookie);
+
   return (
     <Box>
       <ScreenHeader
