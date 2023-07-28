@@ -1,8 +1,10 @@
 import { FC } from 'react';
-import { useForm } from 'react-hook-form';
+import { useController, useForm } from 'react-hook-form';
 import { Box, Flex } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import theme from '@styles/theme';
+import MinuteScreen from 'domain/moit/components/MinuteScreen';
+import { useModal } from 'hooks/useModal';
 import Button from '@components/Button';
 import Text from '@components/Text';
 import { registerFormDataAtom } from '../atoms';
@@ -21,6 +23,7 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
   const {
     handleSubmit,
     getValues,
+    control,
     formState: { errors },
   } = useForm<RuleStepFormData>({
     defaultValues: {
@@ -34,8 +37,24 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
   const onSubmit = handleSubmit((values) => {
     onNext(values);
   });
+  const lateMinuteModalProps = useModal();
+  const absenceMinuteModalProps = useModal();
 
   const isDisabled = Object.keys(errors).length > 0;
+  const {
+    field: { onChange: onChangeLateTime },
+  } = useController({
+    name: 'lateTime',
+    control: control,
+    rules: { required: true },
+  });
+  const {
+    field: { onChange: onChangeAbsenceTime },
+  } = useController({
+    name: 'absenceTime',
+    control: control,
+    rules: { required: true },
+  });
 
   return (
     <Box>
@@ -59,6 +78,7 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
                 width={75}
                 readOnly
                 variant="s"
+                onClick={lateMinuteModalProps.showModal}
               />
               <Text type="h6">부터 지각</Text>
             </Flex>
@@ -81,6 +101,7 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
                 width={75}
                 readOnly
                 variant="s"
+                onClick={absenceMinuteModalProps.showModal}
               />
               <Text type="h6">부터 결석</Text>
             </Flex>
@@ -98,6 +119,20 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
           <Button label="다음" type="submit" isDisabled={isDisabled} />
         </LargeBottom>
       </Form>
+      {lateMinuteModalProps.modalShowing && (
+        <MinuteScreen
+          modalProps={lateMinuteModalProps}
+          update={(v: number) => {
+            onChangeLateTime(v + 5);
+          }}
+        />
+      )}
+      {absenceMinuteModalProps.modalShowing && (
+        <MinuteScreen
+          modalProps={absenceMinuteModalProps}
+          update={(v: number) => onChangeAbsenceTime(v + 5)}
+        />
+      )}
     </Box>
   );
 };
