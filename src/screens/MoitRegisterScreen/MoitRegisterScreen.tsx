@@ -1,7 +1,9 @@
 import { FC, useState } from 'react';
+import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Box, Progress } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
+import { registerMoit } from 'api/moit/registerMoit';
 import ScreenHeader from 'components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
 import { registerFormDataAtom } from './atoms';
@@ -24,6 +26,12 @@ const MoitRegisterScreen: FC = () => {
   console.log(
     '🚀 ~ file: StudyRegisterScreen.tsx:22 ~ registerFormData:',
     registerFormData,
+  );
+
+  const { mutate, data: responseData } = useMutation(registerMoit);
+  console.log(
+    '🚀 ~ file: MoitRegisterScreen.tsx:32 ~ responseData:',
+    responseData,
   );
 
   const currentStepIdx = REGISTER_STEPS.findIndex((t) => t === step);
@@ -82,9 +90,10 @@ const MoitRegisterScreen: FC = () => {
             ),
             [REGISTER_STEPS[3]]: (
               <NotiSettingStep
-                onNext={(data) => {
+                onNext={async (data) => {
                   setStep('info');
                   handleChangeFormData(data);
+                  mutate(registerFormData);
                   navigate('/complete');
                 }}
               />
