@@ -44,6 +44,37 @@ const MoitRegisterScreen: FC = () => {
 
   return (
     <Box>
+      <section
+        style={{
+          border: '1px solid blue',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '4px',
+        }}
+      >
+        <button
+          style={{ border: '1px solid red' }}
+          onClick={() =>
+            window.webkit.messageHandlers.MOIT.postMessage({
+              command: 'alert',
+              value: '안뇽 alert',
+            })
+          }
+        >
+          alert
+        </button>
+        <button
+          style={{ border: '1px solid red' }}
+          onClick={() =>
+            window.webkit.messageHandlers.MOIT.postMessage({
+              command: 'toast',
+              value: '나야 toast',
+            })
+          }
+        >
+          toast
+        </button>
+      </section>
       <ScreenHeader
         title="스터디 생성"
         leftIcon={

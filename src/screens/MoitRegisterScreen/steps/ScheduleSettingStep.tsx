@@ -213,6 +213,9 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
         <DateSelectScreen
           modalProps={selectDateBottomsheetProps}
           dateUpdate={(start: string, end: string) => {
+            // 웹에서는 잘 됨. 디버깅 필요
+            console.log(start, end);
+
             onChangeStartDate(start);
             onChangeEndDate(end);
           }}
