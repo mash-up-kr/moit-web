@@ -69,3 +69,8 @@ type NotiStepFormData = Pick<
   RegisterFormData,
   'isRemindActive' | 'remindOption'
 >;
+
+interface RegisterMoitResponse {
+  code: string;
+  message: string;
+}

@@ -4,6 +4,7 @@ import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.
 import { palette } from '@styles/theme';
 import { zIndex } from '@styles/z-index';
 import { ModalProps } from 'hooks/useModal';
+import { insertZero } from 'utils/dateParser';
 import { generateArray } from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
 import Button from '@components/Button';
@@ -89,8 +90,12 @@ const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
               label="선택하기"
               onClick={() => {
                 dateUpdate(
-                  `${startDate.y}-${startDate.m}-${startDate.d}`,
-                  `${endDate.y}-${endDate.m}-${endDate.d}`,
+                  `${startDate.y}-${insertZero(startDate.m)}-${insertZero(
+                    startDate.d,
+                  )}`,
+                  `${endDate.y}-${insertZero(endDate.m)}-${insertZero(
+                    endDate.d,
+                  )}`,
                 );
                 modalProps.hideModal();
               }}
