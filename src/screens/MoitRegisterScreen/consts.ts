@@ -1,7 +1,7 @@
 export const REGISTER_STEPS = ['info', 'schedule', 'rule', 'noti'] as const;
 
 export const DAY_OF_WEEKS_OPTIONS: {
-  value: RegisterFormData['dayOfWeeks'];
+  value: RegisterFormData['dayOfWeeks'][number];
   label: string;
 }[] = [
   {

@@ -5,7 +5,7 @@ import theme from '@styles/theme';
 
 interface ButtonSelectProps<T> {
   options: { value: T; label: string }[];
-  value: string;
+  value: string | string[];
   onChange: (value: T) => void;
 }
 
@@ -20,7 +20,9 @@ const ButtonSelect = <T extends string>({
         <OptionButton
           key={item.value}
           active={item.value === value}
-          onClick={() => onChange(item.value)}
+          onClick={() => {
+            onChange(item.value);
+          }}
         >
           {item.label}
         </OptionButton>

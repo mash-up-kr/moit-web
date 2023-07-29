@@ -50,12 +50,8 @@ const MoitCompleteScreen = () => {
     {
       label: '일정',
       value: `${repeatCycleTextMap[repeatCycle]} ${
-        DAY_OF_WEEKS_OPTIONS.find((v) => v.value === dayOfWeeks)?.label
-      } ${startTime.hour.toString().padStart(2, '0')}:${startTime.minute
-        .toString()
-        .padStart(2, '0')} - ${endTime.hour
-        .toString()
-        .padStart(2, '0')}:${endTime.minute.toString().padStart(2, '0')}`,
+        DAY_OF_WEEKS_OPTIONS.find((v) => v.value === dayOfWeeks[0])?.label
+      } ${startTime} - ${endTime}`,
     },
     {
       label: '규칙',

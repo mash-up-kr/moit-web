@@ -12,29 +12,32 @@ type TimeParams = {
 interface RegisterFormData {
   name: string;
   description: string;
-  dayOfWeeks:
+  dayOfWeeks: (
     | 'MONDAY'
     | 'TUESDAY'
     | 'WEDNESDAY'
     | 'THURSDAY'
     | 'FRIDAY'
     | 'SATURDAY'
-    | 'SUNDAY';
+    | 'SUNDAY'
+  )[];
   startDate: string; //yyyy-mm-dd
   endDate: string; //yyyy-mm-dd
   repeatCycle: 'NONE' | 'ONE_WEEK' | 'TWO_WEEK' | 'FOUR_WEEK';
-  startTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
-  endTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
+  startTime: string; // hh:mm
+  // {
+  //   hour: number;
+  //   minute: number;
+  //   second: number;
+  //   nano: number;
+  // };
+  endTime: string; // hh:mm
+  // {
+  //   hour: number;
+  //   minute: number;
+  //   second: number;
+  //   nano: number;
+  // };
   lateTime: number;
   lateAmount: number;
   absenceTime: number;
