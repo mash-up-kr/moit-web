@@ -25,19 +25,7 @@ interface RegisterFormData {
   endDate: string; //yyyy-mm-dd
   repeatCycle: 'NONE' | 'ONE_WEEK' | 'TWO_WEEK' | 'FOUR_WEEK';
   startTime: string; // hh:mm
-  // {
-  //   hour: number;
-  //   minute: number;
-  //   second: number;
-  //   nano: number;
-  // };
   endTime: string; // hh:mm
-  // {
-  //   hour: number;
-  //   minute: number;
-  //   second: number;
-  //   nano: number;
-  // };
   lateTime: number;
   lateAmount: number;
   absenceTime: number;

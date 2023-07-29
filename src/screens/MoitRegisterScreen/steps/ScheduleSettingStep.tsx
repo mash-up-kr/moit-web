@@ -92,12 +92,6 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
     if (!startTime || !endTime) return '';
 
     return `${startTime} - ${endTime}`;
-    // `${startTime.hour.toString().padStart(2, '0')}시 ${startTime.minute
-    //   .toString()
-    //   .padStart(2, '0')}분 - ${endTime.hour
-    //   .toString()
-    //   .padStart(2, '0')}시 ${endTime.minute.toString().padStart(2, '0')}분
-    //   `
   }, [startTime, endTime]);
 
   const dateValue = useMemo(() => {
@@ -183,8 +177,8 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
           initialTime={{
             startTime: startTime
               ? {
-                  hour: +startTime.split(':')[0], // startTime.hour,
-                  minute: +startTime.split(':')[1], //startTime.minute,
+                  hour: +startTime.split(':')[0],
+                  minute: +startTime.split(':')[1],
                 }
               : { hour: 0, minute: 0 },
             endTime: endTime
@@ -196,24 +190,11 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
               `${insertZero(selected.startTime.hour)}:${insertZero(
                 selected.startTime.minute,
               )}`,
-              //   {
-              //   hour: selected.startTime.hour,
-              //   minute: selected.startTime.minute,
-              //   second: 0,
-              //   nano: 0,
-              // }
             );
             onChangeEndTime(
               `${insertZero(selected.endTime.hour)}:${insertZero(
                 selected.endTime.minute,
               )}`,
-
-              //   {
-              //   hour: selected.endTime.hour,
-              //   minute: selected.endTime.minute,
-              //   second: 0,
-              //   nano: 0,
-              // }
             );
           }}
         />
