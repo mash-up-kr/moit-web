@@ -79,3 +79,16 @@ export class IOSBridge {
     }
   }
 }
+
+export const closeWebview = () => {
+  window.webkit.messageHandlers.MOIT.postMessage({
+    command: 'close',
+  });
+};
+
+export const nativeShare = (v: string) => {
+  window.webkit.messageHandlers.MOIT.postMessage({
+    command: 'share',
+    value: v,
+  });
+};

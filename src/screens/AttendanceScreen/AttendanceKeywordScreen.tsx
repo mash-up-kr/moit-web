@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Box, Button, Container, Flex } from '@chakra-ui/react';
 import theme from '@styles/theme';
+import { closeWebview } from 'bridge';
 import { useGetCheckIsFirst } from 'hooks';
 import ScreenHeader from '@components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
@@ -33,7 +34,12 @@ const AttendanceKeywordScreen = () => {
       <Box>
         <ScreenHeader
           leftIcon={
-            <SvgIcon name="ArrowLeft" size={24} color={theme.palette.white} />
+            <SvgIcon
+              name="ArrowLeft"
+              size={24}
+              color={theme.palette.white}
+              onClick={closeWebview}
+            />
           }
           rightIcon={
             <TooltipWithTouch

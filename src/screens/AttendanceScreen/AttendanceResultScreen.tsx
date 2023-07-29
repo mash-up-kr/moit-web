@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { Box, Container } from '@chakra-ui/react';
 import theme from '@styles/theme';
+import { closeWebview } from 'bridge';
 import {
   useGetAttendanceStatus,
   useGetCheckIsFirst,
@@ -56,7 +57,9 @@ const AttendanceResultScreen = () => {
         </Box>
       )}
 
-      <ScreenHeader rightIcon={<SvgIcon name={'Close'} />}></ScreenHeader>
+      <ScreenHeader
+        rightIcon={<SvgIcon name={'Close'} size={24} onClick={closeWebview} />}
+      ></ScreenHeader>
       <Box textAlign={'center'}>
         <Text type="h1" color={theme.colors.text.white}>
           {isAttendance ? '출석 완료!' : '앗, 지각이에요'}

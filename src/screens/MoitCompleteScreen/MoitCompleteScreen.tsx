@@ -3,6 +3,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import pngs from '@styles/pngs';
 import theme from '@styles/theme';
+import { closeWebview, nativeShare } from 'bridge';
 import {
   imageDataAtom,
   registerFormDataAtom,
@@ -24,10 +25,6 @@ const MoitCompleteScreen = () => {
   const imageData = useRecoilValue(imageDataAtom);
   const navigate = useNavigate();
   const { invitationCode, moitId } = useRecoilValue(registerMoitResponseAtom);
-  console.log(
-    '🚀 ~ file: MoitCompleteScreen.tsx:27 ~ MoitCompleteScreen ~ moitId:',
-    moitId,
-  );
 
   if (!Object.keys(registerFormData).length) {
     navigate('/error');
@@ -82,17 +79,7 @@ const MoitCompleteScreen = () => {
   return (
     <Box>
       <ScreenHeader
-        rightIcon={
-          <SvgIcon
-            name="Close"
-            size={24}
-            onClick={() => {
-              window.webkit.messageHandlers.MOIT.postMessage({
-                command: 'close',
-              });
-            }}
-          />
-        }
+        rightIcon={<SvgIcon name="Close" size={24} onClick={closeWebview} />}
       />
 
       <Box p="0 20px">
@@ -128,14 +115,31 @@ const MoitCompleteScreen = () => {
         </Box>
       </Box>
 
+      <div>moitId: {moitId}</div>
+      <div>invitationCode: {invitationCode}</div>
+
       <LargeBottom>
-        <Button size="m" isDisabled>
+        <Button
+          size="m"
+          isDisabled
+          onClick={() => {
+            if (window.webkit) {
+              closeWebview();
+            } else {
+              window.location.href = '/';
+            }
+          }}
+        >
           홈으로 돌아가기
         </Button>
         <Button
           size="m"
           onClick={() => {
-            alert(invitationCode);
+            if (window.webkit) {
+              nativeShare(moitId);
+            } else {
+              alert(moitId);
+            }
           }}
         >
           참여코드 공유

@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Progress } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
+import { closeWebview } from 'bridge';
 import ScreenHeader from 'components/ScreenHeader';
 import { useRegisterMoit } from 'hooks/MoitQuery';
 import SvgIcon from '@components/SvgIcon';
@@ -33,9 +34,7 @@ const MoitRegisterScreen: FC = () => {
 
   const handleClickPrev = () => {
     if (currentStepIdx === 0) {
-      return window.webkit.messageHandlers.MOIT.postMessage({
-        command: 'close',
-      });
+      closeWebview();
     }
     setStep(REGISTER_STEPS[currentStepIdx - 1]);
   };
