@@ -6,6 +6,9 @@ const LargeBottom = styled.div`
   position: fixed;
   left: 0;
   bottom: 0;
+
+  display: flex;
+  gap: 9px;
 `;
 
 export default LargeBottom;

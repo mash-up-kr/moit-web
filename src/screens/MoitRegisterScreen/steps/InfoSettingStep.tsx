@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { Box } from '@chakra-ui/react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import Button from '@components/Button';
 import Text from '@components/Text';
-import { registerFormDataAtom } from '../atoms';
+import { imageSrcAtom, registerFormDataAtom } from '../atoms';
 import Form from '../components/Form';
 import FormItem from '../components/FormItem';
+import ImageUploader from '../components/ImageUploader';
 import Input from '../components/Input';
 import LargeBottom from '../components/LargeBottom';
 import TextArea from '../components/TextArea';
@@ -19,6 +20,7 @@ interface InfoSettingStepProps {
 
 const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
   const registerFormData = useRecoilValue(registerFormDataAtom);
+  const [imageSrc, setImageSrc] = useRecoilState(imageSrcAtom);
 
   const {
     handleSubmit,
@@ -40,6 +42,11 @@ const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
       </Text>
 
       <Form onSubmit={onSubmit}>
+        <ImageUploader
+          imageSrc={imageSrc}
+          onChange={(url) => setImageSrc(url)}
+        />
+
         <FormItem label="스터디명 (필수)">
           <Input
             placeholder="스터디명을 10자 이내로 입력해주세요"

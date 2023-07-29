@@ -3,11 +3,14 @@ const TOKEN_KEY = 'accessToken';
 enum BridgeModel {
   alert,
   toast,
+  close,
+  keypad,
+  share,
 }
 
 interface BridgeParams {
   command: keyof typeof BridgeModel;
-  value: string;
+  value?: string;
 }
 
 declare global {

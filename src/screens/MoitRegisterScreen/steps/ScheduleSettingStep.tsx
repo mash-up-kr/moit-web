@@ -6,6 +6,7 @@ import DateSelectScreen from 'domain/moit/components/DateSelectScreen';
 import RepeatScreen from 'domain/moit/components/RepeatScreen';
 import TimeSelectBottomSheet from 'domain/moit/components/TimeSelectBottomSheet';
 import { useModal } from 'hooks/useModal';
+import { insertZero } from 'utils/dateParser';
 import Button from '@components/Button';
 import Text from '@components/Text';
 import { registerFormDataAtom } from '../atoms';
@@ -103,12 +104,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
   const timeValue = useMemo(() => {
     if (!startTime || !endTime) return '';
 
-    return `${startTime.hour.toString().padStart(2, '0')}시 ${startTime.minute
-      .toString()
-      .padStart(2, '0')}분 - ${endTime.hour
-      .toString()
-      .padStart(2, '0')}시 ${endTime.minute.toString().padStart(2, '0')}분
-      `;
+    return `${startTime} - ${endTime}`;
   }, [startTime, endTime]);
 
   const dateValue = useMemo(() => {
@@ -137,8 +133,10 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             render={({ field }) => (
               <ButtonSelect
                 options={DAY_OF_WEEKS_OPTIONS}
-                value={getValues('dayOfWeeks')}
-                onChange={(v) => field.onChange(v)}
+                value={
+                  getValues('dayOfWeeks') ? getValues('dayOfWeeks')[0] : ''
+                }
+                onChange={(v) => field.onChange([v])}
               />
             )}
           />
@@ -184,27 +182,25 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
           initialTime={{
             startTime: startTime
               ? {
-                  hour: startTime.hour,
-                  minute: startTime.minute,
+                  hour: +startTime.split(':')[0],
+                  minute: +startTime.split(':')[1],
                 }
               : { hour: 0, minute: 0 },
             endTime: endTime
-              ? { hour: endTime.hour, minute: endTime.minute }
+              ? { hour: +endTime.split(':')[0], minute: +endTime.split(':')[1] } // endTime.hour, minute: endTime.minute }
               : { hour: 0, minute: 0 },
           }}
           timeUpdate={(selected: SelctTimeParams) => {
-            onChangeStartTime({
-              hour: selected.startTime.hour,
-              minute: selected.startTime.minute,
-              second: 0,
-              nano: 0,
-            });
-            onChangeEndTime({
-              hour: selected.endTime.hour,
-              minute: selected.endTime.minute,
-              second: 0,
-              nano: 0,
-            });
+            onChangeStartTime(
+              `${insertZero(selected.startTime.hour)}:${insertZero(
+                selected.startTime.minute,
+              )}`,
+            );
+            onChangeEndTime(
+              `${insertZero(selected.endTime.hour)}:${insertZero(
+                selected.endTime.minute,
+              )}`,
+            );
           }}
         />
       )}

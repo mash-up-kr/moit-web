@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Progress } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import ScreenHeader from 'components/ScreenHeader';
+import { useRegisterMoit } from 'hooks/MoitQuery';
 import SvgIcon from '@components/SvgIcon';
 import { registerFormDataAtom } from './atoms';
 import { REGISTER_STEPS } from './consts';
@@ -26,12 +27,15 @@ const MoitRegisterScreen: FC = () => {
     registerFormData,
   );
 
+  const { mutate } = useRegisterMoit();
+
   const currentStepIdx = REGISTER_STEPS.findIndex((t) => t === step);
 
   const handleClickPrev = () => {
     if (currentStepIdx === 0) {
-      // TODO: 웹뷰 종료
-      return;
+      return window.webkit.messageHandlers.MOIT.postMessage({
+        command: 'close',
+      });
     }
     setStep(REGISTER_STEPS[currentStepIdx - 1]);
   };
@@ -115,9 +119,10 @@ const MoitRegisterScreen: FC = () => {
             ),
             [REGISTER_STEPS[3]]: (
               <NotiSettingStep
-                onNext={(data) => {
+                onNext={async (data) => {
                   setStep('info');
                   handleChangeFormData(data);
+                  mutate(registerFormData);
                   navigate('/complete');
                 }}
               />

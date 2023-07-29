@@ -9,6 +9,7 @@ import profile5 from '@assets/png/profile5.png';
 import profile6 from '@assets/png/profile6.png';
 import profile7 from '@assets/png/profile7.png';
 import profile8 from '@assets/png/profile8.png';
+import trophy from '@assets/png/trophy.png';
 
 const profile = [
   profile1,
@@ -26,6 +27,7 @@ const pngs = {
   ghost,
   profile,
   defaultAvatar,
+  trophy,
 };
 
 export type PngKeyTypes = keyof typeof pngs;
