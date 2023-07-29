@@ -9,7 +9,7 @@ interface AttendantData {
   userId: number;
   nickname: string;
   profileImage: 0;
-  status: AttendanceStatus;
+  attendanceStatus: AttendanceStatus;
   attendanceAt: Date;
 }
 

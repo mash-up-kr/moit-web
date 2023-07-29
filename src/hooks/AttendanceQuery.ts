@@ -6,6 +6,7 @@ import { getAttendanceStatus } from 'api/study/getAttendanceStatus';
 import { getStudyDetail } from 'api/study/getStudyDetail';
 import { getStudyKeyword } from 'api/study/getStudyKeyword';
 import { registerStudyKeyword } from 'api/study/registerStudyKeyword';
+import { verifyStudyKeyword } from 'api/study/verifyStudyKeyword';
 import { nativeToast } from 'bridge';
 import { QUERY_KEYS } from 'constants/queryKey';
 
@@ -43,7 +44,7 @@ export const useRegisterKeyword = (keyword: string, studyId: number) => {
     () => registerStudyKeyword(keyword, studyId),
     {
       onSuccess: () => {
-        navigate(`registerResult/?studyId=${studyId}`);
+        navigate(`/attendanceResult?studyId=${studyId}`);
       },
       onError: (err: any) => {
         // TODO: 에러처리 개선
@@ -69,10 +70,10 @@ export const useVerifyKeyword = (keyword: string, studyId: number) => {
 
   const { mutate, data, isLoading, isError } = useMutation(
     QUERY_KEYS.STUDY.VERIFY_KEYWORD(studyId),
-    () => registerStudyKeyword(keyword, studyId),
+    () => verifyStudyKeyword(keyword, studyId),
     {
       onSuccess: () => {
-        navigate(`registerResult/?studyId=${studyId}`);
+        navigate(`/attendanceResult?studyId=${studyId}`);
       },
       onError: (err: any) => {
         // TODO: 에러처리 개선
@@ -95,6 +96,7 @@ export const useGetAttendanceStatus = (studyId: number) => {
     QUERY_KEYS.STUDY.GET_ATTENDANCE_STATUS(studyId),
     () => getAttendanceStatus(studyId),
   );
+
   return data?.data || [];
 };
 

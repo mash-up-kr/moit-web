@@ -104,8 +104,8 @@ const AttendanceKeywordScreen = () => {
             mt={'60px'}
           >
             {isFirst
-              ? '오늘의 첫 출석자: 김모잇'
-              : '첫번째 출석자예요! 키워드를 만들어주세요!'}
+              ? '첫번째 출석자예요! 키워드를 만들어주세요!'
+              : '오늘의 첫 출석자'}
           </Text>
         </Container>
       </Box>
