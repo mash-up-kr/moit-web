@@ -7,7 +7,7 @@ import SvgIcon from '@components/SvgIcon';
 
 interface ImageUploaderProps {
   imageSrc: string | undefined;
-  onChange: (src: string) => void;
+  onChange: (imgSrc: string, imgFile: File) => void;
 }
 
 const ImageUploader: FC<ImageUploaderProps> = ({
@@ -37,7 +37,7 @@ const ImageUploader: FC<ImageUploaderProps> = ({
           reader.readAsDataURL(file);
           return new Promise<void>((resolve) => {
             reader.onload = () => {
-              onChange((reader.result as string) || ''); // 파일의 컨텐츠
+              onChange((reader.result as string) || '', file);
               resolve();
             };
           });

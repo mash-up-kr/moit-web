@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import pngs from '@styles/pngs';
 import theme from '@styles/theme';
 import {
-  imageSrcAtom,
+  imageDataAtom,
   registerFormDataAtom,
   registerMoitResponseAtom,
 } from 'screens/MoitRegisterScreen/atoms';
@@ -21,7 +21,7 @@ import Text from '@components/Text';
 
 const MoitCompleteScreen = () => {
   const registerFormData = useRecoilValue(registerFormDataAtom);
-  const imageSrc = useRecoilValue(imageSrcAtom);
+  const imageData = useRecoilValue(imageDataAtom);
   const navigate = useNavigate();
   const { invitationCode, moitId } = useRecoilValue(registerMoitResponseAtom);
   console.log(
@@ -107,7 +107,7 @@ const MoitCompleteScreen = () => {
           mb="60px"
           gap="10px"
         >
-          <Avatar type="lg" src={imageSrc || pngs.trophy} />
+          <Avatar type="lg" src={imageData.imgSrc || pngs.trophy} />
           <Text type="h3">{name}</Text>
         </Flex>
 

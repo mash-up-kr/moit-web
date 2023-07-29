@@ -1,11 +1,15 @@
 import { useMutation } from 'react-query';
-import { useSetRecoilState } from 'recoil';
-import { registerMoit } from 'api/moit/registerMoit';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { registerMoit, uploadImage } from 'api/moit/registerMoit';
 import { QUERY_KEYS } from 'constants/queryKey';
-import { registerMoitResponseAtom } from 'screens/MoitRegisterScreen/atoms';
+import {
+  imageDataAtom,
+  registerMoitResponseAtom,
+} from 'screens/MoitRegisterScreen/atoms';
 
 export const useRegisterMoit = () => {
   const setRegisterMoitResponse = useSetRecoilState(registerMoitResponseAtom);
+  const { imgFile } = useRecoilValue(imageDataAtom);
 
   const { mutate, isLoading, isError } = useMutation(
     QUERY_KEYS.MOIT.REGISTER_MOIT,
@@ -14,8 +18,12 @@ export const useRegisterMoit = () => {
       onSuccess: (res) => {
         setRegisterMoitResponse({
           invitationCode: res.data.invitationCode,
-          moitId: res.data.invitationCode,
+          moitId: res.data.moitId,
         });
+
+        if (imgFile) {
+          uploadImage(res.data.moitId, imgFile);
+        }
       },
     },
   );

@@ -4,7 +4,7 @@ import { Box } from '@chakra-ui/react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Button from '@components/Button';
 import Text from '@components/Text';
-import { imageSrcAtom, registerFormDataAtom } from '../atoms';
+import { imageDataAtom, registerFormDataAtom } from '../atoms';
 import Form from '../components/Form';
 import FormItem from '../components/FormItem';
 import ImageUploader from '../components/ImageUploader';
@@ -20,7 +20,7 @@ interface InfoSettingStepProps {
 
 const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
   const registerFormData = useRecoilValue(registerFormDataAtom);
-  const [imageSrc, setImageSrc] = useRecoilState(imageSrcAtom);
+  const [imageData, setImageData] = useRecoilState(imageDataAtom);
 
   const {
     handleSubmit,
@@ -43,8 +43,13 @@ const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
 
       <Form onSubmit={onSubmit}>
         <ImageUploader
-          imageSrc={imageSrc}
-          onChange={(url) => setImageSrc(url)}
+          imageSrc={imageData.imgSrc}
+          onChange={(src, file) =>
+            setImageData({
+              imgFile: file,
+              imgSrc: src,
+            })
+          }
         />
 
         <FormItem label="스터디명 (필수)">

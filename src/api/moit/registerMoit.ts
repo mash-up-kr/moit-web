@@ -8,3 +8,19 @@ export const registerMoit = async (payload: RegisterFormData) => {
 
   return res.data;
 };
+
+export const uploadImage = async (moitId: string, imgFile: File) => {
+  const formData = new FormData();
+
+  formData.append('moitImage', imgFile);
+
+  await HTTP.post<FormData, Response<unknown>>(
+    `/api/v1/moit/${moitId}/image`,
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    },
+  );
+};

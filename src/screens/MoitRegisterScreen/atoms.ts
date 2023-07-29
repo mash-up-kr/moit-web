@@ -5,9 +5,15 @@ export const registerFormDataAtom = atom<RegisterFormData>({
   default: {} as RegisterFormData,
 });
 
-export const imageSrcAtom = atom<string>({
+export const imageDataAtom = atom<{
+  imgSrc: string;
+  imgFile: File | null;
+}>({
   key: 'imageSrc',
-  default: undefined,
+  default: {
+    imgSrc: '',
+    imgFile: null,
+  },
 });
 
 export const registerMoitResponseAtom = atom<RegisterMoitResponse>({
