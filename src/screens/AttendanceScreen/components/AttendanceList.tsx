@@ -10,7 +10,7 @@ interface AttendanceListProps {
 
 const AttendanceList = ({ attendantList }: AttendanceListProps) => {
   const attendanceList = attendantList.filter(
-    (attendance) => attendance.status === 'ATTENDANCE',
+    (attendance) => attendance.attendanceStatus === 'ATTENDANCE',
   );
   const isEmpty = attendanceList.length === 0;
 
