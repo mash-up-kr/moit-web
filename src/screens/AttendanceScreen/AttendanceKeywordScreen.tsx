@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Box, Button, Container, Flex } from '@chakra-ui/react';
 import theme from '@styles/theme';
 import { closeWebview } from 'bridge';
@@ -11,7 +12,9 @@ import AttendanceTimer from './components/AttendanceTimer';
 import { TooltipWithTouch } from './components/TooltipWithTouch';
 
 const AttendanceKeywordScreen = () => {
-  // const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+
+  const keyboardHeight = searchParams.get('keyboardHeight') || 200;
   // const studyId = searchParams.get('studyId');
 
   const [answer, setAnswer] = useState('');
@@ -30,7 +33,10 @@ const AttendanceKeywordScreen = () => {
   const buttonDisabled = answer.length < 4;
 
   return (
-    <Box bgColor={theme.colors.background.black}>
+    <Box
+      bgColor={theme.colors.background.black}
+      height={window.innerHeight - +keyboardHeight}
+    >
       <Box>
         <ScreenHeader
           leftIcon={
@@ -93,6 +99,8 @@ const AttendanceKeywordScreen = () => {
           buttonDisabled ? theme.palette.gray200 : theme.colors.primary.default
         }
         borderRadius={'0'}
+        position="absolute"
+        bottom="0px"
       >
         완료
       </Button>

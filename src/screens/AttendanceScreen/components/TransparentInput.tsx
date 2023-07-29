@@ -56,6 +56,7 @@ const TransparentInput = ({ setAnswer }: TransparentInputProps) => {
 
   return (
     <Input
+      id="transparent-input"
       autoFocus
       maxLength={4}
       ref={inputRef}
