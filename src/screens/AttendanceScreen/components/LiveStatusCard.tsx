@@ -13,10 +13,10 @@ const LiveStatusCard = ({
   attendantList,
   currentUser,
 }: LiveStatusCardProps) => {
-  const isSuccess = currentUser?.status === 'ATTENDANCE';
+  const isSuccess = currentUser?.attendanceStatus === 'ATTENDANCE';
   const totalCount = attendantList.length;
   const successCount = attendantList.filter(
-    (attendance) => attendance.status === 'ATTENDANCE',
+    (attendance) => attendance.attendanceStatus === 'ATTENDANCE',
   ).length;
   const failCount = totalCount - successCount;
 

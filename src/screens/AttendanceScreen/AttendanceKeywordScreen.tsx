@@ -3,7 +3,12 @@ import { useSearchParams } from 'react-router-dom';
 import { Box, Button, Container, Flex } from '@chakra-ui/react';
 import theme from '@styles/theme';
 import { closeWebview } from 'bridge';
-import { useGetCheckIsFirst } from 'hooks';
+import {
+  useGetCheckIsFirst,
+  useGetStudyDetail,
+  useRegisterKeyword,
+  useVerifyKeyword,
+} from 'hooks';
 import ScreenHeader from '@components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
 import Text from '@components/Text';
@@ -14,14 +19,17 @@ import { TooltipWithTouch } from './components/TooltipWithTouch';
 const AttendanceKeywordScreen = () => {
   const [searchParams] = useSearchParams();
 
-  const keyboardHeight = searchParams.get('keyboardHeight') || 200;
-  // const studyId = searchParams.get('studyId');
+  const keyboardHeight = Number(searchParams.get('keyboardHeight') || '200');
+  const studyId = Number(searchParams.get('studyId') || '1');
 
   const [answer, setAnswer] = useState('');
   const [answerList, setAnswerList] = useState<string[]>(['', '', '', '']);
 
-  const studyId = 1; // dummy
   const { isFirst } = useGetCheckIsFirst(studyId);
+
+  const { studyDetailData } = useGetStudyDetail(studyId);
+  const { registerKeyword } = useRegisterKeyword(answer, studyId);
+  const { verifyKeyword } = useVerifyKeyword(answer, studyId);
 
   useEffect(() => {
     const inputAnswerList = answer
@@ -32,10 +40,18 @@ const AttendanceKeywordScreen = () => {
 
   const buttonDisabled = answer.length < 4;
 
+  const handleSubmit = () => {
+    if (isFirst) {
+      registerKeyword();
+    } else {
+      verifyKeyword();
+    }
+  };
+
   return (
     <Box
       bgColor={theme.colors.background.black}
-      height={window.innerHeight - +keyboardHeight}
+      height={window.innerHeight - keyboardHeight}
     >
       <Box>
         <ScreenHeader
@@ -69,7 +85,13 @@ const AttendanceKeywordScreen = () => {
               를 입력하세요!
             </Text>
           </Flex>
-          <AttendanceTimer />
+
+          {studyDetailData && (
+            <AttendanceTimer
+              startAt={studyDetailData.startAt}
+              lateAt={studyDetailData.lateAt}
+            />
+          )}
           <AttendanceInput
             answer={answer}
             answerList={answerList}
@@ -82,8 +104,8 @@ const AttendanceKeywordScreen = () => {
             mt={'60px'}
           >
             {isFirst
-              ? '오늘의 첫 출석자: 김모잇'
-              : '첫번째 출석자예요! 키워드를 만들어주세요!'}
+              ? '첫번째 출석자예요! 키워드를 만들어주세요!'
+              : '오늘의 첫 출석자'}
           </Text>
         </Container>
       </Box>
@@ -101,6 +123,7 @@ const AttendanceKeywordScreen = () => {
         borderRadius={'0'}
         position="absolute"
         bottom="0px"
+        onClick={handleSubmit}
       >
         완료
       </Button>

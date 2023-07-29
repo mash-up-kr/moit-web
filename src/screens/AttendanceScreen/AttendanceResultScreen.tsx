@@ -22,6 +22,7 @@ const AttendanceResultScreen = () => {
   const studyId = parseInt(searchParams.get('studyId') ?? '1'); // TODO: 영지 확인 필요
 
   const attendantList = useGetAttendanceStatus(studyId);
+
   const { attendanceKeyword } = useGetStudyKeyword(studyId);
   const user = useGetUser();
 
@@ -33,7 +34,7 @@ const AttendanceResultScreen = () => {
     (attendant: AttendantData) => attendant.userId === user?.id,
   ) as AttendantData;
 
-  const isAttendance = currentUser?.status === 'ATTENDANCE';
+  const isAttendance = currentUser?.attendanceStatus === 'ATTENDANCE';
 
   return (
     <Box
