@@ -13,8 +13,8 @@ export const useRegisterMoit = () => {
     {
       onSuccess: (res) => {
         setRegisterMoitResponse({
-          invitationCode: res.invitationCode,
-          moitId: res.invitationCode,
+          invitationCode: res.data.invitationCode,
+          moitId: res.data.invitationCode,
         });
       },
     },
