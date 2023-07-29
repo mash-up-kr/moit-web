@@ -23,11 +23,6 @@ const MoitRegisterScreen: FC = () => {
   const [registerFormData, setRegisterFormData] =
     useRecoilState(registerFormDataAtom);
 
-  console.log(
-    '🚀 ~ file: StudyRegisterScreen.tsx:22 ~ registerFormData:',
-    registerFormData,
-  );
-
   const { mutate } = useRegisterMoit();
 
   const currentStepIdx = REGISTER_STEPS.findIndex((t) => t === step);
