@@ -33,8 +33,9 @@ const MoitRegisterScreen: FC = () => {
 
   const handleClickPrev = () => {
     if (currentStepIdx === 0) {
-      // TODO: 웹뷰 종료
-      return;
+      return window.webkit.messageHandlers.MOIT.postMessage({
+        command: 'close',
+      });
     }
     setStep(REGISTER_STEPS[currentStepIdx - 1]);
   };

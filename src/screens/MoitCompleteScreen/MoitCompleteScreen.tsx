@@ -81,7 +81,19 @@ const MoitCompleteScreen = () => {
 
   return (
     <Box>
-      <ScreenHeader rightIcon={<SvgIcon name="Close" size={24} />} />
+      <ScreenHeader
+        rightIcon={
+          <SvgIcon
+            name="Close"
+            size={24}
+            onClick={() => {
+              window.webkit.messageHandlers.MOIT.postMessage({
+                command: 'close',
+              });
+            }}
+          />
+        }
+      />
 
       <Box p="0 20px">
         <Text type="h4" textAlign="center" mb="60px">
