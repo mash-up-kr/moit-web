@@ -8,16 +8,18 @@ import {
   timeBeforeOneSecond,
 } from '../utils/timer';
 
-// TODO: API 연결하기
-const AttendanceTimer = () => {
-  // 5초 후를 스터디 시작 시간으로 가정
-  const dummyStartAtTime = new Date(new Date().getTime() + 1 * 5000);
-  // 사용자가 출석시간 기준 5초 후까지를 지각으로 설정했다고 가정
-  const dummyLateAtTime = new Date(new Date().getTime() + 2 * 5000);
+interface AttendanceTimerProps {
+  startAt: string;
+  lateAt: string;
+}
 
-  const [time, setTime] = useState<Date>(remainingTime(dummyStartAtTime));
-  const [isLate, setIsLate] = useState(dummyStartAtTime < new Date());
-  const [expired, setExpired] = useState(dummyLateAtTime < new Date());
+const AttendanceTimer = ({ startAt, lateAt }: AttendanceTimerProps) => {
+  const startAtTime = new Date(startAt);
+  const lateAtTime = new Date(lateAt);
+
+  const [time, setTime] = useState<Date>(remainingTime(startAtTime));
+  const [isLate, setIsLate] = useState(startAtTime < new Date());
+  const [expired, setExpired] = useState(lateAtTime < new Date());
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -30,22 +32,22 @@ const AttendanceTimer = () => {
 
   const setOneSecBefore = () => {
     const currentTime = new Date();
-    if (dummyLateAtTime < currentTime && !expired) {
+    if (lateAtTime < currentTime && !expired) {
       setExpired(true);
       alertMethod();
       clearTimer();
       return;
     }
-    if (dummyStartAtTime < currentTime) {
+    if (startAtTime < currentTime) {
       setIsLate(true);
-      setTime(remainingTime(dummyLateAtTime));
+      setTime(remainingTime(lateAtTime));
       return;
     }
     setTime(timeBeforeOneSecond(time));
   };
 
   useEffect(() => {
-    if (dummyLateAtTime < new Date()) {
+    if (lateAtTime < new Date()) {
       alertMethod();
       return;
     }

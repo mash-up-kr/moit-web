@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { checkIsFirst } from 'api/study/checkIsFirst';
 import { getAttendanceStatus } from 'api/study/getAttendanceStatus';
+import { getStudyDetail } from 'api/study/getStudyDetail';
 import { getStudyKeyword } from 'api/study/getStudyKeyword';
 import { QUERY_KEYS } from 'constants/queryKey';
 
@@ -17,6 +18,19 @@ export const useGetCheckIsFirst = (studyId: number) => {
   );
 
   return { isFirst, isLoading };
+};
+
+export const useGetStudyDetail = (studyId: number) => {
+  const { data, isLoading, isError } = useQuery(
+    QUERY_KEYS.STUDY.GET_STUDY_DETAIL(studyId),
+    () => getStudyDetail(studyId),
+  );
+
+  return {
+    studyDetailData: data?.data,
+    isLoading,
+    isError,
+  };
 };
 
 export const useGetAttendanceStatus = (studyId: number) => {
