@@ -74,6 +74,6 @@ type NotiStepFormData = Pick<
 >;
 
 interface RegisterMoitResponse {
-  code: string;
-  message: string;
+  moitId: string;
+  invitationCode: string;
 }

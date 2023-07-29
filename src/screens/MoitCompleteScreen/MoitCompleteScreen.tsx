@@ -3,7 +3,11 @@ import { Box, Flex } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import pngs from '@styles/pngs';
 import theme from '@styles/theme';
-import { registerFormDataAtom } from 'screens/MoitRegisterScreen/atoms';
+import {
+  imageSrcAtom,
+  registerFormDataAtom,
+  registerMoitResponseAtom,
+} from 'screens/MoitRegisterScreen/atoms';
 import LargeBottom from 'screens/MoitRegisterScreen/components/LargeBottom';
 import {
   DAY_OF_WEEKS_OPTIONS,
@@ -17,7 +21,13 @@ import Text from '@components/Text';
 
 const MoitCompleteScreen = () => {
   const registerFormData = useRecoilValue(registerFormDataAtom);
+  const imageSrc = useRecoilValue(imageSrcAtom);
   const navigate = useNavigate();
+  const { invitationCode, moitId } = useRecoilValue(registerMoitResponseAtom);
+  console.log(
+    '🚀 ~ file: MoitCompleteScreen.tsx:27 ~ MoitCompleteScreen ~ moitId:',
+    moitId,
+  );
 
   if (!Object.keys(registerFormData).length) {
     navigate('/error');
@@ -85,7 +95,7 @@ const MoitCompleteScreen = () => {
           mb="60px"
           gap="10px"
         >
-          <Avatar type="lg" src={pngs.trophy} />
+          <Avatar type="lg" src={imageSrc || pngs.trophy} />
           <Text type="h3">{name}</Text>
         </Flex>
 
@@ -110,7 +120,14 @@ const MoitCompleteScreen = () => {
         <Button size="m" isDisabled>
           홈으로 돌아가기
         </Button>
-        <Button size="m">참여코드 공유</Button>
+        <Button
+          size="m"
+          onClick={() => {
+            alert(invitationCode);
+          }}
+        >
+          참여코드 공유
+        </Button>
       </LargeBottom>
     </Box>
   );
