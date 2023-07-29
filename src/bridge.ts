@@ -92,3 +92,25 @@ export const nativeShare = (v: string) => {
     value: v,
   });
 };
+
+export const nativeAlert = (v: string) => {
+  if (window.webkit) {
+    window.webkit.messageHandlers.MOIT.postMessage({
+      command: 'alert',
+      value: v,
+    });
+  } else {
+    alert(v);
+  }
+};
+
+export const nativeToast = (v: string) => {
+  if (window.webkit) {
+    window.webkit.messageHandlers.MOIT.postMessage({
+      command: 'toast',
+      value: v,
+    });
+  } else {
+    alert(v);
+  }
+};

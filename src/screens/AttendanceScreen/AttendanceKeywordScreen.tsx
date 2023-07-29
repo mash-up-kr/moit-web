@@ -3,7 +3,12 @@ import { useSearchParams } from 'react-router-dom';
 import { Box, Button, Container, Flex } from '@chakra-ui/react';
 import theme from '@styles/theme';
 import { closeWebview } from 'bridge';
-import { useGetCheckIsFirst, useGetStudyDetail } from 'hooks';
+import {
+  useGetCheckIsFirst,
+  useGetStudyDetail,
+  useRegisterKeyword,
+  useVerifyKeyword,
+} from 'hooks';
 import ScreenHeader from '@components/ScreenHeader';
 import SvgIcon from '@components/SvgIcon';
 import Text from '@components/Text';
@@ -21,7 +26,10 @@ const AttendanceKeywordScreen = () => {
   const [answerList, setAnswerList] = useState<string[]>(['', '', '', '']);
 
   const { isFirst } = useGetCheckIsFirst(studyId);
+
   const { studyDetailData } = useGetStudyDetail(studyId);
+  const { registerKeyword } = useRegisterKeyword(answer, studyId);
+  const { verifyKeyword } = useVerifyKeyword(answer, studyId);
 
   useEffect(() => {
     const inputAnswerList = answer
@@ -32,7 +40,13 @@ const AttendanceKeywordScreen = () => {
 
   const buttonDisabled = answer.length < 4;
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    if (isFirst) {
+      registerKeyword();
+    } else {
+      verifyKeyword();
+    }
+  };
 
   return (
     <Box

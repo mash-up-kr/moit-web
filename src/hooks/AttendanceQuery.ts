@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import { checkIsFirst } from 'api/study/checkIsFirst';
 import { getAttendanceStatus } from 'api/study/getAttendanceStatus';
 import { getStudyDetail } from 'api/study/getStudyDetail';
 import { getStudyKeyword } from 'api/study/getStudyKeyword';
+import { registerStudyKeyword } from 'api/study/registerStudyKeyword';
+import { nativeToast } from 'bridge';
 import { QUERY_KEYS } from 'constants/queryKey';
 
 export const useGetCheckIsFirst = (studyId: number) => {
@@ -28,6 +31,60 @@ export const useGetStudyDetail = (studyId: number) => {
 
   return {
     studyDetailData: data?.data,
+    isLoading,
+    isError,
+  };
+};
+
+export const useRegisterKeyword = (keyword: string, studyId: number) => {
+  const navigate = useNavigate();
+  const { mutate, data, isLoading, isError } = useMutation(
+    QUERY_KEYS.STUDY.REGISTER_KEYWORD(studyId),
+    () => registerStudyKeyword(keyword, studyId),
+    {
+      onSuccess: () => {
+        navigate(`registerResult/?studyId=${studyId}`);
+      },
+      onError: (err: any) => {
+        // TODO: 에러처리 개선
+        const message = err.response.data.error.message;
+        console.log(message);
+        nativeToast(
+          '아뿔싸! 이미 출석체크 키워드가 등록됐어요.\n공유받은 키워드를 입력해주세요.',
+        );
+      },
+    },
+  );
+
+  return {
+    registerKeyword: mutate,
+    data,
+    isLoading,
+    isError,
+  };
+};
+
+export const useVerifyKeyword = (keyword: string, studyId: number) => {
+  const navigate = useNavigate();
+
+  const { mutate, data, isLoading, isError } = useMutation(
+    QUERY_KEYS.STUDY.VERIFY_KEYWORD(studyId),
+    () => registerStudyKeyword(keyword, studyId),
+    {
+      onSuccess: () => {
+        navigate(`registerResult/?studyId=${studyId}`);
+      },
+      onError: (err: any) => {
+        // TODO: 에러처리 개선
+        const message = err.response.data.error.message;
+        nativeToast(message || '실패');
+      },
+    },
+  );
+
+  return {
+    verifyKeyword: mutate,
+    data,
     isLoading,
     isError,
   };

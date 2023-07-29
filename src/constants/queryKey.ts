@@ -12,6 +12,10 @@ export const QUERY_KEYS = {
       [...QUERY_KEYS.STUDY.ALL, 'ATTENDANCE', 'KEYWORD', studyId] as const,
     GET_STUDY_DETAIL: (studyId: number) =>
       [...QUERY_KEYS.STUDY.ALL, studyId] as const,
+    VERIFY_KEYWORD: (studyId: number) =>
+      [...QUERY_KEYS.STUDY.ALL, 'VERIFY', 'KEYWORD', studyId] as const,
+    REGISTER_KEYWORD: (studyId: number) =>
+      [...QUERY_KEYS.STUDY.ALL, 'REGISTER', 'KEYWORD', studyId] as const,
   },
   MOIT: {
     ALL: ['MOIT'] as const,
