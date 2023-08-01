@@ -109,18 +109,16 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
       {lateMinuteBottomSheetProps.modalShowing && (
         <MinuteScreen
           modalProps={lateMinuteBottomSheetProps}
-          update={(v) => {
-            setValue('lateTime', v);
-          }}
+          update={(v) => setValue('lateTime', v)}
+          initialData={getValues('lateTime') / 5}
         />
       )}
 
       {absenseMinuteBottomSheetProps.modalShowing && (
         <MinuteScreen
           modalProps={absenseMinuteBottomSheetProps}
-          update={(v) => {
-            setValue('absenceTime', v);
-          }}
+          update={(v) => setValue('absenceTime', v)}
+          initialData={getValues('absenceTime') / 5}
         />
       )}
     </Box>

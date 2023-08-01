@@ -12,6 +12,7 @@ import { palette } from '@styles/theme';
 import { zIndex } from '@styles/z-index';
 import useEffectOnce from 'hooks/useEffectOnce';
 import { ModalProps } from 'hooks/useModal';
+import { insertZero } from 'utils/dateParser';
 import {
   generateArrayFromZero,
   generateMinuteArray,
@@ -75,19 +76,15 @@ const TimeSelectBottomSheet = ({
   }, [endTime, modalProps, startTime, timeUpdate]);
 
   const start = useMemo(() => {
-    const format = `${JSON.stringify(startTime.hour).padStart(
-      2,
-      '0',
-    )}:${JSON.stringify(startTime.minute).padStart(2, '0')}`;
+    const format = `${insertZero(startTime.hour)}:${insertZero(
+      startTime.minute,
+    )}`;
     const time = Number(format.replace(':', ''));
 
     return time;
   }, [startTime.hour, startTime.minute]);
   const end = useMemo(() => {
-    const format = `${JSON.stringify(endTime.hour).padStart(
-      2,
-      '0',
-    )}:${JSON.stringify(endTime.minute).padStart(2, '0')}`;
+    const format = `${insertZero(endTime.hour)}:${insertZero(endTime.minute)}`;
     const time = Number(format.replace(':', ''));
 
     return time;

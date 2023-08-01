@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import styled from '@emotion/styled';
+import { insertZero } from 'utils/dateParser';
 
 interface Props {
   currentCursor: SelectCursor;
@@ -21,16 +22,16 @@ const TimeZone: FC<Props> = ({
         onClick={() => onTimeZoneClick('start')}
       >
         <p>시작</p>
-        <span>{`${startTime.hour}시 `}</span>
-        <span>{`${startTime.minute}분 `}</span>
+        <span>{`${insertZero(startTime.hour)}시 `}</span>
+        <span>{`${insertZero(startTime.minute)}분 `}</span>
       </Content>
       <Content
         isCurrentCursor={currentCursor === 'end'}
         onClick={() => onTimeZoneClick('end')}
       >
         <p>종료</p>
-        <span>{`${endTime.hour}시 `}</span>
-        <span>{`${endTime.minute}분 `}</span>
+        <span>{`${insertZero(endTime.hour)}시 `}</span>
+        <span>{`${insertZero(endTime.minute)}분 `}</span>
       </Content>
     </Container>
   );

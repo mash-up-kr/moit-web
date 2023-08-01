@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import styled from '@emotion/styled';
 import dayjs from 'dayjs';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
@@ -13,16 +13,31 @@ import { SelectScroller } from '@components/SelectScroller';
 import { useSelectDate } from '../hooks/useSelectDate';
 import DateZone from './DateZone';
 
+export type CreateMoitRegisterDate = {
+  startDate: DateParams;
+  endDate: DateParams;
+};
+
 interface Props {
   modalProps: ModalProps;
+  initialDate: {
+    start: DateParams;
+    end: DateParams;
+  };
   dateUpdate: (startDate: string, endDate: string) => void;
 }
 
-const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
+const DateSelectScreen: FC<Props> = ({
+  modalProps,
+  initialDate,
+  dateUpdate,
+}) => {
   const nowYear = new Date().getFullYear();
   const [currentCursor, setCurrentCursor] = useState<SelectCursor>('start');
-  const { year, month, date, startDate, endDate } =
-    useSelectDate(currentCursor);
+  const { year, month, date, startDate, endDate } = useSelectDate(
+    currentCursor,
+    { startDate: initialDate.start, endDate: initialDate.end },
+  );
 
   const start = useMemo(
     () =>
@@ -39,6 +54,16 @@ const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
     dateUpdate(start, end);
     modalProps.hideModal();
   }, [dateUpdate, end, modalProps, start]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      year.ref.current?.scrollTo(0, year.selectedIndex * 52);
+      month.ref.current?.scrollTo(0, month.selectedIndex * 52);
+      date.ref.current?.scrollTo(0, date.selectedIndex * 52);
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentCursor]);
 
   return (
     <BottomSheet

@@ -118,6 +118,11 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
     }월-${ed.getDate()}일`;
   }, [startDate, endDate]);
 
+  const initialRepeatIndex = useMemo(
+    () => REPEAT_CYCLE_OPTIONS.findIndex((opt) => opt.label === repeatCycle),
+    [repeatCycle],
+  );
+
   return (
     <Box>
       <Text type="h4" mb="20px">
@@ -209,11 +214,24 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
         <DateSelectScreen
           modalProps={selectDateBottomsheetProps}
           dateUpdate={(start: string, end: string) => {
-            // 웹에서는 잘 됨. 디버깅 필요
-            console.log(start, end);
-
             onChangeStartDate(start);
             onChangeEndDate(end);
+          }}
+          initialDate={{
+            start: {
+              y:
+                Number(getValues('startDate').split('-')[0]) -
+                new Date().getFullYear(),
+              m: Number(getValues('startDate').split('-')[1]) - 1,
+              d: Number(getValues('startDate').split('-')[2]) - 1,
+            },
+            end: {
+              y:
+                Number(getValues('endDate').split('-')[0]) -
+                new Date().getFullYear(),
+              m: Number(getValues('endDate').split('-')[1]) - 1,
+              d: Number(getValues('endDate').split('-')[2]) - 1,
+            },
           }}
         />
       )}
@@ -221,6 +239,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
       {selectRepeatBottomsheetProps.modalShowing && (
         <RepeatScreen
           modalProps={selectRepeatBottomsheetProps}
+          initialRepeatIndex={initialRepeatIndex}
           repeatUpdate={(v) => onChangeRepeat(v.value)}
         />
       )}

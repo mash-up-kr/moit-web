@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
 import { palette } from '@styles/theme';
@@ -11,13 +11,26 @@ import { SelectScroller, useSelectScroller } from '@components/SelectScroller';
 
 interface Props {
   modalProps: ModalProps;
+  initialRepeatIndex: number;
   repeatUpdate: (v: (typeof REPEAT_CYCLE_OPTIONS)[number]) => void;
 }
 
-const RepeatScreen: FC<Props> = ({ modalProps, repeatUpdate }) => {
+const RepeatScreen: FC<Props> = ({
+  modalProps,
+  initialRepeatIndex,
+  repeatUpdate,
+}) => {
   const { ref, onScroll, selectedIndex } = useSelectScroller({
     itemHeight: 52,
+    initialSelectedIndex: initialRepeatIndex,
   });
+
+  useEffect(() => {
+    setTimeout(() => {
+      ref.current?.scrollTo(0, initialRepeatIndex * 52);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <BottomSheet

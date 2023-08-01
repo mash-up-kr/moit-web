@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
 import { palette } from '@styles/theme';
@@ -12,13 +12,22 @@ import { SELECT_TIME_MINUTE_INTERVAL } from '../hooks/useSelectTime';
 
 interface Props {
   modalProps: ModalProps;
+  initialData: number;
   update: (v: number) => void;
 }
 
-const MinuteScreen: FC<Props> = ({ modalProps, update }) => {
+const MinuteScreen: FC<Props> = ({ modalProps, initialData, update }) => {
   const { ref, onScroll, selectedIndex } = useSelectScroller({
     itemHeight: 52,
+    initialSelectedIndex: initialData,
   });
+
+  useEffect(() => {
+    setTimeout(() => {
+      ref.current?.scrollTo(0, (initialData - 1) * 52);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <BottomSheet

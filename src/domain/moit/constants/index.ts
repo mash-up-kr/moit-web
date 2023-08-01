@@ -1,0 +1,1 @@
+export const SELECT_CONTENT_HEIGHT = 52;

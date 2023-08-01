@@ -1,29 +1,27 @@
 import { UseSelectScroller } from '@components/SelectScroller/SelectScroller.hooks';
 import { useSelectScroller } from '@components/SelectScroller';
-
-const SELECT_CONTENT_HEIGHT = 52;
-
-type DateParmas = {
-  y: number;
-  m: number;
-  d: number;
-};
+import { CreateMoitRegisterDate } from '../components/DateSelectScreen';
+import { SELECT_CONTENT_HEIGHT } from '../constants';
 
 interface UseSelectDateProps {
   year: UseSelectScroller;
   month: UseSelectScroller;
   date: UseSelectScroller;
-  startDate: DateParmas;
-  endDate: DateParmas;
+  startDate: DateParams;
+  endDate: DateParams;
 }
 
-export const useSelectDate = (type: SelectCursor): UseSelectDateProps => {
+export const useSelectDate = (
+  type: SelectCursor,
+  initialDate: CreateMoitRegisterDate,
+): UseSelectDateProps => {
   const {
     onScroll: startYearScroll,
     ref: startYearRef,
     selectedIndex: selectedStartYear,
   } = useSelectScroller({
     itemHeight: SELECT_CONTENT_HEIGHT,
+    initialSelectedIndex: initialDate.startDate.y,
   });
   const {
     onScroll: startMonthScroll,
@@ -31,6 +29,7 @@ export const useSelectDate = (type: SelectCursor): UseSelectDateProps => {
     selectedIndex: selectedStartMonth,
   } = useSelectScroller({
     itemHeight: SELECT_CONTENT_HEIGHT,
+    initialSelectedIndex: initialDate.startDate.m,
   });
   const {
     onScroll: startDateScroll,
@@ -38,6 +37,7 @@ export const useSelectDate = (type: SelectCursor): UseSelectDateProps => {
     selectedIndex: selectedStartDate,
   } = useSelectScroller({
     itemHeight: SELECT_CONTENT_HEIGHT,
+    initialSelectedIndex: initialDate.startDate.d,
   });
   const {
     onScroll: endYearScroll,
@@ -45,6 +45,7 @@ export const useSelectDate = (type: SelectCursor): UseSelectDateProps => {
     selectedIndex: selectedEndYear,
   } = useSelectScroller({
     itemHeight: SELECT_CONTENT_HEIGHT,
+    initialSelectedIndex: initialDate.endDate.y,
   });
   const {
     onScroll: endMonthScroll,
@@ -52,6 +53,7 @@ export const useSelectDate = (type: SelectCursor): UseSelectDateProps => {
     selectedIndex: selectedEndMonth,
   } = useSelectScroller({
     itemHeight: SELECT_CONTENT_HEIGHT,
+    initialSelectedIndex: initialDate.endDate.m,
   });
   const {
     onScroll: endDateScroll,
@@ -59,6 +61,7 @@ export const useSelectDate = (type: SelectCursor): UseSelectDateProps => {
     selectedIndex: selectedEndDate,
   } = useSelectScroller({
     itemHeight: SELECT_CONTENT_HEIGHT,
+    initialSelectedIndex: initialDate.endDate.d,
   });
 
   const nowYear = new Date().getFullYear();
