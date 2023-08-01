@@ -1,5 +1,12 @@
-import { PropsWithChildren, useEffect, useState } from 'react';
+import {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import styled from '@emotion/styled';
+import dayjs from 'dayjs';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
 import { palette } from '@styles/theme';
 import { zIndex } from '@styles/z-index';
@@ -62,6 +69,32 @@ const TimeSelectBottomSheet = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCursor]);
 
+  const handleUpdateTime = useCallback(() => {
+    timeUpdate({ startTime, endTime });
+    modalProps.hideModal();
+  }, [endTime, modalProps, startTime, timeUpdate]);
+
+  const start = useMemo(() => {
+    const format = `${JSON.stringify(startTime.hour).padStart(
+      2,
+      '0',
+    )}:${JSON.stringify(startTime.minute).padStart(2, '0')}`;
+    const time = Number(format.replace(':', ''));
+
+    return time;
+  }, [startTime.hour, startTime.minute]);
+  const end = useMemo(() => {
+    const format = `${JSON.stringify(endTime.hour).padStart(
+      2,
+      '0',
+    )}:${JSON.stringify(endTime.minute).padStart(2, '0')}`;
+    const time = Number(format.replace(':', ''));
+
+    return time;
+  }, [endTime.hour, endTime.minute]);
+
+  const isValid = useMemo(() => dayjs(start) < dayjs(end), [end, start]);
+
   return (
     <BottomSheet
       modalProps={modalProps}
@@ -117,10 +150,8 @@ const TimeSelectBottomSheet = ({
           <DefaultBottomCTA>
             <Button
               label="선택하기"
-              onClick={() => {
-                timeUpdate({ startTime, endTime });
-                modalProps.hideModal();
-              }}
+              onClick={handleUpdateTime}
+              isDisabled={!isValid}
             />
           </DefaultBottomCTA>
         </main>

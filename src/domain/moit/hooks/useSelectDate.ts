@@ -17,22 +17,13 @@ interface UseSelectDateProps {
   endDate: DateParmas;
 }
 
-// type CreateMoitRegisterDate = {
-//   startDate: DateParmas;
-//   endDate: DateParmas;
-// };
-
-export const useSelectDate = (
-  type: SelectCursor,
-  // initialDate: CreateMoitRegisterDate,
-): UseSelectDateProps => {
+export const useSelectDate = (type: SelectCursor): UseSelectDateProps => {
   const {
     onScroll: startYearScroll,
     ref: startYearRef,
     selectedIndex: selectedStartYear,
   } = useSelectScroller({
     itemHeight: SELECT_CONTENT_HEIGHT,
-    // initialSelectedIndex: initialDate.startDate.y,
   });
   const {
     onScroll: startMonthScroll,
@@ -40,7 +31,6 @@ export const useSelectDate = (
     selectedIndex: selectedStartMonth,
   } = useSelectScroller({
     itemHeight: SELECT_CONTENT_HEIGHT,
-    // initialSelectedIndex: initialDate.startDate.m,
   });
   const {
     onScroll: startDateScroll,
@@ -48,7 +38,6 @@ export const useSelectDate = (
     selectedIndex: selectedStartDate,
   } = useSelectScroller({
     itemHeight: SELECT_CONTENT_HEIGHT,
-    // initialSelectedIndex: initialDate.startDate.d,
   });
   const {
     onScroll: endYearScroll,
@@ -56,7 +45,6 @@ export const useSelectDate = (
     selectedIndex: selectedEndYear,
   } = useSelectScroller({
     itemHeight: SELECT_CONTENT_HEIGHT,
-    // initialSelectedIndex: initialDate.endDate.y,
   });
   const {
     onScroll: endMonthScroll,
@@ -64,7 +52,6 @@ export const useSelectDate = (
     selectedIndex: selectedEndMonth,
   } = useSelectScroller({
     itemHeight: SELECT_CONTENT_HEIGHT,
-    // initialSelectedIndex: initialDate.endDate.m,
   });
   const {
     onScroll: endDateScroll,
@@ -72,7 +59,6 @@ export const useSelectDate = (
     selectedIndex: selectedEndDate,
   } = useSelectScroller({
     itemHeight: SELECT_CONTENT_HEIGHT,
-    // initialSelectedIndex: initialDate.endDate.d,
   });
 
   const nowYear = new Date().getFullYear();

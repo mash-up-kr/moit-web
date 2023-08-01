@@ -1,5 +1,6 @@
-import { FC, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import styled from '@emotion/styled';
+import dayjs from 'dayjs';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
 import { palette } from '@styles/theme';
 import { zIndex } from '@styles/z-index';
@@ -17,12 +18,27 @@ interface Props {
   dateUpdate: (startDate: string, endDate: string) => void;
 }
 
-// 이름이 Screen인 이유는,, 이번 PR이든 다음 PR이든 바텀시트를 하나로 통합할 예정이기 때문.
 const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
   const nowYear = new Date().getFullYear();
   const [currentCursor, setCurrentCursor] = useState<SelectCursor>('start');
   const { year, month, date, startDate, endDate } =
     useSelectDate(currentCursor);
+
+  const start = useMemo(
+    () =>
+      `${startDate.y}-${insertZero(startDate.m)}-${insertZero(startDate.d)}`,
+    [startDate.d, startDate.m, startDate.y],
+  );
+  const end = useMemo(
+    () => `${endDate.y}-${insertZero(endDate.m)}-${insertZero(endDate.d)}`,
+    [endDate.d, endDate.m, endDate.y],
+  );
+  const isValid = useMemo(() => dayjs(start) < dayjs(end), [end, start]);
+
+  const handleSelectDate = useCallback(() => {
+    dateUpdate(start, end);
+    modalProps.hideModal();
+  }, [dateUpdate, end, modalProps, start]);
 
   return (
     <BottomSheet
@@ -88,17 +104,8 @@ const DateSelectScreen: FC<Props> = ({ modalProps, dateUpdate }) => {
           <DefaultBottomCTA>
             <Button
               label="선택하기"
-              onClick={() => {
-                dateUpdate(
-                  `${startDate.y}-${insertZero(startDate.m)}-${insertZero(
-                    startDate.d,
-                  )}`,
-                  `${endDate.y}-${insertZero(endDate.m)}-${insertZero(
-                    endDate.d,
-                  )}`,
-                );
-                modalProps.hideModal();
-              }}
+              isDisabled={!isValid}
+              onClick={handleSelectDate}
             />
           </DefaultBottomCTA>
         </main>
