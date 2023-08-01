@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { Box, Flex } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import theme from '@styles/theme';
+import MinuteScreen from 'domain/moit/components/MinuteScreen';
+import { useModal } from 'hooks/useModal';
 import Button from '@components/Button';
 import Text from '@components/Text';
 import { registerFormDataAtom } from '../atoms';
@@ -17,10 +19,13 @@ interface RuleSettingStepProps {
 
 const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
   const registerFormData = useRecoilValue(registerFormDataAtom);
+  const lateMinuteBottomSheetProps = useModal();
+  const absenseMinuteBottomSheetProps = useModal();
 
   const {
     handleSubmit,
     getValues,
+    setValue,
     formState: { errors },
   } = useForm<RuleStepFormData>({
     defaultValues: {
@@ -59,6 +64,7 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
                 width={75}
                 readOnly
                 variant="s"
+                onClick={lateMinuteBottomSheetProps.showModal}
               />
               <Text type="h6">부터 지각</Text>
             </Flex>
@@ -81,6 +87,7 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
                 width={75}
                 readOnly
                 variant="s"
+                onClick={absenseMinuteBottomSheetProps.showModal}
               />
               <Text type="h6">부터 결석</Text>
             </Flex>
@@ -98,6 +105,24 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
           <Button label="다음" type="submit" isDisabled={isDisabled} />
         </LargeBottom>
       </Form>
+
+      {lateMinuteBottomSheetProps.modalShowing && (
+        <MinuteScreen
+          modalProps={lateMinuteBottomSheetProps}
+          update={(v) => {
+            setValue('lateTime', v);
+          }}
+        />
+      )}
+
+      {absenseMinuteBottomSheetProps.modalShowing && (
+        <MinuteScreen
+          modalProps={absenseMinuteBottomSheetProps}
+          update={(v) => {
+            setValue('absenceTime', v);
+          }}
+        />
+      )}
     </Box>
   );
 };

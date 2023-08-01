@@ -44,7 +44,7 @@ const MinuteScreen: FC<Props> = ({ modalProps, update }) => {
             <Button
               label="선택하기"
               onClick={() => {
-                update(selectedIndex * SELECT_TIME_MINUTE_INTERVAL);
+                update((selectedIndex + 1) * SELECT_TIME_MINUTE_INTERVAL);
                 modalProps.hideModal();
               }}
             />
