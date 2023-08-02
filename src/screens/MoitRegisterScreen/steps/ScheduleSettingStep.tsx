@@ -188,11 +188,14 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             startTime: startTime
               ? {
                   hour: +startTime.split(':')[0],
-                  minute: +startTime.split(':')[1],
+                  minute: +startTime.split(':')[1] / 5,
                 }
               : { hour: 0, minute: 0 },
             endTime: endTime
-              ? { hour: +endTime.split(':')[0], minute: +endTime.split(':')[1] } // endTime.hour, minute: endTime.minute }
+              ? {
+                  hour: +endTime.split(':')[0],
+                  minute: +endTime.split(':')[1] / 5,
+                }
               : { hour: 0, minute: 0 },
           }}
           timeUpdate={(selected: SelctTimeParams) => {
@@ -218,20 +221,32 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             onChangeEndDate(end);
           }}
           initialDate={{
-            start: {
-              y:
-                Number(getValues('startDate').split('-')[0]) -
-                new Date().getFullYear(),
-              m: Number(getValues('startDate').split('-')[1]) - 1,
-              d: Number(getValues('startDate').split('-')[2]) - 1,
-            },
-            end: {
-              y:
-                Number(getValues('endDate').split('-')[0]) -
-                new Date().getFullYear(),
-              m: Number(getValues('endDate').split('-')[1]) - 1,
-              d: Number(getValues('endDate').split('-')[2]) - 1,
-            },
+            start: getValues('startDate')
+              ? {
+                  y:
+                    Number(getValues('startDate').split('-')[0]) -
+                    new Date().getFullYear(),
+                  m: Number(getValues('startDate').split('-')[1]) - 1,
+                  d: Number(getValues('startDate').split('-')[2]) - 1,
+                }
+              : {
+                  y: 0,
+                  m: 0,
+                  d: 0,
+                },
+            end: getValues('endDate')
+              ? {
+                  y:
+                    Number(getValues('endDate').split('-')[0]) -
+                    new Date().getFullYear(),
+                  m: Number(getValues('endDate').split('-')[1]) - 1,
+                  d: Number(getValues('endDate').split('-')[2]) - 1,
+                }
+              : {
+                  y: 0,
+                  m: 0,
+                  d: 0,
+                },
           }}
         />
       )}

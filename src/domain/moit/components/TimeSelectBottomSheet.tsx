@@ -55,13 +55,15 @@ const TimeSelectBottomSheet = ({
         0,
         Math.floor(initialTime.startTime.minute * 52),
       );
-    }, 300);
+    });
   });
 
   useEffect(() => {
     setTimeout(() => {
-      hour.ref.current?.scrollTo(0, hour.selectedIndex * 52);
-      min.ref.current?.scrollTo(0, min.selectedIndex * 52);
+      console.log(min.selectedIndex);
+
+      hour.ref.current?.scrollTo(0, (hour.selectedIndex / 5) * 52);
+      min.ref.current?.scrollTo(0, (min.selectedIndex / 5) * 52);
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
