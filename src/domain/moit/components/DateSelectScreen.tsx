@@ -26,12 +26,14 @@ interface Props {
   dateUpdate: (startDate: string, endDate: string) => void;
 }
 
+const now = new Date();
+
 const DateSelectScreen: FC<Props> = ({
   modalProps,
   initialDate,
   dateUpdate,
 }) => {
-  const nowYear = new Date().getFullYear();
+  const nowYear = now.getFullYear();
   const [currentCursor, setCurrentCursor] = useState<SelectCursor>('start');
   const { year, month, date, startDate, endDate } = useSelectDate(
     currentCursor,
@@ -47,7 +49,13 @@ const DateSelectScreen: FC<Props> = ({
     () => `${endDate.y}-${insertZero(endDate.m)}-${insertZero(endDate.d)}`,
     [endDate.d, endDate.m, endDate.y],
   );
-  const isValid = useMemo(() => dayjs(start) < dayjs(end), [end, start]);
+  const isValid = useMemo(() => {
+    if (dayjs(start) < dayjs(end) && dayjs(now) < dayjs(start)) {
+      return true;
+    }
+
+    return false;
+  }, [end, start]);
 
   const handleSelectDate = useCallback(() => {
     dateUpdate(start, end);
