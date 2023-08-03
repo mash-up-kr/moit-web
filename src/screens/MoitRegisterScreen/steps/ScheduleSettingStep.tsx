@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import DateSelectScreen from 'domain/moit/components/DateSelectScreen';
 import RepeatScreen from 'domain/moit/components/RepeatScreen';
 import TimeSelectBottomSheet from 'domain/moit/components/TimeSelectBottomSheet';
+import { INITIAL_DATE } from 'domain/moit/constants/data';
 import { useModal } from 'hooks/useModal';
 import { insertZero } from 'utils/dateParser';
 import Button from '@components/Button';
@@ -229,11 +230,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
                   m: Number(getValues('startDate').split('-')[1]) - 1,
                   d: Number(getValues('startDate').split('-')[2]) - 1,
                 }
-              : {
-                  y: 0,
-                  m: 0,
-                  d: 0,
-                },
+              : INITIAL_DATE,
             end: getValues('endDate')
               ? {
                   y:
@@ -242,11 +239,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
                   m: Number(getValues('endDate').split('-')[1]) - 1,
                   d: Number(getValues('endDate').split('-')[2]) - 1,
                 }
-              : {
-                  y: 0,
-                  m: 0,
-                  d: 0,
-                },
+              : INITIAL_DATE,
           }}
         />
       )}
