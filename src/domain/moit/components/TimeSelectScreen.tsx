@@ -17,7 +17,6 @@ import Button from '@components/Button';
 import { SelectScroller } from '@components/SelectScroller';
 import { SELECT_TIME_MINUTE_INTERVAL } from '../constants';
 import { ContentWrapper, Cursor, DefaultBottomCTA } from '../constants/styled';
-import useSelectBottomSheet from '../hooks/useSelectBottomsheet';
 import { useSelectTime } from '../hooks/useSelectTime';
 
 import TimeZone from './TimeZone';
@@ -37,7 +36,7 @@ const TimeSelectScreen = ({
   timeUpdate,
 }: PropsWithChildren<Props>) => {
   const [currentCursor, setCurrentCursor] = useState<SelectCursor>('start');
-  const { close } = useSelectBottomSheet();
+
   const { hour, min, startTime, endTime } = useSelectTime(
     currentCursor,
     initialTime,
@@ -67,8 +66,7 @@ const TimeSelectScreen = ({
 
   const handleUpdateTime = useCallback(() => {
     timeUpdate({ startTime, endTime });
-    close();
-  }, [close, endTime, startTime, timeUpdate]);
+  }, [endTime, startTime, timeUpdate]);
 
   const start = useMemo(() => {
     const format = `${insertZero(startTime.hour)}:${insertZero(

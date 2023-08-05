@@ -1,11 +1,8 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
-import { palette } from '@styles/theme';
-import { ModalProps } from 'hooks/useModal';
 import { insertZero } from 'utils/dateParser';
 import { generateArray } from 'utils/generateArray';
-import BottomSheet from '@components/BottomSheet';
 import Button from '@components/Button';
 import { SelectScroller } from '@components/SelectScroller';
 import { ContentWrapper, Cursor, DefaultBottomCTA } from '../constants/styled';
@@ -18,26 +15,18 @@ export type CreateMoitRegisterDate = {
 };
 
 interface Props {
-  modalProps: ModalProps;
-  initialDate: {
-    start: DateParams;
-    end: DateParams;
-  };
+  initialDate: CreateMoitRegisterDate;
   dateUpdate: (startDate: string, endDate: string) => void;
 }
 
 const now = new Date();
 
-const DateSelectScreen: FC<Props> = ({
-  modalProps,
-  initialDate,
-  dateUpdate,
-}) => {
+const DateSelectScreen: FC<Props> = ({ initialDate, dateUpdate }) => {
   const nowYear = now.getFullYear();
   const [currentCursor, setCurrentCursor] = useState<SelectCursor>('start');
   const { year, month, date, startDate, endDate } = useSelectDate(
     currentCursor,
-    { startDate: initialDate.start, endDate: initialDate.end },
+    initialDate,
   );
 
   const start = useMemo(
@@ -59,8 +48,7 @@ const DateSelectScreen: FC<Props> = ({
 
   const handleSelectDate = useCallback(() => {
     dateUpdate(start, end);
-    modalProps.hideModal();
-  }, [dateUpdate, end, modalProps, start]);
+  }, [dateUpdate, end, start]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -73,76 +61,69 @@ const DateSelectScreen: FC<Props> = ({
   }, [currentCursor]);
 
   return (
-    <BottomSheet
-      modalProps={modalProps}
-      dimColor={palette.modal_dim}
-      headerTitle="날짜 선택"
-      content={
-        <main>
-          <DateZone
-            currentCursor={currentCursor}
-            startDate={startDate}
-            endDate={endDate}
-            onDateZoneClick={(type: SelectCursor) => setCurrentCursor(type)}
-          />
-          <ContentWrapper>
-            <SelectScroller
-              ref={year.ref}
-              onScroll={() => {
-                year.onScroll();
-              }}
+    <main>
+      <DateZone
+        currentCursor={currentCursor}
+        startDate={startDate}
+        endDate={endDate}
+        onDateZoneClick={(type: SelectCursor) => setCurrentCursor(type)}
+      />
+      <ContentWrapper>
+        <SelectScroller
+          ref={year.ref}
+          onScroll={() => {
+            year.onScroll();
+          }}
+        >
+          {generateArray(2023, 2033).map((y) => (
+            <SelectScrollerOption
+              isActive={year.selectedIndex + nowYear === y}
+              key={y}
             >
-              {generateArray(2023, 2033).map((y) => (
-                <SelectScrollerOption
-                  isActive={year.selectedIndex + nowYear === y}
-                  key={y}
-                >
-                  {`${y}년`}
-                </SelectScrollerOption>
-              ))}
-            </SelectScroller>
-            <SelectScroller
-              ref={month.ref}
-              onScroll={() => {
-                month.onScroll();
-              }}
+              {`${y}년`}
+            </SelectScrollerOption>
+          ))}
+        </SelectScroller>
+        <SelectScroller
+          ref={month.ref}
+          onScroll={() => {
+            month.onScroll();
+          }}
+        >
+          {generateArray(1, 12).map((m) => (
+            <SelectScrollerOption
+              key={m}
+              isActive={month.selectedIndex + 1 === m}
             >
-              {generateArray(1, 12).map((m) => (
-                <SelectScrollerOption
-                  key={m}
-                  isActive={month.selectedIndex + 1 === m}
-                >
-                  {`${m}월`}
-                </SelectScrollerOption>
-              ))}
-            </SelectScroller>
-            <SelectScroller
-              ref={date.ref}
-              onScroll={() => {
-                date.onScroll();
-              }}
+              {`${m}월`}
+            </SelectScrollerOption>
+          ))}
+        </SelectScroller>
+        <SelectScroller
+          ref={date.ref}
+          onScroll={() => {
+            date.onScroll();
+          }}
+        >
+          {generateArray(1, 30).map((d) => (
+            <SelectScrollerOption
+              key={d}
+              isActive={date.selectedIndex + 1 === d}
             >
-              {generateArray(1, 30).map((d) => (
-                <SelectScrollerOption
-                  key={d}
-                  isActive={date.selectedIndex + 1 === d}
-                >
-                  {`${d}일`}
-                </SelectScrollerOption>
-              ))}
-            </SelectScroller>
-            <Cursor />
-          </ContentWrapper>
-          <DefaultBottomCTA>
-            <Button
-              label="선택하기"
-              isDisabled={!isValid}
-              onClick={handleSelectDate}
-            />
-          </DefaultBottomCTA>
-        </main>
-      }
-    />
+              {`${d}일`}
+            </SelectScrollerOption>
+          ))}
+        </SelectScroller>
+        <Cursor />
+      </ContentWrapper>
+      <DefaultBottomCTA>
+        <Button
+          label="선택하기"
+          isDisabled={!isValid}
+          onClick={handleSelectDate}
+        />
+      </DefaultBottomCTA>
+    </main>
   );
 };
 

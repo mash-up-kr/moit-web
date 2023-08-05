@@ -4,9 +4,11 @@ import { Box } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import DateSelectScreen from 'domain/moit/components/DateSelectScreen';
 import RepeatScreen from 'domain/moit/components/RepeatScreen';
-import SelectBottomSheet from 'domain/moit/components/SelectBottonSheet';
+import SelectBottomSheet from 'domain/moit/components/SelectBottomSheet';
 import TimeSelectScreen from 'domain/moit/components/TimeSelectScreen';
 import { INITIAL_DATE } from 'domain/moit/constants/data';
+import useSelectBottomSheet from 'domain/moit/hooks/useSelectBottomsheet';
+import { SelectBottomSheetAtom } from 'domain/moit/store/selectBottomSheetAtom';
 import { useModal } from 'hooks/useModal';
 import { insertZero } from 'utils/dateParser';
 import Button from '@components/Button';
@@ -29,9 +31,8 @@ interface ScheduleSettingStepProps {
 }
 
 const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
-  const selectTimeBottomsheetProps = useModal();
-  const selectDateBottomsheetProps = useModal();
-  const selectRepeatBottomsheetProps = useModal();
+  const selectBottomSheetProps = useModal();
+  const { status, close, update } = useSelectBottomSheet();
 
   const formData = useRecoilValue(registerFormDataAtom);
   const {
@@ -60,6 +61,38 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
   const onSubmit = handleSubmit((values) => {
     onNext(values);
   });
+
+  const handleBottomSheetpOpen = (type: SelectBottomSheetAtom) => {
+    if (type === 'none' && selectBottomSheetProps.modalShowing) {
+      selectBottomSheetProps.hideModal();
+      close();
+    } else {
+      update(type);
+      if (!selectBottomSheetProps.modalShowing) {
+        selectBottomSheetProps.showModal();
+      }
+    }
+  };
+
+  const bottomSheetTitle = useMemo(() => {
+    switch (status) {
+      case 'time': {
+        return '시간 선택';
+      }
+
+      case 'date': {
+        return '날짜 선택';
+      }
+
+      case 'repeat': {
+        return '반복 선택';
+      }
+
+      default: {
+        return '';
+      }
+    }
+  }, [status]);
 
   /** Custom Controller를 만들어서 onChange 함수만 뽑아냄 */
   const {
@@ -125,6 +158,86 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
     [repeatCycle],
   );
 
+  const selectBottomSheetFactory = (type: SelectBottomSheetAtom) => {
+    switch (type) {
+      case 'time': {
+        return (
+          <TimeSelectScreen
+            initialTime={{
+              startTime: startTime
+                ? {
+                    hour: +startTime.split(':')[0],
+                    minute: +startTime.split(':')[1] / 5,
+                  }
+                : { hour: 0, minute: 0 },
+              endTime: endTime
+                ? {
+                    hour: +endTime.split(':')[0],
+                    minute: +endTime.split(':')[1] / 5,
+                  }
+                : { hour: 0, minute: 0 },
+            }}
+            timeUpdate={(selected: SelctTimeParams) => {
+              onChangeStartTime(
+                `${insertZero(selected.startTime.hour)}:${insertZero(
+                  selected.startTime.minute,
+                )}`,
+              );
+              onChangeEndTime(
+                `${insertZero(selected.endTime.hour)}:${insertZero(
+                  selected.endTime.minute,
+                )}`,
+              );
+              close();
+            }}
+          />
+        );
+      }
+
+      case 'date': {
+        return (
+          <DateSelectScreen
+            dateUpdate={(start: string, end: string) => {
+              onChangeStartDate(start);
+              onChangeEndDate(end);
+              close();
+            }}
+            initialDate={{
+              startDate: getValues('startDate')
+                ? {
+                    y:
+                      Number(getValues('startDate').split('-')[0]) -
+                      new Date().getFullYear(),
+                    m: Number(getValues('startDate').split('-')[1]) - 1,
+                    d: Number(getValues('startDate').split('-')[2]) - 1,
+                  }
+                : INITIAL_DATE,
+              endDate: getValues('endDate')
+                ? {
+                    y:
+                      Number(getValues('endDate').split('-')[0]) -
+                      new Date().getFullYear(),
+                    m: Number(getValues('endDate').split('-')[1]) - 1,
+                    d: Number(getValues('endDate').split('-')[2]) - 1,
+                  }
+                : INITIAL_DATE,
+            }}
+          />
+        );
+      }
+
+      case 'repeat': {
+        return (
+          <RepeatScreen
+            initialRepeatIndex={initialRepeatIndex}
+            repeatUpdate={(v) => onChangeRepeat(v.value)}
+            modalClose={close}
+          />
+        );
+      }
+    }
+  };
+
   return (
     <Box>
       <Text type="h4" mb="20px">
@@ -155,7 +268,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             placeholder="17시 00분 - 20시 00분"
             value={timeValue}
             variant="s"
-            onClick={selectTimeBottomsheetProps.showModal}
+            onClick={() => handleBottomSheetpOpen('time')}
           />
         </FormItem>
 
@@ -165,7 +278,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             placeholder="2주"
             variant="s"
             value={repeatCycle}
-            onClick={selectRepeatBottomsheetProps.showModal}
+            onClick={() => handleBottomSheetpOpen('repeat')}
           />
         </FormItem>
 
@@ -174,7 +287,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             readOnly
             placeholder="6월 27일 - 8월 30일"
             value={dateValue}
-            onClick={selectDateBottomsheetProps.showModal}
+            onClick={() => handleBottomSheetpOpen('date')}
             variant="s"
           />
         </FormItem>
@@ -183,78 +296,12 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
         </LargeBottom>
       </Form>
 
-      {selectTimeBottomsheetProps.modalShowing && (
+      {status !== 'none' && selectBottomSheetProps.modalShowing && (
         <SelectBottomSheet
-          modalProps={selectTimeBottomsheetProps}
-          title={'시간 선택'}
-          contents={
-            <TimeSelectScreen
-              initialTime={{
-                startTime: startTime
-                  ? {
-                      hour: +startTime.split(':')[0],
-                      minute: +startTime.split(':')[1] / 5,
-                    }
-                  : { hour: 0, minute: 0 },
-                endTime: endTime
-                  ? {
-                      hour: +endTime.split(':')[0],
-                      minute: +endTime.split(':')[1] / 5,
-                    }
-                  : { hour: 0, minute: 0 },
-              }}
-              timeUpdate={(selected: SelctTimeParams) => {
-                onChangeStartTime(
-                  `${insertZero(selected.startTime.hour)}:${insertZero(
-                    selected.startTime.minute,
-                  )}`,
-                );
-                onChangeEndTime(
-                  `${insertZero(selected.endTime.hour)}:${insertZero(
-                    selected.endTime.minute,
-                  )}`,
-                );
-              }}
-            />
-          }
-        />
-      )}
-
-      {selectDateBottomsheetProps.modalShowing && (
-        <DateSelectScreen
-          modalProps={selectDateBottomsheetProps}
-          dateUpdate={(start: string, end: string) => {
-            onChangeStartDate(start);
-            onChangeEndDate(end);
-          }}
-          initialDate={{
-            start: getValues('startDate')
-              ? {
-                  y:
-                    Number(getValues('startDate').split('-')[0]) -
-                    new Date().getFullYear(),
-                  m: Number(getValues('startDate').split('-')[1]) - 1,
-                  d: Number(getValues('startDate').split('-')[2]) - 1,
-                }
-              : INITIAL_DATE,
-            end: getValues('endDate')
-              ? {
-                  y:
-                    Number(getValues('endDate').split('-')[0]) -
-                    new Date().getFullYear(),
-                  m: Number(getValues('endDate').split('-')[1]) - 1,
-                  d: Number(getValues('endDate').split('-')[2]) - 1,
-                }
-              : INITIAL_DATE,
-          }}
-        />
-      )}
-
-      {selectRepeatBottomsheetProps.modalShowing && (
-        <RepeatScreen
-          modalProps={selectRepeatBottomsheetProps}
-          initialRepeatIndex={initialRepeatIndex}
-          repeatUpdate={(v) => onChangeRepeat(v.value)}
+          modalProps={selectBottomSheetProps}
+          title={bottomSheetTitle}
+          contents={selectBottomSheetFactory(status)}
+          initialHeight={status === 'repeat' ? 352 : undefined}
         />
       )}
     </Box>
