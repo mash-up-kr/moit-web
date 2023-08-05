@@ -161,8 +161,6 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
   );
 
   const selectBottomSheetFactory = useMemo(() => {
-    console.log(Number(startTime.split(':')[0]));
-
     switch (status) {
       case 'time': {
         return (
@@ -170,14 +168,14 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
             initialTime={{
               startTime: startTime
                 ? {
-                    hour: Number(startTime.split(':')[0]),
-                    minute: Number(startTime.split(':')[1]) / 5,
+                    hour: Number(startTime?.split(':')[0]),
+                    minute: Number(startTime?.split(':')[1]) / 5,
                   }
                 : { hour: 0, minute: 0 },
               endTime: endTime
                 ? {
-                    hour: Number(endTime.split(':')[0]),
-                    minute: Number(endTime.split(':')[1]) / 5,
+                    hour: Number(endTime?.split(':')[0]),
+                    minute: Number(endTime?.split(':')[1]) / 5,
                   }
                 : { hour: 0, minute: 0 },
             }}
@@ -210,19 +208,19 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
               startDate: getValues('startDate')
                 ? {
                     y:
-                      Number(getValues('startDate').split('-')[0]) -
+                      Number(getValues('startDate')?.split('-')[0]) -
                       new Date().getFullYear(),
-                    m: Number(getValues('startDate').split('-')[1]) - 1,
-                    d: Number(getValues('startDate').split('-')[2]) - 1,
+                    m: Number(getValues('startDate')?.split('-')[1]) - 1,
+                    d: Number(getValues('startDate')?.split('-')[2]) - 1,
                   }
                 : INITIAL_DATE,
               endDate: getValues('endDate')
                 ? {
                     y:
-                      Number(getValues('endDate').split('-')[0]) -
+                      Number(getValues('endDate')?.split('-')[0]) -
                       new Date().getFullYear(),
-                    m: Number(getValues('endDate').split('-')[1]) - 1,
-                    d: Number(getValues('endDate').split('-')[2]) - 1,
+                    m: Number(getValues('endDate')?.split('-')[1]) - 1,
+                    d: Number(getValues('endDate')?.split('-')[2]) - 1,
                   }
                 : INITIAL_DATE,
             }}

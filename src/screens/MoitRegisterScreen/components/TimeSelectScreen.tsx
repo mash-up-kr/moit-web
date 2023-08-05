@@ -42,8 +42,6 @@ const TimeSelectScreen = ({
     initialTime,
   );
 
-  console.log('##', initialTime, startTime.hour, endTime.hour);
-
   useEffectOnce(() => {
     setTimeout(() => {
       hour.ref.current?.scrollTo(
