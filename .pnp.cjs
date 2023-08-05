@@ -52,6 +52,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["commitlint-config-gitmoji", "npm:2.3.1"],\
             ["cross-var", "npm:1.1.0"],\
             ["cz-customizable", "npm:7.0.0"],\
+            ["dayjs", "npm:1.11.9"],\
             ["dotenv-cli", "npm:7.2.1"],\
             ["emotion-normalize", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:11.0.1"],\
             ["eslint", "npm:8.40.0"],\
@@ -13416,6 +13417,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["dayjs", [\
+        ["npm:1.11.9", {\
+          "packageLocation": "./.yarn/cache/dayjs-npm-1.11.9-c47d327b7c-a4844d83dc.zip/node_modules/dayjs/",\
+          "packageDependencies": [\
+            ["dayjs", "npm:1.11.9"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["debug", [\
         ["npm:2.6.9", {\
           "packageLocation": "./.yarn/cache/debug-npm-2.6.9-7d4cb597dc-d2f51589ca.zip/node_modules/debug/",\
@@ -17982,6 +17992,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["commitlint-config-gitmoji", "npm:2.3.1"],\
             ["cross-var", "npm:1.1.0"],\
             ["cz-customizable", "npm:7.0.0"],\
+            ["dayjs", "npm:1.11.9"],\
             ["dotenv-cli", "npm:7.2.1"],\
             ["emotion-normalize", "virtual:b2a801001176bc02418f212b7d1a88d478ba21e424558fe75226d5c80ea85a84806c405804ac33b737f9eb3d54346be030fe432a0c04a85ac8f285edbc25cece#npm:11.0.1"],\
             ["eslint", "npm:8.40.0"],\

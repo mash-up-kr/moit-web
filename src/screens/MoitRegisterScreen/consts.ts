@@ -77,3 +77,13 @@ export const REMIND_OPTIONS: {
     label: '10분 전',
   },
 ];
+
+const now = new Date();
+export const INITIAL_DATE: DateParams = {
+  y: 0,
+  m: now.getMonth(),
+  d: now.getDate(),
+};
+
+export const SELECT_CONTENT_HEIGHT = 52;
+export const SELECT_TIME_MINUTE_INTERVAL = 5;

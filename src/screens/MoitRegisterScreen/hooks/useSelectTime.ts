@@ -1,8 +1,7 @@
 import { UseSelectScroller } from '@components/SelectScroller/SelectScroller.hooks';
 import { useSelectScroller } from '@components/SelectScroller';
-import { CreateMoitRegisterTime } from '../components/TimeSelectBottomSheet';
-
-const SELECT_CONTENT_HEIGHT = 52;
+import { CreateMoitRegisterTime } from '../components/TimeSelectScreen';
+import { SELECT_CONTENT_HEIGHT, SELECT_TIME_MINUTE_INTERVAL } from '../consts';
 
 interface UseSelectTimeProps {
   hour: UseSelectScroller;
@@ -10,8 +9,6 @@ interface UseSelectTimeProps {
   startTime: TimeParams;
   endTime: TimeParams;
 }
-
-export const SELECT_TIME_MINUTE_INTERVAL = 5;
 
 export const useSelectTime = (
   type: SelectCursor,

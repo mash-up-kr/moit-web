@@ -3,7 +3,7 @@
   <img width=200px height=200px src="https://github.com/mash-up-kr/moit-web/assets/82315118/0e793d2b-3673-4dc1-a45e-075e33025c38" alt="Project logo"></a>
 </p>
 
-<h3 align="center">moit</h3>
+<h3 align="center">MO IT</h3>
 
 <div align="center">
 
@@ -16,9 +16,13 @@
 
 ---
 
+<br>
+
 <p align="center"> <strong>Delightful way to manage your study 🧚🏻‍♀️</strong>
     <br> 
 </p>
+
+<br>
 
 ## 📝 Table of Contents
 
@@ -28,6 +32,8 @@
 - [Authors](#authors)
 - [License](#license)
 
+<br>
+
 ## 🧐 About <a name = "about"></a>
 
 Moit is a study management app created by the team '전자군단'.
@@ -35,6 +41,8 @@ Moit is a study management app created by the team '전자군단'.
 The study management app allows users to check in participants quickly and easily using their smartphones. It also provides real-time attendance tracking, so you can monitor who is present and who is absent at any given time. This makes it easier to identify trends and patterns in attendance, enabling you to take proactive measures to address issues.
 
 In addition to attendance tracking, Moit also makes it easy to manage fines. You can set up rules and guidelines for attendance, and the app will automatically calculate any fines owed based on those rules. This makes it easy to enforce fines and ensures that participants are held accountable for their attendance.
+
+<br>
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -74,6 +82,8 @@ $ yarn
 $ yarn dev
 ```
 
+<br>
+
 ## ⛏️ Built Using <a name = "built_using"></a>
 
 - [react](https://reactjs.org/) - Web Framework
@@ -82,11 +92,15 @@ $ yarn dev
 - [chakra-ui](https://chakra-ui.com/) - CSS in JS
 - [vite](https://vitejs.dev/) - Build Tool
 
+<br>
+
 ## ✍️ Authors <a name = "authors"></a>
 
 - [@otterji](https://github.com/otterji) - Idea & Initial work
 - [@wonjin-dev](https://github.com/wonjin-dev) - Idea & Initial work
 - [@Young-mason](https://github.com/Young-mason) - Idea & Initial work
+
+<br>
 
 ## License <a name = "license"></a>
 

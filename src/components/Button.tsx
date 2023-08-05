@@ -36,6 +36,7 @@ const Button = ({
       color={color}
       size={size}
       isDisabled={isDisabled}
+      disabled={isDisabled}
       onClick={onClick}
       type={type}
       {...restProps}

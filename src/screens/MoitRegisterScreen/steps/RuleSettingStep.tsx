@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { Box, Flex } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import theme from '@styles/theme';
-import MinuteScreen from 'domain/moit/components/MinuteScreen';
 import { useModal } from 'hooks/useModal';
 import Button from '@components/Button';
 import Text from '@components/Text';
@@ -12,6 +11,7 @@ import Form from '../components/Form';
 import FormItem from '../components/FormItem';
 import Input from '../components/Input';
 import LargeBottom from '../components/LargeBottom';
+import MinuteScreen from '../components/MinuteScreen';
 
 interface RuleSettingStepProps {
   onNext: (data: RuleStepFormData) => void;
@@ -109,18 +109,16 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
       {lateMinuteBottomSheetProps.modalShowing && (
         <MinuteScreen
           modalProps={lateMinuteBottomSheetProps}
-          update={(v) => {
-            setValue('lateTime', v);
-          }}
+          update={(v) => setValue('lateTime', v)}
+          initialData={getValues('lateTime') / 5}
         />
       )}
 
       {absenseMinuteBottomSheetProps.modalShowing && (
         <MinuteScreen
           modalProps={absenseMinuteBottomSheetProps}
-          update={(v) => {
-            setValue('absenceTime', v);
-          }}
+          update={(v) => setValue('absenceTime', v)}
+          initialData={getValues('absenceTime') / 5}
         />
       )}
     </Box>
