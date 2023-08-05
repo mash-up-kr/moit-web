@@ -1,7 +1,7 @@
 import { UseSelectScroller } from '@components/SelectScroller/SelectScroller.hooks';
 import { useSelectScroller } from '@components/SelectScroller';
 import { CreateMoitRegisterDate } from '../components/DateSelectScreen';
-import { SELECT_CONTENT_HEIGHT } from '../constants';
+import { SELECT_CONTENT_HEIGHT } from '../consts';
 
 interface UseSelectDateProps {
   year: UseSelectScroller;

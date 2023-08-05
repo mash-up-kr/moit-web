@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { Box, Flex } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import theme from '@styles/theme';
-import MinuteScreen from 'domain/moit/components/MinuteScreen';
 import { useModal } from 'hooks/useModal';
 import Button from '@components/Button';
 import Text from '@components/Text';
@@ -12,6 +11,7 @@ import Form from '../components/Form';
 import FormItem from '../components/FormItem';
 import Input from '../components/Input';
 import LargeBottom from '../components/LargeBottom';
+import MinuteScreen from '../components/MinuteScreen';
 
 interface RuleSettingStepProps {
   onNext: (data: RuleStepFormData) => void;

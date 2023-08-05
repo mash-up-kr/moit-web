@@ -1,2 +1,0 @@
-export const SELECT_CONTENT_HEIGHT = 52;
-export const SELECT_TIME_MINUTE_INTERVAL = 5;

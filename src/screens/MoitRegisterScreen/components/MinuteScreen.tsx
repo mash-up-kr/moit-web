@@ -2,53 +2,49 @@ import { FC, useEffect } from 'react';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
 import { palette } from '@styles/theme';
 import { ModalProps } from 'hooks/useModal';
-import { REPEAT_CYCLE_OPTIONS } from 'screens/MoitRegisterScreen/consts';
+import { generateMinuteArray } from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
 import Button from '@components/Button';
 import { SelectScroller, useSelectScroller } from '@components/SelectScroller';
-import { ContentWrapper, Cursor, DefaultBottomCTA } from '../constants/styled';
+import { SELECT_TIME_MINUTE_INTERVAL } from '../consts';
+import { ContentWrapper, Cursor, DefaultBottomCTA } from '../styled';
 
 interface Props {
   modalProps: ModalProps;
-  initialRepeatIndex: number;
-  repeatUpdate: (v: (typeof REPEAT_CYCLE_OPTIONS)[number]) => void;
+  initialData: number;
+  update: (v: number) => void;
 }
 
-const RepeatScreen: FC<Props> = ({
-  modalProps,
-  initialRepeatIndex,
-  repeatUpdate,
-}) => {
+const MinuteScreen: FC<Props> = ({ modalProps, initialData, update }) => {
   const { ref, onScroll, selectedIndex } = useSelectScroller({
     itemHeight: 52,
-    initialSelectedIndex: initialRepeatIndex,
+    initialSelectedIndex: initialData,
   });
 
   useEffect(() => {
     setTimeout(() => {
-      ref.current?.scrollTo(0, initialRepeatIndex * 52);
+      ref.current?.scrollTo(0, (initialData - 1) * 52);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <BottomSheet
-      headerTitle="반복 선택"
-      dimColor={palette.modal_dim}
       modalProps={modalProps}
+      headerTitle="시간 선택"
+      dimColor={palette.modal_dim}
       containerHeight={352}
       content={
         <main>
           <ContentWrapper style={{ justifyContent: 'center' }}>
             <SelectScroller ref={ref} onScroll={onScroll}>
-              {REPEAT_CYCLE_OPTIONS.map((option, i) => (
-                <SelectScrollerOption
-                  isActive={selectedIndex === i}
-                  key={option.value}
-                >
-                  {option.label}
-                </SelectScrollerOption>
-              ))}
+              {generateMinuteArray('endSixty', SELECT_TIME_MINUTE_INTERVAL).map(
+                (m, i) => (
+                  <SelectScrollerOption isActive={selectedIndex === i} key={m}>
+                    {`${m}분`}
+                  </SelectScrollerOption>
+                ),
+              )}
             </SelectScroller>
             <Cursor />
           </ContentWrapper>
@@ -56,7 +52,7 @@ const RepeatScreen: FC<Props> = ({
             <Button
               label="선택하기"
               onClick={() => {
-                repeatUpdate(REPEAT_CYCLE_OPTIONS[selectedIndex]);
+                update((selectedIndex + 1) * SELECT_TIME_MINUTE_INTERVAL);
                 modalProps.hideModal();
               }}
             />
@@ -67,4 +63,4 @@ const RepeatScreen: FC<Props> = ({
   );
 };
 
-export default RepeatScreen;
+export default MinuteScreen;
