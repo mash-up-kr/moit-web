@@ -4,6 +4,7 @@ import { Box } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import DateSelectScreen from 'domain/moit/components/DateSelectScreen';
 import RepeatScreen from 'domain/moit/components/RepeatScreen';
+import SelectBottomSheet from 'domain/moit/components/SelectBottonSheet';
 import TimeSelectScreen from 'domain/moit/components/TimeSelectScreen';
 import { INITIAL_DATE } from 'domain/moit/constants/data';
 import { useModal } from 'hooks/useModal';
@@ -183,34 +184,39 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
       </Form>
 
       {selectTimeBottomsheetProps.modalShowing && (
-        <TimeSelectScreen
+        <SelectBottomSheet
           modalProps={selectTimeBottomsheetProps}
-          initialTime={{
-            startTime: startTime
-              ? {
-                  hour: +startTime.split(':')[0],
-                  minute: +startTime.split(':')[1] / 5,
-                }
-              : { hour: 0, minute: 0 },
-            endTime: endTime
-              ? {
-                  hour: +endTime.split(':')[0],
-                  minute: +endTime.split(':')[1] / 5,
-                }
-              : { hour: 0, minute: 0 },
-          }}
-          timeUpdate={(selected: SelctTimeParams) => {
-            onChangeStartTime(
-              `${insertZero(selected.startTime.hour)}:${insertZero(
-                selected.startTime.minute,
-              )}`,
-            );
-            onChangeEndTime(
-              `${insertZero(selected.endTime.hour)}:${insertZero(
-                selected.endTime.minute,
-              )}`,
-            );
-          }}
+          title={'시간 선택'}
+          contents={
+            <TimeSelectScreen
+              initialTime={{
+                startTime: startTime
+                  ? {
+                      hour: +startTime.split(':')[0],
+                      minute: +startTime.split(':')[1] / 5,
+                    }
+                  : { hour: 0, minute: 0 },
+                endTime: endTime
+                  ? {
+                      hour: +endTime.split(':')[0],
+                      minute: +endTime.split(':')[1] / 5,
+                    }
+                  : { hour: 0, minute: 0 },
+              }}
+              timeUpdate={(selected: SelctTimeParams) => {
+                onChangeStartTime(
+                  `${insertZero(selected.startTime.hour)}:${insertZero(
+                    selected.startTime.minute,
+                  )}`,
+                );
+                onChangeEndTime(
+                  `${insertZero(selected.endTime.hour)}:${insertZero(
+                    selected.endTime.minute,
+                  )}`,
+                );
+              }}
+            />
+          }
         />
       )}
 
