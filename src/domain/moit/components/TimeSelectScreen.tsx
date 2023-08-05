@@ -34,7 +34,7 @@ interface Props {
   timeUpdate: (times: CreateMoitRegisterTime) => void;
 }
 
-const TimeSelectBottomSheet = ({
+const TimeSelectScreen = ({
   modalProps,
   initialTime,
   timeUpdate,
@@ -156,4 +156,4 @@ const TimeSelectBottomSheet = ({
   );
 };
 
-export default TimeSelectBottomSheet;
+export default TimeSelectScreen;

@@ -1,6 +1,6 @@
 import { UseSelectScroller } from '@components/SelectScroller/SelectScroller.hooks';
 import { useSelectScroller } from '@components/SelectScroller';
-import { CreateMoitRegisterTime } from '../components/TimeSelectBottomSheet';
+import { CreateMoitRegisterTime } from '../components/TimeSelectScreen';
 import {
   SELECT_CONTENT_HEIGHT,
   SELECT_TIME_MINUTE_INTERVAL,

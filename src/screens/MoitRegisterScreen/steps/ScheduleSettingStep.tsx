@@ -4,7 +4,7 @@ import { Box } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import DateSelectScreen from 'domain/moit/components/DateSelectScreen';
 import RepeatScreen from 'domain/moit/components/RepeatScreen';
-import TimeSelectBottomSheet from 'domain/moit/components/TimeSelectBottomSheet';
+import TimeSelectScreen from 'domain/moit/components/TimeSelectScreen';
 import { INITIAL_DATE } from 'domain/moit/constants/data';
 import { useModal } from 'hooks/useModal';
 import { insertZero } from 'utils/dateParser';
@@ -183,7 +183,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
       </Form>
 
       {selectTimeBottomsheetProps.modalShowing && (
-        <TimeSelectBottomSheet
+        <TimeSelectScreen
           modalProps={selectTimeBottomsheetProps}
           initialTime={{
             startTime: startTime
