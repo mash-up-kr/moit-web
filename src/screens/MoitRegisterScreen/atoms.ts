@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { ATOM_KEYS } from 'constants/atomKeys';
 
 export const registerFormDataAtom = atom<RegisterFormData>({
   key: 'registerFormData',
@@ -22,4 +23,11 @@ export const registerMoitResponseAtom = atom<RegisterMoitResponse>({
     moitId: '',
     invitationCode: '',
   },
+});
+
+export type SelectBottomSheetType = 'none' | 'date' | 'repeat' | 'time';
+
+export const selectBottomSheetAtom = atom<SelectBottomSheetType>({
+  key: ATOM_KEYS.MOIT_REGISTER_SELECT_BOTTOM_SHEET_STATUS,
+  default: 'none',
 });

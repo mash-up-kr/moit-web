@@ -5,8 +5,8 @@ import { insertZero } from 'utils/dateParser';
 import { generateArray } from 'utils/generateArray';
 import Button from '@components/Button';
 import { SelectScroller } from '@components/SelectScroller';
-import { ContentWrapper, Cursor, DefaultBottomCTA } from '../constants/styled';
 import { useSelectDate } from '../hooks/useSelectDate';
+import { ContentWrapper, Cursor, DefaultBottomCTA } from '../styled';
 import DateZone from './DateZone';
 
 export type CreateMoitRegisterDate = {

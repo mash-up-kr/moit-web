@@ -15,10 +15,10 @@ import {
 } from 'utils/generateArray';
 import Button from '@components/Button';
 import { SelectScroller } from '@components/SelectScroller';
-import { SELECT_TIME_MINUTE_INTERVAL } from '../constants';
-import { ContentWrapper, Cursor, DefaultBottomCTA } from '../constants/styled';
-import { useSelectTime } from '../hooks/useSelectTime';
 
+import { SELECT_CONTENT_HEIGHT, SELECT_TIME_MINUTE_INTERVAL } from '../consts';
+import { useSelectTime } from '../hooks/useSelectTime';
+import { ContentWrapper, Cursor, DefaultBottomCTA } from '../styled';
 import TimeZone from './TimeZone';
 
 export type CreateMoitRegisterTime = {
@@ -42,23 +42,28 @@ const TimeSelectScreen = ({
     initialTime,
   );
 
+  console.log('##', initialTime, startTime.hour, endTime.hour);
+
   useEffectOnce(() => {
     setTimeout(() => {
       hour.ref.current?.scrollTo(
         0,
-        Math.floor(initialTime.startTime.hour * 52),
+        Math.floor(initialTime.startTime.hour * SELECT_CONTENT_HEIGHT),
       );
       min.ref.current?.scrollTo(
         0,
-        Math.floor(initialTime.startTime.minute * 52),
+        Math.floor(initialTime.startTime.minute * SELECT_CONTENT_HEIGHT),
       );
     });
   });
 
   useEffect(() => {
     setTimeout(() => {
-      hour.ref.current?.scrollTo(0, (hour.selectedIndex / 5) * 52);
-      min.ref.current?.scrollTo(0, (min.selectedIndex / 5) * 52);
+      hour.ref.current?.scrollTo(0, hour.selectedIndex * SELECT_CONTENT_HEIGHT);
+      min.ref.current?.scrollTo(
+        0,
+        (min.selectedIndex / 5) * SELECT_CONTENT_HEIGHT,
+      );
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

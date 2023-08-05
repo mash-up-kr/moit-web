@@ -6,8 +6,8 @@ import { generateMinuteArray } from 'utils/generateArray';
 import BottomSheet from '@components/BottomSheet';
 import Button from '@components/Button';
 import { SelectScroller, useSelectScroller } from '@components/SelectScroller';
-import { SELECT_TIME_MINUTE_INTERVAL } from '../constants';
-import { ContentWrapper, Cursor, DefaultBottomCTA } from '../constants/styled';
+import { SELECT_TIME_MINUTE_INTERVAL } from '../consts';
+import { ContentWrapper, Cursor, DefaultBottomCTA } from '../styled';
 
 interface Props {
   modalProps: ModalProps;

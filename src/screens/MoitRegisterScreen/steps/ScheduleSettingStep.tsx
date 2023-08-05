@@ -2,24 +2,26 @@ import { FC, useMemo } from 'react';
 import { Controller, useController, useForm } from 'react-hook-form';
 import { Box } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
-import DateSelectScreen from 'domain/moit/components/DateSelectScreen';
-import RepeatScreen from 'domain/moit/components/RepeatScreen';
-import SelectBottomSheet from 'domain/moit/components/SelectBottomSheet';
-import TimeSelectScreen from 'domain/moit/components/TimeSelectScreen';
-import { INITIAL_DATE } from 'domain/moit/constants/data';
-import useSelectBottomSheet from 'domain/moit/hooks/useSelectBottomsheet';
-import { SelectBottomSheetAtom } from 'domain/moit/store/selectBottomSheetAtom';
 import { useModal } from 'hooks/useModal';
+import DateSelectScreen from 'screens/MoitRegisterScreen/components/DateSelectScreen';
 import { insertZero } from 'utils/dateParser';
 import Button from '@components/Button';
 import Text from '@components/Text';
-import { registerFormDataAtom } from '../atoms';
+import { SelectBottomSheetType, registerFormDataAtom } from '../atoms';
 import ButtonSelect from '../components/ButtonSelect';
 import Form from '../components/Form';
 import FormItem from '../components/FormItem';
 import Input from '../components/Input';
 import LargeBottom from '../components/LargeBottom';
-import { DAY_OF_WEEKS_OPTIONS, REPEAT_CYCLE_OPTIONS } from '../consts';
+import RepeatScreen from '../components/RepeatScreen';
+import SelectBottomSheet from '../components/SelectBottomSheet';
+import TimeSelectScreen from '../components/TimeSelectScreen';
+import {
+  DAY_OF_WEEKS_OPTIONS,
+  INITIAL_DATE,
+  REPEAT_CYCLE_OPTIONS,
+} from '../consts';
+import useSelectBottomSheet from '../hooks/useSelectBottomsheet';
 
 type SelctTimeParams = {
   startTime: TimeParams;
@@ -62,7 +64,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
     onNext(values);
   });
 
-  const handleBottomSheetpOpen = (type: SelectBottomSheetAtom) => {
+  const handleBottomSheetpOpen = (type: SelectBottomSheetType) => {
     if (type === 'none' && selectBottomSheetProps.modalShowing) {
       selectBottomSheetProps.hideModal();
       close();
@@ -158,22 +160,24 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
     [repeatCycle],
   );
 
-  const selectBottomSheetFactory = (type: SelectBottomSheetAtom) => {
-    switch (type) {
+  const selectBottomSheetFactory = useMemo(() => {
+    console.log(Number(startTime.split(':')[0]));
+
+    switch (status) {
       case 'time': {
         return (
           <TimeSelectScreen
             initialTime={{
               startTime: startTime
                 ? {
-                    hour: +startTime.split(':')[0],
-                    minute: +startTime.split(':')[1] / 5,
+                    hour: Number(startTime.split(':')[0]),
+                    minute: Number(startTime.split(':')[1]) / 5,
                   }
                 : { hour: 0, minute: 0 },
               endTime: endTime
                 ? {
-                    hour: +endTime.split(':')[0],
-                    minute: +endTime.split(':')[1] / 5,
+                    hour: Number(endTime.split(':')[0]),
+                    minute: Number(endTime.split(':')[1]) / 5,
                   }
                 : { hour: 0, minute: 0 },
             }}
@@ -236,7 +240,19 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
         );
       }
     }
-  };
+  }, [
+    close,
+    endTime,
+    getValues,
+    initialRepeatIndex,
+    onChangeEndDate,
+    onChangeEndTime,
+    onChangeRepeat,
+    onChangeStartDate,
+    onChangeStartTime,
+    startTime,
+    status,
+  ]);
 
   return (
     <Box>
@@ -300,7 +316,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
         <SelectBottomSheet
           modalProps={selectBottomSheetProps}
           title={bottomSheetTitle}
-          contents={selectBottomSheetFactory(status)}
+          contents={selectBottomSheetFactory}
           initialHeight={status === 'repeat' ? 352 : undefined}
         />
       )}

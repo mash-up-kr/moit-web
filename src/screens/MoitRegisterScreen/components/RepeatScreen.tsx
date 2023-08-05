@@ -1,10 +1,12 @@
 import { FC, useEffect } from 'react';
 import { SelectScrollerOption } from '@components/SelectScroller/SelectScroller.option';
-import { REPEAT_CYCLE_OPTIONS } from 'screens/MoitRegisterScreen/consts';
+import {
+  REPEAT_CYCLE_OPTIONS,
+  SELECT_CONTENT_HEIGHT,
+} from 'screens/MoitRegisterScreen/consts';
 import Button from '@components/Button';
 import { SelectScroller, useSelectScroller } from '@components/SelectScroller';
-import { SELECT_CONTENT_HEIGHT } from '../constants';
-import { ContentWrapper, Cursor, DefaultBottomCTA } from '../constants/styled';
+import { ContentWrapper, Cursor, DefaultBottomCTA } from '../styled';
 
 interface Props {
   initialRepeatIndex: number;

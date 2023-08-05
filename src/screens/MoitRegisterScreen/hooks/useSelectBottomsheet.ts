@@ -1,8 +1,5 @@
 import { useRecoilState } from 'recoil';
-import {
-  SelectBottomSheetAtom,
-  selectBottomSheetAtom,
-} from '../store/selectBottomSheetAtom';
+import { SelectBottomSheetType, selectBottomSheetAtom } from '../atoms';
 
 const useSelectBottomSheet = () => {
   const [selectBottomSheetStatus, setSelectBottomSheetStatus] = useRecoilState(
@@ -11,7 +8,7 @@ const useSelectBottomSheet = () => {
 
   const closeBottomSheet = () => setSelectBottomSheetStatus('none');
 
-  const updateBottomSheet = (type: SelectBottomSheetAtom) => {
+  const updateBottomSheet = (type: SelectBottomSheetType) => {
     setSelectBottomSheetStatus(type);
   };
 
