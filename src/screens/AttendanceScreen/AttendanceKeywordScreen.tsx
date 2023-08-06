@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Box, Button, Container, Flex } from '@chakra-ui/react';
 import theme from '@styles/theme';
-import { closeWebview } from 'bridge';
+import { closeWebview, nativeAlert } from 'bridge';
 import {
   useGetCheckIsFirst,
   useGetStudyDetail,
@@ -30,12 +30,25 @@ const AttendanceKeywordScreen = () => {
 
   const [answer, setAnswer] = useState('');
   const [answerList, setAnswerList] = useState<string[]>(['', '', '', '']);
+  // const [calculatedHeight, setCalculatedHeight] = useState(window.innerHeight);
 
   const { isFirst } = useGetCheckIsFirst(studyId);
 
   const { studyDetailData } = useGetStudyDetail(studyId);
   const { registerKeyword } = useRegisterKeyword(answer, studyId);
   const { verifyKeyword } = useVerifyKeyword(answer, studyId);
+
+  useEffect(() => {
+    if (isFirst) {
+      console.log('첫번째 출석자');
+      nativeAlert(
+        JSON.stringify({
+          title: ' 쉿! 우리만의 키워드를 입력해 출석완료하세요! 🤫 ',
+          body: '첫 출석자와 공유한 키워드를 시간 내 입력하면 출석 완료되어요.',
+        }),
+      );
+    }
+  }, []);
 
   useEffect(() => {
     const inputAnswerList = answer
@@ -53,6 +66,11 @@ const AttendanceKeywordScreen = () => {
       verifyKeyword();
     }
   };
+
+  // const calcHeight = () => {
+  //   // input창이 눌렸을 경우 전체 높이를 키보드 높이 뺀걸로 바꿔주기
+  //   // input창이 안눌렸을 경우 다시 전체 높이로 바꾸기
+  // };
 
   return (
     <Box
@@ -91,7 +109,6 @@ const AttendanceKeywordScreen = () => {
               를 입력하세요!
             </Text>
           </Flex>
-
           {studyDetailData && (
             <AttendanceTimer
               startAt={studyDetailData.startAt}

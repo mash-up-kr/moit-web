@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 import theme from '@styles/theme';
+import { nativeAlert } from 'bridge';
 import Text from '@components/Text';
 import {
   formattedTime,
@@ -23,7 +24,14 @@ const AttendanceTimer = ({ startAt, lateAt }: AttendanceTimerProps) => {
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const alertMethod = () => window.alert('EXPIRED!!!');
+  // const alertMethod = () => window.alert('EXPIRED!!!');
+  const alertMethod = () =>
+    nativeAlert(
+      JSON.stringify({
+        title: '출석체크가 끝났어요!🥲',
+        body: '출석 인정 시간이 지나서 출석체크를 할 수 없어요.',
+      }),
+    );
   const clearTimer = () => {
     if (timerRef.current) {
       clearInterval(timerRef.current);
