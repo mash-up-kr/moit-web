@@ -9,8 +9,11 @@ export default defineConfig({
   cacheDir: './.vite',
   server: {
     proxy: {
-      '/api':
-        'http://moit-backend-eb-env.eba-qtcnkjjy.ap-northeast-2.elasticbeanstalk.com',
+      '/api': {
+        target:
+          'http://moit-backend-eb-env.eba-qtcnkjjy.ap-northeast-2.elasticbeanstalk.com',
+        secure: false,
+      },
     },
   },
 });

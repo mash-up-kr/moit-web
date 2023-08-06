@@ -66,11 +66,11 @@ const NotiSettingStep: FC<NotiSettingStepProps> = ({ onNext }) => {
                     key={item.value}
                     size="s"
                     isDisabled={getValues('remindOption') !== item.value}
+                    disabled={false}
                     onClick={() => {
                       if (getValues('remindOption') === item.value) {
                         return field.onChange(null);
                       }
-
                       field.onChange(item.value);
                     }}
                   >
