@@ -12,6 +12,7 @@ import FormItem from '../components/FormItem';
 import Input from '../components/Input';
 import LargeBottom from '../components/LargeBottom';
 import MinuteScreen from '../components/MinuteScreen';
+import { SELECT_TIME_MINUTE_INTERVAL } from '../consts';
 
 interface RuleSettingStepProps {
   onNext: (data: RuleStepFormData) => void;
@@ -109,8 +110,10 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
       {lateMinuteBottomSheetProps.modalShowing && (
         <MinuteScreen
           modalProps={lateMinuteBottomSheetProps}
-          update={(v) => setValue('lateTime', v)}
-          initialData={getValues('lateTime') / 5}
+          update={(v) => {
+            setValue('lateTime', v);
+          }}
+          initialData={getValues('lateTime') / SELECT_TIME_MINUTE_INTERVAL}
         />
       )}
 
@@ -118,7 +121,7 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
         <MinuteScreen
           modalProps={absenseMinuteBottomSheetProps}
           update={(v) => setValue('absenceTime', v)}
-          initialData={getValues('absenceTime') / 5}
+          initialData={getValues('absenceTime') / SELECT_TIME_MINUTE_INTERVAL}
         />
       )}
     </Box>
