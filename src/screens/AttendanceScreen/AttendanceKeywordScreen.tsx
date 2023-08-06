@@ -20,6 +20,12 @@ const AttendanceKeywordScreen = () => {
   const [searchParams] = useSearchParams();
 
   const keyboardHeight = Number(searchParams.get('keyboardHeight') || '200');
+
+  console.log(
+    '🚀 ~ file: AttendanceKeywordScreen.tsx:23 ~ AttendanceKeywordScreen ~ keyboardHeight:',
+    keyboardHeight,
+  );
+
   const studyId = Number(searchParams.get('studyId') || '1');
 
   const [answer, setAnswer] = useState('');
