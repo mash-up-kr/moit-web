@@ -45,6 +45,7 @@ const AttendanceKeywordScreen = () => {
         JSON.stringify({
           title: ' 쉿! 우리만의 키워드를 입력해 출석완료하세요! 🤫 ',
           body: '첫 출석자와 공유한 키워드를 시간 내 입력하면 출석 완료되어요.',
+          type: 'none',
         }),
       );
     }

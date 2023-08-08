@@ -30,6 +30,7 @@ const AttendanceTimer = ({ startAt, lateAt }: AttendanceTimerProps) => {
       JSON.stringify({
         title: '출석체크가 끝났어요!🥲',
         body: '출석 인정 시간이 지나서 출석체크를 할 수 없어요.',
+        type: 'home',
       }),
     );
   const clearTimer = () => {
