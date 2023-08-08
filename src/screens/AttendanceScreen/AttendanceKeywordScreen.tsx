@@ -26,13 +26,11 @@ const AttendanceKeywordScreen = () => {
     keyboardHeight,
   );
 
-  console.log('visualViewport', window.visualViewport);
-
   const studyId = Number(searchParams.get('studyId') || '1');
 
   const [answer, setAnswer] = useState('');
   const [answerList, setAnswerList] = useState<string[]>(['', '', '', '']);
-  // const [calculatedHeight, setCalculatedHeight] = useState(window.innerHeight);
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
   const { isFirst } = useGetCheckIsFirst(studyId);
 
@@ -42,7 +40,6 @@ const AttendanceKeywordScreen = () => {
 
   useEffect(() => {
     if (isFirst) {
-      console.log('첫번째 출석자');
       nativeAlert(
         JSON.stringify({
           title: ' 쉿! 우리만의 키워드를 입력해 출석완료하세요! 🤫 ',
@@ -60,7 +57,25 @@ const AttendanceKeywordScreen = () => {
     setAnswerList(inputAnswerList);
   }, [answer]);
 
-  const buttonDisabled = answer.length < 4;
+  useEffect(() => {
+    const inputRef = document.getElementById('transparent-input');
+
+    const handleFocus = () => {
+      resizeScreen(keyboardHeight);
+    };
+
+    const handleBlur = () => {
+      setScreenHeight(window.innerHeight);
+    };
+
+    inputRef?.addEventListener('focus', handleFocus);
+    inputRef?.addEventListener('blur', handleBlur);
+
+    return () => {
+      inputRef?.removeEventListener('focus', handleFocus);
+      inputRef?.removeEventListener('blur', handleBlur);
+    };
+  }, []);
 
   const handleSubmit = () => {
     if (isFirst) {
@@ -70,16 +85,14 @@ const AttendanceKeywordScreen = () => {
     }
   };
 
-  // const calcHeight = () => {
-  //   // input창이 눌렸을 경우 전체 높이를 키보드 높이 뺀걸로 바꿔주기
-  //   // input창이 안눌렸을 경우 다시 전체 높이로 바꾸기
-  // };
+  const resizeScreen = (h: number) => {
+    setScreenHeight(window.innerHeight - h);
+  };
+
+  const buttonDisabled = answer.length < 4;
 
   return (
-    <Box
-      bgColor={theme.colors.background.black}
-      height={window.innerHeight - keyboardHeight}
-    >
+    <Box bgColor={theme.colors.background.black} height={screenHeight}>
       <Box>
         <ScreenHeader
           leftIcon={
