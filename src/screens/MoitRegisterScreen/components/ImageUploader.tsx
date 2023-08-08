@@ -10,14 +10,11 @@ interface ImageUploaderProps {
   onChange: (imgSrc: string, imgFile: File) => void;
 }
 
-const ImageUploader: FC<ImageUploaderProps> = ({
-  onChange,
-  imageSrc = pngs.trophy,
-}) => {
+const ImageUploader: FC<ImageUploaderProps> = ({ onChange, imageSrc }) => {
   const handleClick = () => {};
   return (
     <Box pos="relative" onClick={handleClick}>
-      <Avatar type="lg" src={imageSrc} />
+      <Avatar type="lg" src={imageSrc || pngs.trophy} />
       <StyledIcon name="PlusFill" size={24} />
 
       <Input
