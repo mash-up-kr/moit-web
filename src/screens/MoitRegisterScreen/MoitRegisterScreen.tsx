@@ -73,7 +73,7 @@ const MoitRegisterScreen: FC = () => {
             [REGISTER_STEPS[2]]: (
               <RuleSettingStep
                 onNext={(data) => {
-                  if (!(data.lateTime <= data.absenceTime)) {
+                  if (!(data.lateAmount <= data.absenceAmount)) {
                     window.webkit.messageHandlers.MOIT.postMessage({
                       command: 'toast',
                       value: '결석 벌금은 지각 벌금과 같거나 더 커야 합니다',
@@ -81,7 +81,7 @@ const MoitRegisterScreen: FC = () => {
                     return;
                   }
 
-                  if (!(data.lateAmount < data.absenceAmount)) {
+                  if (!(data.lateTime < data.absenceTime)) {
                     window.webkit.messageHandlers.MOIT.postMessage({
                       command: 'toast',
                       value: '결석 시간은 지각 시간 이후여야 합니다',
