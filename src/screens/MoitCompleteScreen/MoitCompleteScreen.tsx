@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Flex } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
@@ -25,6 +26,13 @@ const MoitCompleteScreen = () => {
   const imageData = useRecoilValue(imageDataAtom);
   const navigate = useNavigate();
   const { invitationCode, moitId } = useRecoilValue(registerMoitResponseAtom);
+
+  useEffect(() => {
+    window.webkit.messageHandlers.MOIT.postMessage({
+      command: 'didRegisterMOIT',
+      value: moitId,
+    });
+  }, []);
 
   if (!Object.keys(registerFormData).length) {
     navigate('/error');
@@ -136,7 +144,7 @@ const MoitCompleteScreen = () => {
           size="m"
           onClick={() => {
             if (window.webkit) {
-              nativeShare(moitId);
+              nativeShare(invitationCode);
             } else {
               alert(moitId);
             }

@@ -6,6 +6,7 @@ enum BridgeModel {
   close,
   keypad,
   share,
+  didRegisterMOIT,
 }
 
 interface BridgeParams {
