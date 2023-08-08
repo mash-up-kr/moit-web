@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useForm } from 'react-hook-form';
+import { useController, useForm } from 'react-hook-form';
 import { Box, Flex } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 import theme from '@styles/theme';
@@ -24,16 +24,18 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
   const absenseMinuteBottomSheetProps = useModal();
 
   const {
+    register,
     handleSubmit,
     getValues,
     setValue,
+    control,
     formState: { errors },
   } = useForm<RuleStepFormData>({
     defaultValues: {
       lateTime: registerFormData.lateTime ?? 10,
-      lateAmount: registerFormData.lateAmount ?? 5000,
+      lateAmount: registerFormData.lateAmount,
       absenceTime: registerFormData.absenceTime ?? 30,
-      absenceAmount: registerFormData.absenceAmount ?? 8000,
+      absenceAmount: registerFormData.absenceAmount,
     },
   });
 
@@ -42,6 +44,22 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
   });
 
   const isDisabled = Object.keys(errors).length > 0;
+
+  const {
+    field: { onChange: onChangeAbsenseAmount },
+  } = useController({
+    name: 'absenceAmount',
+    control: control,
+    rules: { required: true },
+  });
+
+  const {
+    field: { onChange: onChangeLateAmount },
+  } = useController({
+    name: 'lateAmount',
+    control: control,
+    rules: { required: true },
+  });
 
   return (
     <Box>
@@ -71,10 +89,20 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
             </Flex>
 
             <Input
-              value={`${getValues('lateAmount').toLocaleString()}원`}
+              {...register('lateAmount')}
               variant="s"
               width={100}
-              readOnly
+              unit="원"
+              inputMode="numeric"
+              onChange={(e) => {
+                const { value } = e.target;
+                onChangeLateAmount(+value.replace(/[^0-9]/g, ''));
+              }}
+              value={
+                getValues('lateAmount')
+                  ? getValues('lateAmount').toLocaleString()
+                  : ''
+              }
             />
           </Flex>
         </FormItem>
@@ -94,10 +122,20 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
             </Flex>
 
             <Input
-              value={`${getValues('absenceAmount').toLocaleString()}원`}
+              {...register('absenceAmount')}
               variant="s"
               width={100}
-              readOnly
+              unit="원"
+              inputMode="numeric"
+              onChange={(e) => {
+                const { value } = e.target;
+                onChangeAbsenseAmount(+value.replace(/[^0-9]/g, ''));
+              }}
+              value={
+                getValues('absenceAmount')
+                  ? getValues('absenceAmount').toLocaleString()
+                  : ''
+              }
             />
           </Flex>
         </FormItem>
