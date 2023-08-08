@@ -91,11 +91,12 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
             <Input
               {...register('lateAmount')}
               variant="s"
-              width={100}
+              width={120}
               unit="원"
               inputMode="numeric"
               onChange={(e) => {
                 const { value } = e.target;
+                if (value.length > 8) return;
                 onChangeLateAmount(+value.replace(/[^0-9]/g, ''));
               }}
               value={
@@ -124,11 +125,12 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
             <Input
               {...register('absenceAmount')}
               variant="s"
-              width={100}
+              width={120}
               unit="원"
               inputMode="numeric"
               onChange={(e) => {
                 const { value } = e.target;
+                if (value.length > 8) return;
                 onChangeAbsenseAmount(+value.replace(/[^0-9]/g, ''));
               }}
               value={
