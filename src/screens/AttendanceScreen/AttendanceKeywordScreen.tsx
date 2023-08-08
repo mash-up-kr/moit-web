@@ -26,6 +26,8 @@ const AttendanceKeywordScreen = () => {
     keyboardHeight,
   );
 
+  console.log('innerHeight', window.innerHeight);
+
   const studyId = Number(searchParams.get('studyId') || '1');
 
   const [answer, setAnswer] = useState('');
