@@ -101,7 +101,7 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
               }}
               value={
                 getValues('lateAmount')
-                  ? getValues('lateAmount').toLocaleString()
+                  ? getValues('lateAmount') //.toLocaleString()
                   : ''
               }
             />
@@ -135,7 +135,7 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
               }}
               value={
                 getValues('absenceAmount')
-                  ? getValues('absenceAmount').toLocaleString()
+                  ? getValues('absenceAmount') //.toLocaleString()
                   : ''
               }
             />
