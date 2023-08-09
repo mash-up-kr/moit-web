@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, Progress } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import { closeWebview } from 'bridge';
@@ -16,7 +15,6 @@ import {
 } from './steps';
 
 const MoitRegisterScreen: FC = () => {
-  const navigate = useNavigate();
   const [step, setStep] = useState<(typeof REGISTER_STEPS)[number]>(
     REGISTER_STEPS[0],
   );
@@ -84,7 +82,6 @@ const MoitRegisterScreen: FC = () => {
                   setStep('info');
                   handleChangeFormData(data);
                   mutate(registerFormData);
-                  navigate('/complete');
                 }}
               />
             ),
