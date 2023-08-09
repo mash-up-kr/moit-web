@@ -10,7 +10,14 @@ interface MVPCardProps {
 
 const MVPCard = ({ attendantList }: MVPCardProps) => {
   const top3List = () => {
-    return Array.from({ length: 3 }, (_, index) => attendantList[index] || {});
+    const validList = attendantList.filter(
+      (at) =>
+        at.attendanceStatus === 'ATTENDANCE' || at.attendanceStatus === 'LATE',
+    );
+    const empty = {
+      userId: null,
+    };
+    return [...validList, empty, empty, empty].slice(0, 3);
   };
   const heights = ['71px', '47px', '31px'];
   const transformedTop3List = top3List().map((attendance, index) => ({
