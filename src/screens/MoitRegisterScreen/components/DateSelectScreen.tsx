@@ -39,7 +39,7 @@ const DateSelectScreen: FC<Props> = ({ initialDate, dateUpdate }) => {
     [endDate.d, endDate.m, endDate.y],
   );
   const isValid = useMemo(() => {
-    if (dayjs(start) < dayjs(end) && dayjs(now) < dayjs(start)) {
+    if (dayjs(start) < dayjs(end) && dayjs(now) <= dayjs(start)) {
       return true;
     }
 
