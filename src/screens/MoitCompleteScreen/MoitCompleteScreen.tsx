@@ -123,9 +123,6 @@ const MoitCompleteScreen = () => {
         </Box>
       </Box>
 
-      <div>moitId: {moitId}</div>
-      <div>invitationCode: {invitationCode}</div>
-
       <LargeBottom>
         <Button
           size="m"

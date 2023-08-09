@@ -79,7 +79,6 @@ const MoitRegisterScreen: FC = () => {
             [REGISTER_STEPS[3]]: (
               <NotiSettingStep
                 onNext={async (data) => {
-                  setStep('info');
                   handleChangeFormData(data);
                   mutate(registerFormData);
                 }}
