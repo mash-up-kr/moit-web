@@ -28,8 +28,7 @@ const RepeatScreen: FC<Props> = ({
     setTimeout(() => {
       ref.current?.scrollTo(0, initialRepeatIndex * 52);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [initialRepeatIndex, ref]);
 
   return (
     <main>
