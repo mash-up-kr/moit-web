@@ -10,6 +10,7 @@ import {
 import { useGetUser } from 'hooks/useGetUser';
 import Lottie from '@components/Lottie';
 import ScreenHeader from '@components/ScreenHeader';
+import ScreenWithSafeArea from '@components/ScreenWithSafeArea';
 import SvgIcon from '@components/SvgIcon';
 import Text from '@components/Text';
 import AttendanceList from './components/AttendanceList';
@@ -45,46 +46,50 @@ const AttendanceResultScreen = () => {
           : 'linear-gradient(180deg, #FF8A01 16.12%, #F2F4F6 25.97%)'
       }
     >
-      {isAttendance && (
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          right={0}
-          bottom={0}
-          zIndex={2}
-        >
-          <Lottie src={'confetti'} />
+      <ScreenWithSafeArea>
+        {isAttendance && (
+          <Box
+            position="absolute"
+            top={0}
+            left={0}
+            right={0}
+            bottom={0}
+            zIndex={2}
+          >
+            <Lottie src={'confetti'} />
+          </Box>
+        )}
+
+        <ScreenHeader
+          rightIcon={
+            <SvgIcon name={'Close'} size={24} onClick={closeWebview} />
+          }
+        ></ScreenHeader>
+        <Box textAlign={'center'}>
+          <Text type="h1" color={theme.colors.text.white}>
+            {isAttendance ? '출석 완료!' : '앗, 지각이에요'}
+          </Text>
+          <Text type="h5" color={theme.palette.white_07}>
+            {isAttendance
+              ? '출석체크가 성공적으로 완료되었어요'
+              : '다음에는 꼭 제시간에 출석하세요!'}
+          </Text>
         </Box>
-      )}
+        <Lottie src={isAttendance ? 'success' : 'fail'} />
 
-      <ScreenHeader
-        rightIcon={<SvgIcon name={'Close'} size={24} onClick={closeWebview} />}
-      ></ScreenHeader>
-      <Box textAlign={'center'}>
-        <Text type="h1" color={theme.colors.text.white}>
-          {isAttendance ? '출석 완료!' : '앗, 지각이에요'}
-        </Text>
-        <Text type="h5" color={theme.palette.white_07}>
-          {isAttendance
-            ? '출석체크가 성공적으로 완료되었어요'
-            : '다음에는 꼭 제시간에 출석하세요!'}
-        </Text>
-      </Box>
-      <Lottie src={isAttendance ? 'success' : 'fail'} />
+        <Container centerContent pb={'20%'}>
+          {isFirst && <KeywordCard keywordList={keywordList} />}
 
-      <Container centerContent pb={'20%'}>
-        {isFirst && <KeywordCard keywordList={keywordList} />}
+          <LiveStatusCard
+            currentUser={currentUser}
+            attendantList={attendantList}
+          />
 
-        <LiveStatusCard
-          currentUser={currentUser}
-          attendantList={attendantList}
-        />
+          <MVPCard attendantList={attendantList} />
 
-        <MVPCard attendantList={attendantList} />
-
-        <AttendanceList attendantList={attendantList} />
-      </Container>
+          <AttendanceList attendantList={attendantList} />
+        </Container>
+      </ScreenWithSafeArea>
     </Box>
   );
 };
