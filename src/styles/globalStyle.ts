@@ -43,6 +43,12 @@ const globalStyle = css`
     font-family: 'Pretendard';
     color: ${colors.text.general};
     -webkit-tap-highlight-color: transparent !important;
+    @media only screen and (-webkit-device-pixel-ratio: 3) {
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 `;
 
