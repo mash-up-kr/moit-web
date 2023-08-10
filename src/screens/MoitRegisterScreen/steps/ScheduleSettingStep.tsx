@@ -152,7 +152,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
 
     return `${sd.getMonth() + 1}월 ${sd.getDate()}일 - ${
       ed.getMonth() + 1
-    }월-${ed.getDate()}일`;
+    }월 ${ed.getDate()}일`;
   }, [startDate, endDate]);
 
   const initialRepeatIndex = useMemo(
@@ -279,7 +279,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
         <FormItem label="시간" direction="row">
           <Input
             readOnly
-            placeholder="17시 00분 - 20시 00분"
+            placeholder="시간을 입력해주세요" // "17시 00분 - 20시 00분"
             value={timeValue}
             variant="s"
             onClick={() => handleBottomSheetpOpen('time')}
@@ -299,7 +299,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
         <FormItem label="진행기간" direction="row">
           <Input
             readOnly
-            placeholder="6월 27일 - 8월 30일"
+            placeholder="진행기간을 입력해주세요"
             value={dateValue}
             onClick={() => handleBottomSheetpOpen('date')}
             variant="s"
