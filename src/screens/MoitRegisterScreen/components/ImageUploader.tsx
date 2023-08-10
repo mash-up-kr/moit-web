@@ -1,23 +1,25 @@
 import { FC } from 'react';
-import { Box, Input } from '@chakra-ui/react';
-import styled from '@emotion/styled';
+import { Box } from '@chakra-ui/react';
+// import { Input } from '@chakra-ui/react';
+// import styled from '@emotion/styled';
 import pngs from '@styles/pngs';
 import Avatar from '@components/Avatar';
-import SvgIcon from '@components/SvgIcon';
+// import SvgIcon from '@components/SvgIcon';
 
 interface ImageUploaderProps {
   imageSrc: string | undefined;
-  onChange: (imgSrc: string, imgFile: File) => void;
+  onChange?: (imgSrc: string, imgFile: File) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ImageUploader: FC<ImageUploaderProps> = ({ onChange, imageSrc }) => {
   const handleClick = () => {};
   return (
     <Box pos="relative" onClick={handleClick}>
       <Avatar type="lg" src={imageSrc || pngs.trophy} />
-      <StyledIcon name="PlusFill" size={24} />
+      {/* <StyledIcon name="PlusFill" size={24} /> */}
 
-      <Input
+      {/* <Input
         type="file"
         height="100%"
         width="100%"
@@ -39,15 +41,15 @@ const ImageUploader: FC<ImageUploaderProps> = ({ onChange, imageSrc }) => {
             };
           });
         }}
-      />
+      /> */}
     </Box>
   );
 };
 
-const StyledIcon = styled(SvgIcon)`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-`;
+// const StyledIcon = styled(SvgIcon)`
+//   position: absolute;
+//   bottom: 0;
+//   right: 0;
+// `;
 
 export default ImageUploader;

@@ -20,6 +20,7 @@ interface InfoSettingStepProps {
 
 const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
   const registerFormData = useRecoilValue(registerFormDataAtom);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [imageData, setImageData] = useRecoilState(imageDataAtom);
 
   const {
@@ -44,12 +45,12 @@ const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
       <Form onSubmit={onSubmit}>
         <ImageUploader
           imageSrc={imageData.imgSrc}
-          onChange={(src, file) =>
-            setImageData({
-              imgFile: file,
-              imgSrc: src,
-            })
-          }
+          // onChange={(src, file) =>
+          //   setImageData({
+          //     imgFile: file,
+          //     imgSrc: src,
+          //   })
+          // }
         />
 
         <FormItem label="스터디명 (필수)">
