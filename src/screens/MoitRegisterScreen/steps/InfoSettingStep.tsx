@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { Box } from '@chakra-ui/react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
+// import { useRecoilState } from 'recoil';
 import Button from '@components/Button';
 import Text from '@components/Text';
 import { imageDataAtom, registerFormDataAtom } from '../atoms';
@@ -20,8 +21,8 @@ interface InfoSettingStepProps {
 
 const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
   const registerFormData = useRecoilValue(registerFormDataAtom);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [imageData, setImageData] = useRecoilState(imageDataAtom);
+  // const [imageData, setImageData] = useRecoilState(imageDataAtom);
+  const imageData = useRecoilValue(imageDataAtom);
 
   const {
     handleSubmit,

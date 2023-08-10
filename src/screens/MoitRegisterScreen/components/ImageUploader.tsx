@@ -12,7 +12,7 @@ interface ImageUploaderProps {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageUploader: FC<ImageUploaderProps> = ({ onChange, imageSrc }) => {
+const ImageUploader: FC<ImageUploaderProps> = ({ imageSrc }) => {
   const handleClick = () => {};
   return (
     <Box pos="relative" onClick={handleClick}>
