@@ -6,21 +6,21 @@ import MoitCompleteScreen from 'screens/MoitCompleteScreen';
 import MoitRegisterScreen from 'screens/MoitRegisterScreen';
 import NotFoundScreen from 'screens/NotFoundScreen';
 
-interface ScreenWithSafeAreaProps {
-  children: React.ReactNode;
-}
+// interface ScreenWithSafeAreaProps {
+//   children: React.ReactNode;
+// }
 
 const Router: FC = () => {
-  const ScreenWithSafeArea: FC<ScreenWithSafeAreaProps> = ({ children }) => {
-    const mediaQueryStyles = {
-      paddingTop: 'env(safe-area-inset-top)',
-      paddingBottom: 'env(safe-area-inset-bottom)',
-      paddingLeft: 'env(safe-area-inset-left)',
-      paddingRight: 'env(safe-area-inset-right)',
-    };
+  // const ScreenWithSafeArea: FC<ScreenWithSafeAreaProps> = ({ children }) => {
+  //   const mediaQueryStyles = {
+  //     paddingTop: 'env(safe-area-inset-top)',
+  //     paddingBottom: 'env(safe-area-inset-bottom)',
+  //     paddingLeft: 'env(safe-area-inset-left)',
+  //     paddingRight: 'env(safe-area-inset-right)',
+  //   };
 
-    return <div style={mediaQueryStyles}>{children}</div>;
-  };
+  //   return <div style={mediaQueryStyles}>{children}</div>;
+  // };
 
   return (
     <BrowserRouter>
@@ -28,17 +28,17 @@ const Router: FC = () => {
         <Route
           path="/"
           element={
-            <ScreenWithSafeArea>
-              <MoitRegisterScreen />
-            </ScreenWithSafeArea>
+            // <ScreenWithSafeArea>
+            <MoitRegisterScreen />
+            // </ScreenWithSafeArea>
           }
         />
         <Route
           path="/register"
           element={
-            <ScreenWithSafeArea>
-              <MoitRegisterScreen />
-            </ScreenWithSafeArea>
+            // <ScreenWithSafeArea>
+            <MoitRegisterScreen />
+            // </ScreenWithSafeArea>
           }
         />
         <Route path="/attendance" element={<AttendanceKeywordScreen />} />
@@ -46,17 +46,17 @@ const Router: FC = () => {
         <Route
           path="/complete"
           element={
-            <ScreenWithSafeArea>
-              <MoitCompleteScreen />
-            </ScreenWithSafeArea>
+            // <ScreenWithSafeArea>
+            <MoitCompleteScreen />
+            // </ScreenWithSafeArea>
           }
         />
         <Route
           path="*"
           element={
-            <ScreenWithSafeArea>
-              <NotFoundScreen />
-            </ScreenWithSafeArea>
+            // <ScreenWithSafeArea>
+            <NotFoundScreen />
+            // </ScreenWithSafeArea>
           }
         />
       </Routes>
