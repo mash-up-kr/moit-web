@@ -127,6 +127,7 @@ const MoitCompleteScreen = () => {
         <Button
           size="m"
           isDisabled
+          disabled={false}
           onClick={() => {
             if (window.webkit) {
               closeWebview();
