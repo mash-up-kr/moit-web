@@ -31,7 +31,7 @@ const AttendanceKeywordScreen = () => {
 
   const [answer, setAnswer] = useState('');
   const [answerList, setAnswerList] = useState<string[]>(['', '', '', '']);
-  const [screenHeight, setScreenHeight] = useState('100vh');
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
   const { isFirst } = useGetCheckIsFirst(studyId);
 
@@ -66,7 +66,7 @@ const AttendanceKeywordScreen = () => {
     };
 
     const handleBlur = () => {
-      setScreenHeight('100vh');
+      setScreenHeight(window.innerHeight);
     };
 
     inputRef?.addEventListener('focus', handleFocus);
@@ -87,7 +87,7 @@ const AttendanceKeywordScreen = () => {
   };
 
   const resizeScreen = (h: number) => {
-    setScreenHeight(`calc(100vh - ${h}px)`);
+    setScreenHeight(window.innerHeight - h);
   };
 
   const buttonDisabled = answer.length < 4;
