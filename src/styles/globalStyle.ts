@@ -38,6 +38,12 @@ const globalStyle = css`
       padding-right: env(safe-area-inset-right);
     }
   }
+
+  body.no-safe-area {
+    font-family: 'Pretendard';
+    color: ${colors.text.general};
+    -webkit-tap-highlight-color: transparent !important;
+  }
 `;
 
 export default globalStyle;

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { Box } from '@chakra-ui/react';
 import { useRecoilValue } from 'recoil';
 // import { useRecoilState } from 'recoil';
@@ -23,6 +24,8 @@ const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
   const registerFormData = useRecoilValue(registerFormDataAtom);
   // const [imageData, setImageData] = useRecoilState(imageDataAtom);
   const imageData = useRecoilValue(imageDataAtom);
+
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -78,6 +81,11 @@ const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
           <Button label="다음" type="submit" isDisabled={isDisabled} />
         </LargeBottom>
       </Form>
+      <Button
+        label="출석화면"
+        type="submit"
+        onClick={() => navigate(`/attendance?studyId=${553}`)}
+      />
     </Box>
   );
 };
