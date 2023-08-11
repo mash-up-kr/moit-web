@@ -150,7 +150,9 @@ const AttendanceKeywordScreen = () => {
             >
               {isFirst
                 ? '첫번째 출석자예요! 키워드를 만들어주세요!'
-                : `오늘의 첫 출석자 : ${attendantList[0].nickname}`}
+                : `오늘의 첫 출석자 : ${
+                    attendantList.length !== 0 ? attendantList[0].nickname : ''
+                  }`}
             </Text>
           </Container>
         </Box>
