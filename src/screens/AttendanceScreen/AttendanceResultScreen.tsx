@@ -2,11 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Box, Container } from '@chakra-ui/react';
 import theme from '@styles/theme';
 import { closeWebview } from 'bridge';
-import {
-  useGetAttendanceStatus,
-  useGetCheckIsFirst,
-  useGetStudyKeyword,
-} from 'hooks';
+import { useGetAttendanceStatus, useGetStudyKeyword } from 'hooks';
 import { useGetUser } from 'hooks/useGetUser';
 import Lottie from '@components/Lottie';
 import ScreenHeader from '@components/ScreenHeader';
@@ -20,7 +16,7 @@ import MVPCard from './components/MVPCard';
 
 const AttendanceResultScreen = () => {
   const [searchParams] = useSearchParams();
-  const studyId = parseInt(searchParams.get('studyId') ?? '1'); // TODO: 영지 확인 필요
+  const studyId = parseInt(searchParams.get('studyId') ?? 'null'); // TODO: 영지 확인 필요
 
   const attendantList = useGetAttendanceStatus(studyId);
 
@@ -29,7 +25,8 @@ const AttendanceResultScreen = () => {
 
   const keywordList = Array.from(attendanceKeyword);
 
-  const { isFirst } = useGetCheckIsFirst(studyId);
+  const isFirst =
+    attendantList.length !== 0 ? attendantList[0].userId === user?.id : false;
 
   const currentUser = attendantList.find(
     (attendant: AttendantData) => attendant.userId === user?.id,
