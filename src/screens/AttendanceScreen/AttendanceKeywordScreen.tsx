@@ -87,7 +87,7 @@ const AttendanceKeywordScreen = () => {
   };
 
   const resizeScreen = (h: number) => {
-    setScreenHeight(`calc(100vh - ${h})`);
+    setScreenHeight(`calc(100vh - ${h}px)`);
   };
 
   const buttonDisabled = answer.length < 4;
