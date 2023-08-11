@@ -1,9 +1,11 @@
 import { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Progress } from '@chakra-ui/react';
 import { useRecoilState } from 'recoil';
 import { closeWebview } from 'bridge';
 import ScreenHeader from 'components/ScreenHeader';
 import { useRegisterMoit } from 'hooks/MoitQuery';
+import Button from '@components/Button';
 import SvgIcon from '@components/SvgIcon';
 import { registerFormDataAtom } from './atoms';
 import { REGISTER_STEPS } from './consts';
@@ -22,6 +24,8 @@ const MoitRegisterScreen: FC = () => {
     useRecoilState(registerFormDataAtom);
 
   const { mutate } = useRegisterMoit();
+
+  const navigate = useNavigate();
 
   const currentStepIdx = REGISTER_STEPS.findIndex((t) => t === step);
 
@@ -86,6 +90,13 @@ const MoitRegisterScreen: FC = () => {
             ),
           }[step]
         }
+        <Button
+          label="출석화면"
+          type="submit"
+          onClick={() =>
+            navigate(`/attendance?studyId=${727}?keyboardHeight=${301}`)
+          }
+        />
       </Box>
     </Box>
   );
