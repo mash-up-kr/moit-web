@@ -94,7 +94,7 @@ const MoitRegisterScreen: FC = () => {
           label="출석화면"
           type="submit"
           onClick={() =>
-            navigate(`/attendance?studyId=${728}&keyboardHeight=${301}`)
+            navigate(`/attendance?studyId=${730}&keyboardHeight=${301}`)
           }
         />
       </Box>
