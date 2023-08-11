@@ -22,7 +22,7 @@ const Router: FC = () => {
         <Route
           path="/register"
           element={
-            <ScreenWithSafeArea>
+            <ScreenWithSafeArea exceptPb>
               <MoitRegisterScreen />
             </ScreenWithSafeArea>
           }

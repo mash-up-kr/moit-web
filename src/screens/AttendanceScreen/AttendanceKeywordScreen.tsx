@@ -94,7 +94,7 @@ const AttendanceKeywordScreen = () => {
 
   return (
     <Box bgColor={theme.colors.background.black} height={screenHeight}>
-      <ScreenWithSafeArea>
+      <ScreenWithSafeArea exceptPb>
         <Box>
           <ScreenHeader
             leftIcon={
