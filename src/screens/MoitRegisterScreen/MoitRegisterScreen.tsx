@@ -37,7 +37,7 @@ const MoitRegisterScreen: FC = () => {
   }
 
   return (
-    <Box>
+    <Box height="100vh">
       <ScreenHeader
         title="스터디 생성"
         leftIcon={

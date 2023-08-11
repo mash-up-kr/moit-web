@@ -85,7 +85,7 @@ const MoitCompleteScreen = () => {
   ];
 
   return (
-    <Box>
+    <Box height="100vh">
       <ScreenHeader
         rightIcon={<SvgIcon name="Close" size={24} onClick={closeWebview} />}
       />
