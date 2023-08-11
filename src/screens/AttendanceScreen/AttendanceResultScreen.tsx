@@ -62,7 +62,13 @@ const AttendanceResultScreen = () => {
 
         <ScreenHeader
           rightIcon={
-            <SvgIcon name={'Close'} size={24} onClick={closeWebview} />
+            <SvgIcon
+              name={'Close'}
+              size={24}
+              onClick={closeWebview}
+              color={theme.palette.white}
+              style={{ zIndex: 9999 }}
+            />
           }
         ></ScreenHeader>
         <Box textAlign={'center'}>

@@ -82,6 +82,7 @@ export class IOSBridge {
 }
 
 export const closeWebview = () => {
+  console.log('close web view');
   window.webkit.messageHandlers.MOIT.postMessage({
     command: 'close',
   });
