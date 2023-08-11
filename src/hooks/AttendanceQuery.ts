@@ -50,9 +50,7 @@ export const useRegisterKeyword = (keyword: string, studyId: number) => {
         // TODO: 에러처리 개선
         const message = err.response.data.error.message;
         console.log(message);
-        nativeToast(
-          '아뿔싸! 이미 출석체크 키워드가 등록됐어요.\n공유받은 키워드를 입력해주세요.',
-        );
+        nativeToast(message);
       },
     },
   );
