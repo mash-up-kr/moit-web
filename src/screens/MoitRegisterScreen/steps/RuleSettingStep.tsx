@@ -28,6 +28,7 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
     handleSubmit,
     getValues,
     setValue,
+    watch,
     control,
     formState: { errors },
   } = useForm<RuleStepFormData>({
@@ -43,7 +44,10 @@ const RuleSettingStep: FC<RuleSettingStepProps> = ({ onNext }) => {
     onNext(values);
   });
 
-  const isDisabled = Object.keys(errors).length > 0;
+  const isDisabled =
+    Object.keys(errors).length > 0 ||
+    !watch('absenceAmount') ||
+    !watch('lateAmount');
 
   const {
     field: { onChange: onChangeAbsenseAmount },

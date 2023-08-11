@@ -41,12 +41,13 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
     handleSubmit,
     getValues,
     control,
+    watch,
     formState: { errors },
   } = useForm<ScheduleStepFormData>({
     defaultValues: {
       ...formData,
-      repeatCycle: 'TWO_WEEK',
     },
+    mode: 'onChange',
   });
 
   const startTime = getValues('startTime');
@@ -136,7 +137,15 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
     control: control,
     rules: { required: true },
   });
-  const isDisabled = Object.keys(errors).length > 0;
+
+  const isDisabled =
+    Object.keys(errors).length > 0 ||
+    !watch('dayOfWeeks') ||
+    !watch('endTime') ||
+    !watch('startTime') ||
+    !watch('repeatCycle') ||
+    !watch('endDate') ||
+    !watch('startDate');
 
   const timeValue = useMemo(() => {
     if (!startTime || !endTime) return '';
@@ -289,7 +298,7 @@ const ScheduleSettingStep: FC<ScheduleSettingStepProps> = ({ onNext }) => {
         <FormItem label="반복" direction="row">
           <Input
             readOnly
-            placeholder="2주"
+            placeholder="반복주기를 입력해주세요"
             variant="s"
             value={repeatCycle}
             onClick={() => handleBottomSheetpOpen('repeat')}

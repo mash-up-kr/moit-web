@@ -27,15 +27,17 @@ const InfoSettingStep: FC<InfoSettingStepProps> = ({ onNext }) => {
   const {
     handleSubmit,
     register,
+    watch,
     formState: { errors },
   } = useForm<InfoStepFormData>({
     defaultValues: registerFormData,
+    mode: 'onChange',
   });
   const onSubmit = handleSubmit((values) => {
     onNext(values);
   });
 
-  const isDisabled = Object.keys(errors).length > 0;
+  const isDisabled = Object.keys(errors).length > 0 || !watch('name');
 
   return (
     <Box>
