@@ -10,13 +10,13 @@ import {
 } from '../utils/timer';
 
 interface AttendanceTimerProps {
-  startAt: string;
   lateAt: string;
+  absenceAt: string;
 }
 
-const AttendanceTimer = ({ startAt, lateAt }: AttendanceTimerProps) => {
-  const startAtTime = new Date(startAt);
-  const lateAtTime = new Date(lateAt);
+const AttendanceTimer = ({ lateAt, absenceAt }: AttendanceTimerProps) => {
+  const startAtTime = new Date(lateAt);
+  const lateAtTime = new Date(absenceAt);
 
   const [time, setTime] = useState<Date>(remainingTime(startAtTime));
   const [isLate, setIsLate] = useState(startAtTime < new Date());
@@ -24,7 +24,6 @@ const AttendanceTimer = ({ startAt, lateAt }: AttendanceTimerProps) => {
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // const alertMethod = () => window.alert('EXPIRED!!!');
   const alertMethod = () =>
     nativeAlert(
       JSON.stringify({

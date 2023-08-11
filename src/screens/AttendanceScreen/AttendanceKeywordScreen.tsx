@@ -4,6 +4,7 @@ import { Box, Button, Container, Flex } from '@chakra-ui/react';
 import theme from '@styles/theme';
 import { closeWebview, nativeAlert } from 'bridge';
 import {
+  useGetAttendanceStatus,
   useGetCheckIsFirst,
   useGetStudyDetail,
   useRegisterKeyword,
@@ -38,6 +39,7 @@ const AttendanceKeywordScreen = () => {
   const { studyDetailData } = useGetStudyDetail(studyId);
   const { registerKeyword } = useRegisterKeyword(answer, studyId);
   const { verifyKeyword } = useVerifyKeyword(answer, studyId);
+  const attendantList = useGetAttendanceStatus(studyId);
 
   useEffect(() => {
     if (isFirst) {
@@ -87,8 +89,11 @@ const AttendanceKeywordScreen = () => {
   };
 
   const resizeScreen = (h: number) => {
-    setScreenHeight(`calc(100vh - ${h}px - env(safe-area-inset-top))`);
+    setScreenHeight(`calc(100vh - ${h}px)`);
   };
+
+  console.log('env(safe-area-inset-top)');
+  console.log('screenHeight', screenHeight);
 
   const buttonDisabled = answer.length < 4;
   return (
@@ -128,8 +133,8 @@ const AttendanceKeywordScreen = () => {
             </Flex>
             {studyDetailData && (
               <AttendanceTimer
-                startAt={studyDetailData.startAt}
                 lateAt={studyDetailData.lateAt}
+                absenceAt={studyDetailData.absenceAt}
               />
             )}
             <AttendanceInput
@@ -145,7 +150,7 @@ const AttendanceKeywordScreen = () => {
             >
               {isFirst
                 ? '첫번째 출석자예요! 키워드를 만들어주세요!'
-                : '오늘의 첫 출석자'}
+                : `오늘의 첫 출석자 : ${attendantList[0].nickname}`}
             </Text>
           </Container>
         </Box>
