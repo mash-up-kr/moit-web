@@ -3,7 +3,7 @@
   <img width=200px height=200px src="https://github.com/mash-up-kr/moit-web/assets/82315118/0e793d2b-3673-4dc1-a45e-075e33025c38" alt="Project logo"></a>
 </p>
 
-<h3 align="center">MO IT</h3>
+<h3 align="center">MOIT</h3>
 
 <div align="center">
 
@@ -27,14 +27,17 @@
 ## 📝 Table of Contents
 
 - [About](#about)
+- [Preview](#preview)
 - [Getting Started](#getting_started)
 - [Built Using](#built_using)
 - [Authors](#authors)
 - [License](#license)
 
+
 <br>
 
 ## 🧐 About <a name = "about"></a>
+![moit](https://github.com/mash-up-kr/moit-web/assets/52898735/08da0a5d-426d-4960-917e-b6a73ef651a3)
 
 Moit is a study management app created by the team '전자군단'.
 
@@ -42,7 +45,21 @@ The study management app allows users to check in participants quickly and easil
 
 In addition to attendance tracking, Moit also makes it easy to manage fines. You can set up rules and guidelines for attendance, and the app will automatically calculate any fines owed based on those rules. This makes it easy to enforce fines and ensures that participants are held accountable for their attendance.
 
+### App Store : https://apps.apple.com/kr/app/moit/id6448715747
+
 <br>
+
+## Web View <a name = "preview"></a>
+
+### 스터디 생성
+https://github.com/mash-up-kr/moit-web/assets/52898735/89b129bd-86db-4617-8c69-211dd4682990
+
+### 출석 등록 및 조회
+https://github.com/mash-up-kr/moit-web/assets/52898735/809eb829-3877-4415-acf1-7c04aee0a1f4
+
+
+<br>
+
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -99,6 +116,12 @@ $ yarn dev
 - [@otterji](https://github.com/otterji) - Idea & Initial work
 - [@wonjin-dev](https://github.com/wonjin-dev) - Idea & Initial work
 - [@Young-mason](https://github.com/Young-mason) - Idea & Initial work
+
+### Related Repositories
+- https://github.com/mash-up-kr/MOIT-backend
+- https://github.com/mash-up-kr/MOIT-iOS
+- https://github.com/mash-up-kr/MOIT-infra
+
 
 <br>
 

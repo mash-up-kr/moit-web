@@ -3,6 +3,7 @@ import pngs from '@styles/pngs';
 import theme from '@styles/theme';
 import Avatar from '@components/Avatar';
 import Text from '@components/Text';
+import { formattedTime } from '../utils/timer';
 
 interface AttendanceListProps {
   attendantList: AttendantData[];
@@ -38,7 +39,7 @@ const AttendanceList = ({ attendantList }: AttendanceListProps) => {
               <Box textAlign={'left'} ml={'10px'}>
                 <Text type="h6">{user.nickname}</Text>
                 <Text type="caption" color={theme.palette.gray600}>
-                  17:02
+                  {formattedTime(new Date(user.attendanceAt))}
                 </Text>
               </Box>
             </Flex>
